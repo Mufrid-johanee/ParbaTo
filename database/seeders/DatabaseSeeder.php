@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Achievement;
 use App\Models\Assessment;
 use App\Models\AssessmentAttempt;
 use App\Models\AttendanceRecord;
@@ -20,7 +21,9 @@ use App\Models\Question;
 use App\Models\Skill;
 use App\Models\StudentSkill;
 use App\Models\User;
+use App\Models\XpLedger;
 use App\Services\FlexLearnRecommendationService;
+use App\Services\XpService;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -33,10 +36,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@parbato.test',
             'password' => 'password',
             'role' => User::ROLE_ADMIN,
-            'xp' => 0,
-            'level' => 1,
             'email_verified_at' => now(),
         ]);
+        $admin->forceFill(['xp' => 0, 'level' => 1])->save();
 
         $teacher = User::query()->create([
             'name' => 'David Vance',
@@ -44,11 +46,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'teacher@parbato.test',
             'password' => 'password',
             'role' => User::ROLE_TEACHER,
-            'xp' => 0,
-            'level' => 1,
             'major' => 'Computer Science',
             'email_verified_at' => now(),
         ]);
+        $teacher->forceFill(['xp' => 0, 'level' => 1])->save();
 
         // 10 uniquely named demo students (shared password: password)
         $demoStudents = [
@@ -67,17 +68,17 @@ class DatabaseSeeder extends Seeder
         $students = collect();
         $masteryMap = [];
         foreach ($demoStudents as [$name, $display, $email, $xp, $level, $mastery]) {
-            $students->push(User::query()->create([
+            $student = User::query()->create([
                 'name' => $name,
                 'display_name' => $display,
                 'email' => $email,
                 'password' => 'password',
                 'role' => User::ROLE_STUDENT,
-                'xp' => $xp,
-                'level' => $level,
                 'major' => 'Computer Science',
                 'email_verified_at' => now(),
-            ]));
+            ]);
+            $student->forceFill(['xp' => $xp, 'level' => $level])->save();
+            $students->push($student);
             $masteryMap[$email] = $mastery;
         }
 
@@ -485,6 +486,55 @@ class DatabaseSeeder extends Seeder
         }
 
         foreach ($students as $student) {
+            XpLedger::query()->updateOrCreate(
+                [
+                    'user_id' => $student->id,
+                    'source_type' => 'seed_balance',
+                    'source_id' => 0,
+                ],
+                [
+                    'amount' => (int) $student->xp,
+                    'description' => 'Demo opening XP balance',
+                    'awarded_at' => now()->subDays(30),
+                ]
+            );
+            $level = app(XpService::class)->getLevel((int) $student->xp);
+            $student->forceFill(['level' => $level['level']])->save();
+        }
+
+        $badgeDefs = [
+            ['first-mission', 'First Mission', 'Complete your first mission', 'flag', 15],
+            ['mission-streak-3', 'Mission Streak 3', 'Complete 3 missions', 'local_fire_department', 15],
+            ['mission-streak-10', 'Mission Streak 10', 'Complete 10 missions', 'emoji_events', 25],
+            ['perfect-score', 'Perfect Score', 'Score 100% on an assessment', 'verified', 20],
+            ['consistent-learner', 'Consistent Learner', 'Log in 5 different days', 'calendar_month', 15],
+            ['classroom-champion', 'Classroom Champion', 'Attend 5 ClassTwin sessions', 'sensors', 15],
+            ['explorer', 'Explorer', 'Reach Learner level XP', 'explore', 10],
+            ['quick-starter', 'Quick Starter', 'Join a mission and attend class', 'bolt', 10],
+            ['skill-builder', 'Skill Builder', 'Reach proficient mastery on 2 skills', 'construction', 15],
+            ['advanced-learner', 'Advanced Learner', 'Reach advanced mastery on a skill', 'school', 20],
+            ['portfolio-builder', 'Portfolio Builder', 'Collect 2 portfolio items', 'badge', 15],
+            ['level-up-practitioner', 'Level Up: Practitioner', 'Reach Practitioner level', 'trending_up', 20],
+            ['level-up-builder', 'Level Up: Builder', 'Reach Builder level', 'workspace_premium', 25],
+        ];
+
+        foreach ($badgeDefs as [$slug, $name, $desc, $icon, $reward]) {
+            Achievement::query()->updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $name,
+                    'description' => $desc,
+                    'icon' => $icon,
+                    'xp_reward' => $reward,
+                    'category' => 'phase3',
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        app(\App\Services\BadgeService::class)->checkAndAward($alex);
+
+        foreach ($students as $student) {
             app(FlexLearnRecommendationService::class)->generateFor($student);
         }
 
@@ -494,6 +544,6 @@ class DatabaseSeeder extends Seeder
         $this->command?->info('10 demo students seeded (all password: password)');
         $this->command?->info('Classroom join code: JOIN201A');
         $this->command?->info('Live attendance code: PARBATO1');
-        $this->command?->info('Phase 2: 2 assessments, graded + pending attempts, portfolio + notifications seeded');
+        $this->command?->info('Phase 2+3: assessments, XP ledger, badges, notifications seeded');
     }
 }

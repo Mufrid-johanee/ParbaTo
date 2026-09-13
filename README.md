@@ -102,7 +102,39 @@ Classroom join code: **`JOIN201A`**
 | Analytics | `/analytics` |
 | Notifications | `/notifications` (+ topbar bell) |
 
-Pipeline: Assessment attempt → grade → LearningEvidence → Mastery → FlexLearn → Portfolio → Analytics → Notification
+Pipeline: Assessment attempt → grade → LearningEvidence → Mastery → FlexLearn → Portfolio → Analytics → Notification → XP/Badges
+
+### Phase 3 surfaces
+
+| Area | Routes / tools |
+|------|----------------|
+| Leaderboard | `/student/leaderboard` |
+| Admin overview | `/admin` |
+| XP recalculate | `php artisan xp:recalculate` |
+| DB backup | `php artisan parbato:backup` |
+| Ops docs | `docs/nginx.conf`, `docs/supervisor.conf`, `docs/RECOVERY.md`, `docs/SECURITY.md`, `deploy.sh` |
+
+---
+
+## Testing
+
+```bash
+php artisan test
+```
+
+---
+
+## Production deployment (readiness)
+
+ParbaTo is **deployment-ready**, not automatically production-deployed.
+
+1. Provision PHP 8.2+, MySQL/MariaDB, Composer, Node (build), Nginx/Apache, Supervisor, cron  
+2. Configure `.env` (`APP_DEBUG=false`, secure DB credentials, `QUEUE_CONNECTION=database`, HTTPS)  
+3. `composer install --no-dev`, `npm ci && npm run build`, `php artisan migrate --force`, `php artisan optimize`  
+4. Run queue worker + Laravel scheduler (`* * * * * php artisan schedule:run`)  
+5. See `docs/nginx.conf`, `docs/supervisor.conf`, and `deploy.sh`
+
+Daily backups are scheduled via `parbato:backup` (requires `mysqldump`). Recovery: `docs/RECOVERY.md`.
 
 ---
 
@@ -111,6 +143,7 @@ Pipeline: Assessment attempt → grade → LearningEvidence → Mastery → Flex
 - Never commit `.env` or real API keys.
 - Firebase variables are optional placeholders in `.env.example` — leave blank until the project owner supplies values.
 - Attendance codes are stored hashed server-side.
+- See `docs/SECURITY.md` for headers, throttling, audit logging, and production checklist.
 
 ---
 

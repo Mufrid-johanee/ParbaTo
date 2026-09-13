@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ClassTwinController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlexLearnController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\LearnQuestController;
 use App\Http\Controllers\MissionEvaluationController;
 use App\Http\Controllers\NotificationController;
@@ -23,7 +25,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('/register', [RegisteredUserController::class, 'store']);
+    Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('throttle:5,1');
 });
 
 Route::middleware('auth')->group(function () {
@@ -33,7 +35,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classrooms.index');
     Route::get('/classrooms/join', [ClassroomController::class, 'joinForm'])->name('classrooms.join');
-    Route::post('/classrooms/join', [ClassroomController::class, 'join'])->name('classrooms.join.store');
+    Route::post('/classrooms/join', [ClassroomController::class, 'join'])->middleware('throttle:10,1')->name('classrooms.join.store');
     Route::get('/classrooms/create', [ClassroomController::class, 'create'])->name('classrooms.create');
     Route::post('/classrooms', [ClassroomController::class, 'store'])->name('classrooms.store');
     Route::get('/classrooms/{classroom}', [ClassroomController::class, 'show'])->name('classrooms.show');
@@ -44,9 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/classrooms/{classroom}/sessions', [ClassroomController::class, 'startSession'])->name('classrooms.sessions.start');
 
     Route::get('/classtwin/sessions/{session}', [ClassTwinController::class, 'show'])->name('classtwin.show');
-    Route::post('/classtwin/sessions/{session}/attendance', [ClassTwinController::class, 'checkIn'])->name('classtwin.attendance');
-    Route::post('/classtwin/sessions/{session}/join', [ClassTwinController::class, 'joinSession'])->name('classtwin.join');
-    Route::post('/classtwin/sessions/{session}/heartbeat', [ClassTwinController::class, 'heartbeat'])->name('classtwin.heartbeat');
+    Route::post('/classtwin/sessions/{session}/attendance', [ClassTwinController::class, 'checkIn'])->middleware('throttle:30,1')->name('classtwin.attendance');
+    Route::post('/classtwin/sessions/{session}/join', [ClassTwinController::class, 'joinSession'])->middleware('throttle:30,1')->name('classtwin.join');
+    Route::post('/classtwin/sessions/{session}/heartbeat', [ClassTwinController::class, 'heartbeat'])->middleware('throttle:120,1')->name('classtwin.heartbeat');
     Route::get('/classtwin/sessions/{session}/presence', [ClassTwinController::class, 'presence'])->name('classtwin.presence');
     Route::post('/classtwin/sessions/{session}/rotate-code', [ClassTwinController::class, 'rotateCode'])->name('classtwin.rotate');
     Route::post('/classtwin/sessions/{session}/end', [ClassTwinController::class, 'end'])->name('classtwin.end');
@@ -110,16 +112,21 @@ Route::middleware('auth')->group(function () {
     Route::prefix('student/attempts')->name('student.attempts.')->group(function () {
         Route::get('/{attempt}', [StudentAssessmentController::class, 'take'])->name('take');
         Route::post('/{attempt}/autosave', [StudentAssessmentController::class, 'autosave'])->name('autosave');
-        Route::post('/{attempt}/submit', [StudentAssessmentController::class, 'submit'])->name('submit');
+        Route::post('/{attempt}/submit', [StudentAssessmentController::class, 'submit'])->middleware('throttle:20,1')->name('submit');
         Route::get('/{attempt}/result', [StudentAssessmentController::class, 'result'])->name('result');
     });
 
     // Portfolio
     Route::get('/student/profile', [PortfolioController::class, 'profile'])->name('student.profile');
     Route::get('/student/skills', [PortfolioController::class, 'skills'])->name('student.skills');
+    Route::get('/student/leaderboard', LeaderboardController::class)->name('student.leaderboard');
     Route::get('/teacher/students/{student}/portfolio', [PortfolioController::class, 'teacherShow'])
         ->middleware('role:teacher,admin')
         ->name('teacher.students.portfolio');
+
+    Route::get('/admin', [AdminController::class, 'index'])
+        ->middleware('role:admin')
+        ->name('admin.index');
 
     // Notifications
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

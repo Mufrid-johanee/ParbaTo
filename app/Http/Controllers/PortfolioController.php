@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Policies\PortfolioItemPolicy;
+use App\Services\BadgeService;
 use App\Services\PortfolioService;
+use App\Services\XpService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PortfolioController extends Controller
 {
-    public function __construct(protected PortfolioService $portfolio) {}
+    public function __construct(
+        protected PortfolioService $portfolio,
+        protected XpService $xp,
+        protected BadgeService $badges,
+    ) {}
 
     public function profile(Request $request): View
     {
@@ -53,6 +59,9 @@ class PortfolioController extends Controller
             'evidence' => $this->portfolio->evidence($student),
             'recommendations' => $this->portfolio->recommendations($student),
             'teacherView' => $teacherView,
+            'level' => $this->xp->getLevel((int) $student->xp),
+            'recentXp' => $this->xp->getRecentXp($student, 10),
+            'badgeCatalog' => $this->badges->catalogFor($student),
         ]);
     }
 }

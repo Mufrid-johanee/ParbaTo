@@ -24,8 +24,14 @@
         </div>
         <div class="flex flex-wrap items-center gap-space-xs">
             <div class="flex items-center gap-1.5 px-space-sm py-1.5 rounded-full bg-surface-container-high text-on-surface">
-                <span class="material-symbols-outlined text-sm text-primary">military_tech</span>
-                <span class="font-label-meta text-label-meta uppercase">Level {{ $user->level }} · {{ $user->xp }} XP</span>
+                <span class="material-symbols-outlined text-sm text-primary" aria-hidden="true">military_tech</span>
+                <span class="font-label-meta text-label-meta uppercase">
+                    @if($level)
+                        {{ $level['name'] }} · L{{ $level['level'] }} · {{ number_format($level['current_xp']) }} XP
+                    @else
+                        Level {{ $user->level }} · {{ $user->xp }} XP
+                    @endif
+                </span>
             </div>
             @if($user->major)
                 <div class="flex items-center gap-1.5 px-space-sm py-1.5 rounded-full bg-surface-container-high text-on-surface">
@@ -37,8 +43,22 @@
     </section>
 
     <section class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
-        <a href="{{ route('student.assessments.index') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors">
-            <span class="material-symbols-outlined text-primary">quiz</span>
+        @if($level)
+            <x-card class="sm:col-span-2">
+                <p class="font-label-code text-label-code text-primary">{{ $level['name'] }} · Level {{ $level['level'] }}</p>
+                <p class="font-headline text-headline-sm text-on-surface mt-1">{{ number_format($level['current_xp']) }} XP · {{ $badgeCount }} badges</p>
+                <div class="mt-3"><x-progress-bar :percent="$level['progress_percent']" label="Level progress" /></div>
+                @if($recentXp->isNotEmpty())
+                    <ul class="mt-3 space-y-1 text-xs text-on-surface-variant">
+                        @foreach($recentXp as $entry)
+                            <li>+{{ $entry->amount }} · {{ $entry->description }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </x-card>
+        @endif
+        <a href="{{ route('student.assessments.index') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors min-h-11">
+            <span class="material-symbols-outlined text-primary" aria-hidden="true">quiz</span>
             <div class="font-headline text-headline-sm text-on-surface mt-2">Assessments</div>
             <p class="text-xs text-on-surface-variant mt-1">Quizzes & results</p>
         </a>

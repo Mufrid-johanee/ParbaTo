@@ -16,12 +16,46 @@
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                 <div class="pb-card p-3"><div class="font-label-code text-label-code text-primary">{{ $stats['xp'] }}</div><div class="text-xs text-on-surface-variant">XP</div></div>
+                <div class="pb-card p-3"><div class="font-label-code text-label-code text-on-surface">{{ $level['name'] ?? '—' }}</div><div class="text-xs text-on-surface-variant">Level {{ $level['level'] ?? $student->level }}</div></div>
                 <div class="pb-card p-3"><div class="font-label-code text-label-code text-on-surface">{{ $stats['missions_completed'] }}</div><div class="text-xs text-on-surface-variant">Missions</div></div>
-                <div class="pb-card p-3"><div class="font-label-code text-label-code text-on-surface">{{ $stats['assessments_passed'] }}</div><div class="text-xs text-on-surface-variant">Passed</div></div>
-                <div class="pb-card p-3"><div class="font-label-code text-label-code text-on-surface">{{ $stats['sessions_attended'] }}</div><div class="text-xs text-on-surface-variant">Sessions</div></div>
+                <div class="pb-card p-3"><div class="font-label-code text-label-code text-on-surface">{{ $badgeCatalog['count'] ?? 0 }}/{{ $badgeCatalog['total'] ?? 0 }}</div><div class="text-xs text-on-surface-variant">Badges</div></div>
             </div>
         </div>
     </header>
+
+    @isset($level)
+        <section class="grid lg:grid-cols-2 gap-space-lg">
+            <x-card title="Level progress">
+                <p class="text-on-surface">{{ $level['name'] }} · {{ number_format($level['current_xp']) }} XP</p>
+                <div class="mt-3"><x-progress-bar :percent="$level['progress_percent']" label="Progress to next level" /></div>
+                @if(!($level['is_max'] ?? false))
+                    <p class="text-xs text-on-surface-variant mt-2">Next at {{ number_format($level['next_level_xp']) }} XP</p>
+                @endif
+                <h3 class="font-headline text-headline-sm mt-4 mb-2">Recent XP</h3>
+                @forelse($recentXp as $entry)
+                    <p class="text-sm text-on-surface-variant">+{{ $entry->amount }} · {{ $entry->description }} · {{ $entry->awarded_at->diffForHumans() }}</p>
+                @empty
+                    <p class="text-sm text-on-surface-variant">No XP history yet.</p>
+                @endforelse
+            </x-card>
+            <x-card title="Badges">
+                <h3 class="font-label-meta text-label-meta uppercase text-secondary mb-2">Earned ({{ $badgeCatalog['count'] }})</h3>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    @forelse($badgeCatalog['earned'] as $badge)
+                        <x-badge tone="secondary" :title="$badge->description">{{ $badge->name }}</x-badge>
+                    @empty
+                        <p class="text-sm text-on-surface-variant">No badges yet.</p>
+                    @endforelse
+                </div>
+                <h3 class="font-label-meta text-label-meta uppercase text-on-surface-variant mb-2">Locked</h3>
+                <div class="flex flex-wrap gap-2 opacity-60">
+                    @foreach($badgeCatalog['locked'] as $badge)
+                        <x-badge tone="neutral">{{ $badge->name }}</x-badge>
+                    @endforeach
+                </div>
+            </x-card>
+        </section>
+    @endisset
 
     <section class="grid lg:grid-cols-2 gap-space-lg">
         <div>

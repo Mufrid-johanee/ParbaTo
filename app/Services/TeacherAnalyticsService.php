@@ -14,11 +14,23 @@ use App\Models\MissionEnrollment;
 use App\Models\StudentSkill;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class TeacherAnalyticsService
 {
     public function overview(User $teacher): array
+    {
+        return Cache::remember(
+            'teacher.analytics.overview.'.$teacher->id,
+            now()->addMinutes(5),
+            function () use ($teacher) {
+                return $this->computeOverview($teacher);
+            }
+        );
+    }
+
+    protected function computeOverview(User $teacher): array
     {
         $classroomIds = $this->ownedClassroomIds($teacher);
 

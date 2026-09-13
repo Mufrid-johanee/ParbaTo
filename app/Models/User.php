@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,8 +28,6 @@ class User extends Authenticatable
         'password',
         'role',
         'avatar_url',
-        'xp',
-        'level',
         'major',
         'bio',
         'firebase_uid',
@@ -98,6 +97,18 @@ class User extends Authenticatable
     public function classroomMemberships(): HasMany
     {
         return $this->hasMany(ClassroomMember::class);
+    }
+
+    public function achievements(): BelongsToMany
+    {
+        return $this->belongsToMany(Achievement::class, 'user_achievements')
+            ->withPivot(['earned_at'])
+            ->withTimestamps();
+    }
+
+    public function xpLedger(): HasMany
+    {
+        return $this->hasMany(XpLedger::class);
     }
 
     public function preferredName(): string

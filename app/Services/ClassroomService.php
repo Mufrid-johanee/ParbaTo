@@ -176,6 +176,13 @@ class ClassroomService
 
         $this->notifyTeacherOfJoin($classroom, $student);
 
+        app(XpService::class)->award(
+            $student,
+            'classroom_joined',
+            $classroom->id,
+            'Joined classroom: '.$classroom->name
+        );
+
         return $member;
     }
 

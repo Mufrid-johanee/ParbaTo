@@ -4,7 +4,7 @@
 > Do not casually alter core concept, vision, mission, or architectural decisions without owner approval.
 
 **Last updated:** 2026-09-13  
-**Status:** Phase 1 + Phase 2 implemented (Foundation, ClassTwin, LearnQuest, FlexLearn, Assessment, Portfolio, Teacher Analytics, Notifications). Phase 3 (gamification / polish / production) not started.
+**Status:** Phase 1 + Phase 2 + Phase 3 implemented. ParbaTo is deployment-ready with gamification, security hardening, performance/ops tooling, accessibility audit, and expanded tests. Not claimed as live-production-deployed or WCAG-certified.
 
 ---
 
@@ -364,11 +364,13 @@ Touch targets, bottom navigation for app shell, no tiny twin grids — use list/
 - Live ClassTwin quizzes/announcements may remain lighter than full assessment engine
 - Attendance is not automatically converted into FlexLearn mastery
 - Firebase credentials not supplied (optional scaffolding only)
-- Phase 3: gamification badges, full Stitch fidelity polish, advanced security/perf, production deploy — not started
+- Not live-deployed on a production server; not WCAG-certified; no formal device-farm / browser E2E automation
+- Alpine CSP uses `'unsafe-eval'` until `@alpinejs/csp` migration
+- `parbato:backup` requires MySQL + `mysqldump`
 
 ## Future roadmap
 
-Phase 3+ per master plan: gamification/XP badges polish → advanced responsive/UI fidelity → security hardening → performance → production deployment → backup/recovery → accessibility audit → full E2E hardening.
+Post–Phase 3 hardening: Alpine CSP build, optional email notifications, richer ClassTwin live activities, off-site backup verification, formal accessibility audit tooling.
 
 ## AI integration roadmap
 
@@ -412,11 +414,11 @@ ParbaTo/
 
 ---
 
-## Database entities (Phase 1–2)
+## Database entities (Phase 1–3)
 
-`users`, `courses`, `course_modules`, `materials`, `course_enrollments`, `classrooms`, `classroom_members`, `class_sessions`, `attendance_records`, `classroom_activities`, `help_requests`, `announcements`, `missions`, `mission_tasks`, `mission_resources`, `mission_submissions`, `mission_task_progress`, `assessments`, `questions`, `assessment_attempts`, `attempt_answers`, `skills`, `student_skills`, `learning_evidences`, `recommendations`, `achievements`, `user_achievements`, `notifications`, `portfolio_items`
+`users`, `courses`, `course_modules`, `materials`, `course_enrollments`, `classrooms`, `classroom_members`, `class_sessions`, `attendance_records`, `classroom_activities`, `help_requests`, `announcements`, `missions`, `mission_tasks`, `mission_resources`, `mission_submissions`, `mission_task_progress`, `assessments`, `questions`, `assessment_attempts`, `attempt_answers`, `skills`, `student_skills`, `learning_evidences`, `recommendations`, `achievements`, `user_achievements`, `notifications`, `portfolio_items`, `xp_ledger`, `audit_logs`
 
-Phase 3 may expand gamification (`badges`, richer XP) and audit logging.
+Phase 3 reuses `achievements` / `user_achievements` for badges and adds `xp_ledger` + `audit_logs`.
 
 ---
 

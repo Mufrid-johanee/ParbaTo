@@ -352,6 +352,22 @@ class AssessmentService
             ]
         );
 
+        $xp = app(XpService::class);
+        if ($percentage >= 90) {
+            $xp->award($attempt->user, 'assessment_excellent', $attempt->id, 'Excellent assessment: '.$attempt->assessment->title);
+        } elseif ($percentage >= (float) $attempt->assessment->pass_score) {
+            $xp->award($attempt->user, 'assessment_passed', $attempt->id, 'Passed assessment: '.$attempt->assessment->title);
+        }
+
+        $portfolio = PortfolioItem::query()
+            ->where('user_id', $attempt->user_id)
+            ->where('source_type', AssessmentAttempt::class)
+            ->where('source_id', $attempt->id)
+            ->first();
+        if ($portfolio) {
+            $xp->award($attempt->user, 'portfolio_item_created', $portfolio->id, 'Portfolio: '.$attempt->assessment->title);
+        }
+
         $this->flexLearn->refreshFor($attempt->user->fresh());
 
         $already = $attempt->user->notifications()

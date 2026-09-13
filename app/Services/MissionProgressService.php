@@ -82,8 +82,10 @@ class MissionProgressService
             ]);
         }
 
-        return DB::transaction(function () use ($enrollment, $task) {
-            MissionTaskProgress::query()->updateOrCreate(
+        return DB::transaction(function () use ($enrollment, $task, $actor) {
+            $beforePhase = $enrollment->lifecycle_phase;
+
+            $progress = MissionTaskProgress::query()->updateOrCreate(
                 [
                     'mission_enrollment_id' => $enrollment->id,
                     'mission_task_id' => $task->id,
@@ -94,7 +96,26 @@ class MissionProgressService
                 ]
             );
 
-            return $this->recalculate($enrollment->fresh(['mission.tasks', 'taskProgress', 'submission']));
+            $fresh = $this->recalculate($enrollment->fresh(['mission.tasks', 'taskProgress', 'submission', 'user']));
+
+            app(XpService::class)->award(
+                $actor,
+                'mission_task_completed',
+                (int) $progress->id,
+                'Completed task: '.$task->title
+            );
+
+            if ($fresh->lifecycle_phase !== $beforePhase && $beforePhase) {
+                $phaseIndex = array_search($beforePhase, self::PHASES, true);
+                app(XpService::class)->award(
+                    $actor,
+                    'mission_phase_completed',
+                    ($enrollment->id * 100) + (is_int($phaseIndex) ? $phaseIndex : 0),
+                    'Completed phase: '.$beforePhase
+                );
+            }
+
+            return $fresh;
         });
     }
 
@@ -156,6 +177,13 @@ class MissionProgressService
             ])->save();
 
             $this->recalculate($enrollment->fresh(['mission.tasks', 'taskProgress', 'submission']));
+
+            app(XpService::class)->award(
+                $actor,
+                'mission_submitted',
+                $enrollment->id,
+                'Submitted mission: '.$enrollment->mission->title
+            );
 
             $teacher = $enrollment->mission->creator;
             if ($teacher) {
@@ -305,16 +333,22 @@ class MissionProgressService
         $user = $enrollment->user;
         $mission = $enrollment->mission;
 
-        $xpGain = (int) $mission->xp_reward;
-        $user->forceFill([
-            'xp' => $user->xp + $xpGain,
-            'level' => max(1, (int) floor(($user->xp + $xpGain) / 500) + 1),
-        ])->save();
+        $xp = app(XpService::class);
+        $event = $score >= (float) config('xp.distinction_score', 90)
+            ? 'mission_evaluated_distinction'
+            : 'mission_evaluated_pass';
+        $entry = $xp->award(
+            $user,
+            $event,
+            $enrollment->id,
+            'Mission evaluated: '.$mission->title
+        );
+        $xpGain = $entry?->amount ?? 0;
 
         $mastery = app(MasteryService::class);
         $mastery->applyMissionEvaluation($enrollment, $score);
 
-        PortfolioItem::query()->updateOrCreate(
+        $portfolio = PortfolioItem::query()->updateOrCreate(
             [
                 'user_id' => $user->id,
                 'source_type' => MissionEnrollment::class,
@@ -335,8 +369,22 @@ class MissionProgressService
             ]
         );
 
+        if ($portfolio->wasRecentlyCreated) {
+            $xp->award(
+                $user,
+                'portfolio_item_created',
+                $portfolio->id,
+                'Portfolio item: '.$mission->title
+            );
+        }
+
         $flex = app(FlexLearnRecommendationService::class);
         $flex->markCompletedForMission($user, $mission->id);
         $flex->refreshFor($user->fresh());
+
+        app(AuditLogService::class)->log('mission_evaluated', null, $enrollment, [
+            'score' => $score,
+            'mission_id' => $mission->id,
+        ]);
     }
 }

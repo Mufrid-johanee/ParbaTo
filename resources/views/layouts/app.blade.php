@@ -16,7 +16,7 @@
     <div class="lg:pl-64 pb-20 lg:pb-0">
         @include('layouts.partials.topbar')
 
-        <main class="relative pt-16 bg-surface min-h-screen w-full px-4 sm:px-6 lg:px-space-lg py-space-lg">
+        <main id="main-content" class="relative pt-16 bg-surface min-h-screen w-full px-4 sm:px-6 lg:px-space-lg py-space-lg" tabindex="-1">
             @if (session('status'))
                 <div class="mb-space-md rounded-lg border border-success/30 bg-success/10 px-4 py-3 text-body-md text-success" role="status">
                     {{ session('status') }}

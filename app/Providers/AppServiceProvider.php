@@ -32,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Assessment::class, AssessmentPolicy::class);
         Gate::policy(AssessmentAttempt::class, AssessmentAttemptPolicy::class);
         Gate::policy(PortfolioItem::class, PortfolioItemPolicy::class);
+        Gate::policy(\Illuminate\Notifications\DatabaseNotification::class, \App\Policies\NotificationPolicy::class);
     }
 }

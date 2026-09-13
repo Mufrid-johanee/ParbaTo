@@ -46,7 +46,16 @@
         </a>
         @if(auth()->user()?->isStudent() || auth()->user()?->isAdmin())
             <a href="{{ route('student.profile') }}" class="pb-nav-link {{ request()->routeIs('student.profile', 'student.skills') ? 'pb-nav-link-active' : '' }}">
-                <span class="material-symbols-outlined text-lg">badge</span><span>Portfolio</span>
+                <span class="material-symbols-outlined text-lg" aria-hidden="true">badge</span><span>Portfolio</span>
+            </a>
+            <a href="{{ route('student.leaderboard') }}" class="pb-nav-link {{ request()->routeIs('student.leaderboard') ? 'pb-nav-link-active' : '' }}">
+                <span class="material-symbols-outlined text-lg" aria-hidden="true">leaderboard</span><span>Leaderboard</span>
+            </a>
+        @endif
+
+        @if(auth()->user()?->isAdmin())
+            <a href="{{ route('admin.index') }}" class="pb-nav-link {{ request()->routeIs('admin.*') ? 'pb-nav-link-active' : '' }}">
+                <span class="material-symbols-outlined text-lg" aria-hidden="true">admin_panel_settings</span><span>Admin</span>
             </a>
         @endif
 

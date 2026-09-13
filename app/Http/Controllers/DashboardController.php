@@ -6,14 +6,20 @@ use App\Models\ClassSession;
 use App\Models\Mission;
 use App\Models\MissionEnrollment;
 use App\Models\Recommendation;
+use App\Services\BadgeService;
 use App\Services\FlexLearnRecommendationService;
+use App\Services\XpService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function __invoke(Request $request, FlexLearnRecommendationService $flexLearn): View
-    {
+    public function __invoke(
+        Request $request,
+        FlexLearnRecommendationService $flexLearn,
+        XpService $xp,
+        BadgeService $badges
+    ): View {
         $user = $request->user();
 
         $flexLearn->generateFor($user);
@@ -70,6 +76,10 @@ class DashboardController extends Controller
             ->take(3)
             ->get();
 
+        $level = $user->isStudent() ? $xp->getLevel((int) $user->xp) : null;
+        $recentXp = $user->isStudent() ? $xp->getRecentXp($user, 5) : collect();
+        $badgeCount = $user->isStudent() ? $badges->catalogFor($user)['count'] : 0;
+
         return view('dashboard.index', compact(
             'user',
             'activeMissions',
@@ -77,7 +87,10 @@ class DashboardController extends Controller
             'liveSession',
             'missionCount',
             'availableMissions',
-            'classrooms'
+            'classrooms',
+            'level',
+            'recentXp',
+            'badgeCount'
         ));
     }
 }

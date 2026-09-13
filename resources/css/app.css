@@ -155,11 +155,35 @@
     }
 
     .pb-nav-link {
-        @apply flex items-center gap-2 rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface-variant
-            hover:bg-surface-container-high hover:text-on-surface transition-all;
+        @apply flex items-center gap-2 rounded-lg px-3 py-2.5 min-h-11 font-body-md text-body-md text-on-surface-variant
+            hover:bg-surface-container-high hover:text-on-surface transition-all
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-primary;
     }
 
     .pb-nav-link-active {
         @apply bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(128,131,255,0.35)];
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    .focus\:not-sr-only:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: inherit;
+        margin: inherit;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
     }
 }

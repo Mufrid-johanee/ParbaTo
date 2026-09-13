@@ -13,6 +13,7 @@
     @stack('head')
 </head>
 <body class="bg-background text-on-surface min-h-screen">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-on-primary">Skip to main content</a>
     @yield('body')
     @stack('scripts')
 </body>

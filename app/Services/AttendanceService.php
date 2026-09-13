@@ -60,6 +60,17 @@ class AttendanceService
                     'last_seen_at' => now(),
                     'ip_address' => $ip ?? $record->ip_address,
                 ])->save();
+            } else {
+                app(XpService::class)->award(
+                    $student,
+                    'classtwin_attendance',
+                    $record->id,
+                    'ClassTwin attendance'
+                );
+                app(AuditLogService::class)->log('attendance_marked', $student, $record, [
+                    'method' => 'qr',
+                    'session_id' => $session->id,
+                ]);
             }
 
             return $record->fresh();
