@@ -36,6 +36,45 @@
         </div>
     </section>
 
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+        <a href="{{ route('student.assessments.index') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors">
+            <span class="material-symbols-outlined text-primary">quiz</span>
+            <div class="font-headline text-headline-sm text-on-surface mt-2">Assessments</div>
+            <p class="text-xs text-on-surface-variant mt-1">Quizzes & results</p>
+        </a>
+        @if($user->isStudent() || $user->isAdmin())
+            <a href="{{ route('student.profile') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors">
+                <span class="material-symbols-outlined text-primary">badge</span>
+                <div class="font-headline text-headline-sm text-on-surface mt-2">Portfolio</div>
+                <p class="text-xs text-on-surface-variant mt-1">Skills & evidence</p>
+            </a>
+        @else
+            <a href="{{ route('teacher.assessments.index') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors">
+                <span class="material-symbols-outlined text-primary">edit_note</span>
+                <div class="font-headline text-headline-sm text-on-surface mt-2">Manage quizzes</div>
+                <p class="text-xs text-on-surface-variant mt-1">Author & grade</p>
+            </a>
+        @endif
+        <a href="{{ route('notifications.index') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors">
+            <span class="material-symbols-outlined text-primary">notifications</span>
+            <div class="font-headline text-headline-sm text-on-surface mt-2">Notifications</div>
+            <p class="text-xs text-on-surface-variant mt-1">{{ $user->unreadNotifications()->count() }} unread</p>
+        </a>
+        @if($user->hasRole('teacher', 'admin'))
+            <a href="{{ route('analytics.teacher') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors">
+                <span class="material-symbols-outlined text-primary">query_stats</span>
+                <div class="font-headline text-headline-sm text-on-surface mt-2">Analytics</div>
+                <p class="text-xs text-on-surface-variant mt-1">Classroom intelligence</p>
+            </a>
+        @else
+            <a href="{{ route('flexlearn.index') }}" class="pb-card p-space-md hover:border-primary/40 transition-colors">
+                <span class="material-symbols-outlined text-primary">account_tree</span>
+                <div class="font-headline text-headline-sm text-on-surface mt-2">FlexLearn</div>
+                <p class="text-xs text-on-surface-variant mt-1">Your learning path</p>
+            </a>
+        @endif
+    </section>
+
     <section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
         <div class="xl:col-span-8 pb-card p-space-lg relative overflow-hidden">
             <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>

@@ -89,7 +89,20 @@ All demo passwords are **`password`**.
 | Teacher | `teacher@parbato.test` | `password` |
 | Admin | `admin@parbato.test` | `password` |
 
-Live ClassTwin attendance code (seeded session): **`PARBATO1`**
+Live ClassTwin attendance code (seeded session): **`PARBATO1`**  
+Classroom join code: **`JOIN201A`**
+
+### Phase 2 surfaces
+
+| Area | Routes |
+|------|--------|
+| Teacher assessments | `/teacher/assessments` |
+| Student assessments | `/student/assessments` |
+| Portfolio | `/student/profile`, `/student/skills`, `/teacher/students/{id}/portfolio` |
+| Analytics | `/analytics` |
+| Notifications | `/notifications` (+ topbar bell) |
+
+Pipeline: Assessment attempt → grade → LearningEvidence → Mastery → FlexLearn → Portfolio → Analytics → Notification
 
 ---
 

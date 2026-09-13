@@ -1,8 +1,8 @@
 # ParbaTo — Implementation Progress
 
-**Overall completion:** ~62%  
+**Overall completion:** ~78%  
 **Last updated:** 2026-09-13  
-**Current phase:** **Phase 1 COMPLETE** (Foundation + LearnQuest + FlexLearn + ClassTwin + Classroom/Session)
+**Current phase:** **Phase 2 COMPLETE** (Assessment + Portfolio + Teacher Analytics + Notifications)
 
 Honest status only. Unfinished work is never marked complete.
 
@@ -27,6 +27,15 @@ Honest status only. Unfinished work is never marked complete.
 | 4 | ClassTwin MVP | [✓] |
 | 5 | Classroom + Session system | [✓] |
 
+## Phase 2 checklist
+
+| Item | Module | Status |
+|------|--------|--------|
+| 6 | Assessment System | [✓] |
+| 7 | Student Portfolio / Skill Profile | [✓] |
+| 8 | Teacher Analytics | [✓] |
+| 9 | Notifications (in-app DB) | [✓] |
+
 ---
 
 ## Phase status (roadmap)
@@ -37,61 +46,42 @@ Honest status only. Unfinished work is never marked complete.
 | 4 | Core course/classroom system | [✓] MVP |
 | 5 | ClassTwin | [✓] MVP |
 | 6 | LearnQuest | [✓] MVP |
-| 7 | Assessment | [~] |
+| 7 | Assessment | [✓] MVP |
 | 8 | FlexLearn | [✓] MVP |
-| 9–13 | Analytics / portfolio / polish / prod | [~]/[ ] |
+| 9 | Analytics / portfolio / notifications | [✓] Phase 2 |
+| 10–13 | Gamification / polish / security / prod | [ ] Phase 3 |
 
 ---
 
-## Completed (Phase 1)
+## Completed (Phase 1 + 2)
 
 - [✓] Auth, roles, CSRF, protected routes
 - [✓] LearnQuest mission lifecycle + evaluation → evidence
 - [✓] FlexLearn mastery + explainable recommendations
-- [✓] Classroom create / edit / archive / join / remove member
-- [✓] Session start / end / history snapshots
-- [✓] Hashed attendance codes + local SVG QR (`bacon/bacon-qr-code`)
-- [✓] Manual attendance + join-without-code fallback
-- [✓] Presence heartbeat + active/idle/absent (120s)
-- [✓] Live ClassTwin teacher/student UI + 15s polling
-- [✓] Dashboard classrooms + live session for teacher/student
-- [✓] ClassTwin ↔ LearnQuest links; FlexLearn unchanged pipeline
-- [✓] Policies, Form Requests, APIs
-- [✓] Tests: **33 passed (127 assertions)** including Phase1 E2E
-- [✓] `migrate:fresh --seed` + `npm run build`
-
----
-
-## In-progress / later phases
-
-- [~] Full course CRUD UI
-- [~] Assessment attempt UX → evidence
-- [~] Portfolio UI
-- [~] Reverb/websockets (polling used)
-- [ ] Firebase Auth
-- [ ] Production deployment
+- [✓] ClassTwin classroom/session/attendance/presence
+- [✓] Assessment create/publish/attempt/autosave/resume/server scoring/short-answer grading
+- [✓] Assessment → LearningEvidence → Mastery → FlexLearn → Portfolio
+- [✓] Student portfolio + teacher classroom-scoped portfolio view
+- [✓] Teacher analytics (overview, classrooms, missions, assessments, matrix, at-risk, skills)
+- [✓] Laravel database notifications + bell UI + `/notifications`
+- [✓] Tests: **42 passed (191 assertions)** including Phase1 + Phase2 E2E
+- [✓] Dashboard Phase 2 quick links + mobile nav Assess/Portfolio entries
+- [✓] Docs aligned to Phase 2 status (`PROJECT_REPORT`, `PROGRESS`, `CHANGELOG`, `README`)
 
 ---
 
 ## Testing status
 
-- [✓] Full suite **33 passed / 127 assertions / 0 failures**
-- [✓] `Phase1EndToEndTest` — classroom → session → attendance → LearnQuest → FlexLearn
-- [✓] ClassTwin / LearnQuest / FlexLearn / Auth suites green
+- [✓] Full suite **42 passed / 191 assertions / 0 failures**
+- [✓] Phase 1 baseline preserved green
+- [✓] `Phase2IntegrationEndToEndTest` — assessment → grade → evidence → portfolio → analytics → notifications
 
-## Demo credentials
+---
 
-| Role | Email | Password |
-|------|-------|----------|
-| Student | student@parbato.test | password |
-| Teacher | teacher@parbato.test | password |
+## Known limitations (intentional)
 
-- Classroom join: `JOIN201A`  
-- Live attendance: `PARBATO1`  
-
-## Remaining limitations (honest)
-
-- No WebSockets (honest HTTP polling)
-- Attendance is not auto-scored into FlexLearn mastery (by design)
-- Quizzes/announcements still schema-only
-- Stitch visual density not 1:1 on every ClassTwin surface
+- No WebSockets/Reverb (polling + HTTP autosave)
+- No email/SMS/FCM notifications
+- No AI grading or AI analytics
+- Assessment options remain JSON on `questions` (compatible with Phase 1 schema); `attempt_answers` is normalized
+- Phase 3 polish / gamification / production hardening not started

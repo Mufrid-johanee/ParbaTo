@@ -95,6 +95,11 @@ class User extends Authenticatable
         return $this->hasMany(StudentSkill::class);
     }
 
+    public function classroomMemberships(): HasMany
+    {
+        return $this->hasMany(ClassroomMember::class);
+    }
+
     public function preferredName(): string
     {
         return $this->display_name ?: $this->name;

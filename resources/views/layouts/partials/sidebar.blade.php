@@ -41,9 +41,20 @@
         <a href="{{ route('flexlearn.index') }}" class="pb-nav-link {{ request()->routeIs('flexlearn.*') ? 'pb-nav-link-active' : '' }}">
             <span class="material-symbols-outlined text-lg">account_tree</span><span>FlexLearn</span>
         </a>
+        <a href="{{ route('student.assessments.index') }}" class="pb-nav-link {{ request()->routeIs('student.assessments.*', 'student.attempts.*', 'teacher.assessments.*') ? 'pb-nav-link-active' : '' }}">
+            <span class="material-symbols-outlined text-lg">quiz</span><span>Assessments</span>
+        </a>
+        @if(auth()->user()?->isStudent() || auth()->user()?->isAdmin())
+            <a href="{{ route('student.profile') }}" class="pb-nav-link {{ request()->routeIs('student.profile', 'student.skills') ? 'pb-nav-link-active' : '' }}">
+                <span class="material-symbols-outlined text-lg">badge</span><span>Portfolio</span>
+            </a>
+        @endif
 
         @if(auth()->user()?->hasRole('teacher', 'admin'))
             <span class="px-space-sm pt-space-md pb-1 font-label-meta text-label-meta text-on-surface-variant/70 uppercase tracking-wider">Faculty</span>
+            <a href="{{ route('teacher.assessments.index') }}" class="pb-nav-link {{ request()->routeIs('teacher.assessments.*') ? 'pb-nav-link-active' : '' }}">
+                <span class="material-symbols-outlined text-lg">edit_note</span><span>Manage assessments</span>
+            </a>
             <a href="{{ route('analytics.teacher') }}" class="pb-nav-link {{ request()->routeIs('analytics.*') ? 'pb-nav-link-active' : '' }}">
                 <span class="material-symbols-outlined text-lg">query_stats</span><span>Analytics</span>
             </a>

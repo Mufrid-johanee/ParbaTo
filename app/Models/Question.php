@@ -14,6 +14,7 @@ class Question extends Model
         'prompt',
         'options',
         'correct_answer',
+        'explanation',
         'points',
         'position',
     ];

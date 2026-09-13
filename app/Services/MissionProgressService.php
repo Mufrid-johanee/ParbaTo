@@ -9,6 +9,8 @@ use App\Models\MissionTask;
 use App\Models\MissionTaskProgress;
 use App\Models\PortfolioItem;
 use App\Models\User;
+use App\Notifications\MissionEvaluationCompletedNotification;
+use App\Notifications\MissionSubmittedNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -155,6 +157,17 @@ class MissionProgressService
 
             $this->recalculate($enrollment->fresh(['mission.tasks', 'taskProgress', 'submission']));
 
+            $teacher = $enrollment->mission->creator;
+            if ($teacher) {
+                $already = $teacher->notifications()
+                    ->where('type', MissionSubmittedNotification::class)
+                    ->where('data->enrollment_id', $enrollment->id)
+                    ->exists();
+                if (! $already) {
+                    $teacher->notify(new MissionSubmittedNotification($enrollment->fresh(['mission', 'user'])));
+                }
+            }
+
             return $submission->fresh();
         });
     }
@@ -212,6 +225,17 @@ class MissionProgressService
             ])->save();
 
             $this->storeLearningEvidence($enrollment, $score);
+
+            $student = $enrollment->user;
+            if ($student) {
+                $already = $student->notifications()
+                    ->where('type', MissionEvaluationCompletedNotification::class)
+                    ->where('data->enrollment_id', $enrollment->id)
+                    ->exists();
+                if (! $already) {
+                    $student->notify(new MissionEvaluationCompletedNotification($enrollment->fresh(['mission']), $score));
+                }
+            }
 
             return $enrollment->fresh(['mission', 'submission', 'taskProgress']);
         });

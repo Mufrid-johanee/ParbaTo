@@ -10,105 +10,158 @@
         <p class="font-body-lg text-body-lg text-on-surface-variant">Insights calculated from stored ParbaTo data — never fabricated.</p>
     </header>
 
-    @if(!$classroom)
-        <div class="pb-card p-10 text-center text-on-surface-variant">
-            No classroom assigned to your teacher account yet. Seed data includes a demo classroom for teacher@parbato.test.
-        </div>
-    @else
-        <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-headline text-headline-sm text-on-surface">{{ $classroom->course->title ?? $classroom->name }}</span>
-            <span class="px-2 py-0.5 rounded bg-surface-container-highest font-label-code text-label-code text-primary">{{ $classroom->course->code ?? '' }}</span>
-        </div>
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-space-md">
+        @foreach([
+            ['Students', $overview['total_students']],
+            ['Classrooms', $overview['total_classrooms']],
+            ['Missions', $overview['total_missions']],
+            ['Assessments', $overview['total_assessments']],
+            ['Sessions', $overview['total_sessions']],
+            ['Avg attendance', $overview['average_attendance'].'%'],
+            ['Learning activity', $overview['learning_activity']],
+        ] as [$label, $value])
+            <div class="pb-card p-space-md">
+                <div class="font-label-meta text-label-meta uppercase text-on-surface-variant">{{ $label }}</div>
+                <div class="font-headline text-headline-lg text-on-surface">{{ $value }}</div>
+            </div>
+        @endforeach
+    </section>
 
-        <section class="grid grid-cols-2 lg:grid-cols-4 gap-space-md">
-            <div class="pb-card p-space-md">
-                <div class="font-label-meta text-label-meta uppercase text-on-surface-variant">Members</div>
-                <div class="font-headline text-headline-lg text-on-surface">{{ $memberCount }}</div>
-            </div>
-            <div class="pb-card p-space-md">
-                <div class="font-label-meta text-label-meta uppercase text-on-surface-variant">Present (live)</div>
-                <div class="font-headline text-headline-lg text-secondary">{{ $presentCount }}</div>
-            </div>
-            <div class="pb-card p-space-md">
-                <div class="font-label-meta text-label-meta uppercase text-on-surface-variant">Avg mastery</div>
-                <div class="font-headline text-headline-lg text-on-surface">{{ $avgMastery }}%</div>
-            </div>
-            <div class="pb-card p-space-md">
-                <div class="font-label-meta text-label-meta uppercase text-on-surface-variant">Mission completion</div>
-                <div class="font-headline text-headline-lg text-on-surface">{{ $missionCompletion }}%</div>
-            </div>
-        </section>
-
-        <section class="pb-card p-space-lg">
-            <h2 class="font-headline text-headline-md text-on-surface mb-3">Live insights</h2>
-            <ul class="space-y-2">
-                @foreach($insights as $insight)
-                    <li class="flex gap-2 text-body-md text-on-surface-variant">
-                        <span class="text-secondary">▸</span>
-                        <span>{{ $insight }}</span>
-                    </li>
-                @endforeach
-            </ul>
-        </section>
-
-        <section class="grid grid-cols-1 xl:grid-cols-2 gap-space-lg">
-            <div class="pb-card p-space-lg overflow-x-auto">
-                <h3 class="font-headline text-headline-md text-on-surface mb-4">Topic difficulty</h3>
-                <div class="min-w-[280px] space-y-3">
-                    @forelse($topicDifficulty as $topic)
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="font-body-md text-body-md">{{ $topic->skill->name }}</span>
-                                <span class="font-label-code text-label-code {{ $topic->avg_mastery < 55 ? 'text-error' : 'text-secondary' }}">{{ (int) round($topic->avg_mastery) }}%</span>
-                            </div>
-                            <div class="h-2 rounded-full bg-surface-container-highest">
-                                <div class="h-full rounded-full bg-primary-container" style="width: {{ (int) round($topic->avg_mastery) }}%"></div>
-                            </div>
-                        </div>
-                    @empty
-                        <p class="text-on-surface-variant text-body-sm">No skill data yet.</p>
-                    @endforelse
+    <section>
+        <h2 class="font-headline text-headline-md mb-3">Needs attention</h2>
+        @forelse($atRisk as $row)
+            <div class="pb-card p-space-md mb-2">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <a href="{{ route('teacher.students.portfolio', $row['student']) }}" class="font-headline text-headline-sm text-on-surface hover:text-primary">{{ $row['student']->preferredName() }}</a>
+                    <ul class="text-sm text-error space-y-0.5">
+                        @foreach($row['reasons'] as $reason)
+                            <li>{{ $reason }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
+        @empty
+            <div class="pb-card p-6 text-center text-on-surface-variant">No at-risk signals from current rules.</div>
+        @endforelse
+    </section>
 
-            <div class="pb-card p-space-lg">
-                <h3 class="font-headline text-headline-md text-on-surface mb-4">Students needing attention</h3>
-                @forelse($studentsNeedingSupport as $row)
-                    <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
-                        <div>
-                            <div class="font-headline text-headline-sm text-on-surface">{{ $row->user->preferredName() }}</div>
-                            <div class="font-body-sm text-body-sm text-on-surface-variant">Low mastery: {{ $row->skill->name }}</div>
-                        </div>
-                        <span class="font-label-code text-label-code text-error">{{ $row->mastery }}%</span>
-                    </div>
-                @empty
-                    <p class="text-on-surface-variant text-body-sm">No students currently below the support threshold.</p>
-                @endforelse
-            </div>
-        </section>
+    <section>
+        <h2 class="font-headline text-headline-md mb-3">Classrooms</h2>
+        <div class="grid md:grid-cols-2 gap-space-md">
+            @forelse($classrooms as $row)
+                <a href="{{ route('analytics.classroom', $row['classroom']) }}" class="pb-card p-space-md block">
+                    <h3 class="font-headline text-headline-sm">{{ $row['classroom']->name }}</h3>
+                    <p class="text-sm text-on-surface-variant mt-1">{{ $row['member_count'] }} members · {{ $row['session_count'] }} sessions · {{ $row['average_attendance'] }}% attendance</p>
+                </a>
+            @empty
+                <div class="pb-card p-8 text-center text-on-surface-variant md:col-span-2">No analytics data yet.</div>
+            @endforelse
+        </div>
+    </section>
 
-        <section class="pb-card p-space-lg overflow-x-auto">
-            <h3 class="font-headline text-headline-md text-on-surface mb-4">Mission performance</h3>
-            <table class="w-full min-w-[480px] text-left">
-                <thead>
-                    <tr class="font-label-meta text-label-meta uppercase text-on-surface-variant">
-                        <th class="py-2 pr-4">Mission</th>
-                        <th class="py-2 pr-4">Attempts</th>
-                        <th class="py-2">Completed</th>
+    <section>
+        <h2 class="font-headline text-headline-md mb-3">Skill mastery</h2>
+        <p class="text-sm text-on-surface-variant mb-3">Classroom average mastery {{ $skills['average_mastery'] }}%</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+            @foreach($skills['distribution'] as $band => $count)
+                <div class="pb-card p-3 text-center">
+                    <div class="font-headline text-headline-sm">{{ $count }}</div>
+                    <div class="text-xs text-on-surface-variant capitalize">{{ str_replace('_',' ', $band) }}</div>
+                </div>
+            @endforeach
+        </div>
+        <div class="overflow-x-auto">
+            <svg viewBox="0 0 400 120" class="w-full max-w-xl h-28 text-primary">
+                @php $bars = $skills['skills']->take(6)->values(); $max = max(1, (float)$bars->max('avg_mastery')); @endphp
+                @foreach($bars as $i => $s)
+                    @php $h = ((float)$s->avg_mastery / $max) * 90; $x = 20 + $i * 60; @endphp
+                    <rect x="{{ $x }}" y="{{ 100 - $h }}" width="36" height="{{ $h }}" fill="currentColor" opacity="0.7" rx="4"/>
+                    <text x="{{ $x + 18 }}" y="115" text-anchor="middle" fill="#9aa0ad" font-size="8">{{ \Illuminate\Support\Str::limit($s->skill->name ?? 'Skill', 8) }}</text>
+                @endforeach
+            </svg>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="font-headline text-headline-md mb-3">Student progress matrix</h2>
+        <div class="overflow-x-auto pb-card hidden md:block">
+            <table class="min-w-full text-sm text-left">
+                <thead class="border-b border-white/10 text-on-surface-variant">
+                    <tr>
+                        <th class="p-3">Student</th>
+                        <th class="p-3">Missions</th>
+                        <th class="p-3">Assessments</th>
+                        <th class="p-3">Attendance</th>
+                        <th class="p-3">Mastery</th>
+                        <th class="p-3">Evidence</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($missionStats as $stat)
-                        <tr class="border-t border-white/5">
-                            <td class="py-3 pr-4 font-body-md text-body-md text-on-surface">{{ $stat->mission->title ?? 'Mission' }}</td>
-                            <td class="py-3 pr-4 font-label-code text-label-code">{{ $stat->attempts }}</td>
-                            <td class="py-3 font-label-code text-label-code text-secondary">{{ $stat->completed }}</td>
+                    @foreach($matrix as $row)
+                        <tr class="border-b border-white/5">
+                            <td class="p-3"><a class="text-primary" href="{{ route('teacher.students.portfolio', $row['student']) }}">{{ $row['student']->preferredName() }}</a></td>
+                            <td class="p-3">{{ $row['missions'] }}</td>
+                            <td class="p-3">{{ $row['assessments'] }}</td>
+                            <td class="p-3">{{ $row['attendance'] }}%</td>
+                            <td class="p-3">{{ $row['avg_mastery'] }}%</td>
+                            <td class="p-3">{{ $row['evidence'] }}</td>
                         </tr>
-                    @empty
-                        <tr><td colspan="3" class="py-4 text-on-surface-variant">No mission attempts yet.</td></tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="md:hidden flex flex-col gap-2">
+            @foreach($matrix as $row)
+                <div class="pb-card p-3">
+                    <a href="{{ route('teacher.students.portfolio', $row['student']) }}" class="font-headline text-headline-sm text-primary">{{ $row['student']->preferredName() }}</a>
+                    <p class="text-xs text-on-surface-variant mt-1">Missions {{ $row['missions'] }} · Assessments {{ $row['assessments'] }} · Att {{ $row['attendance'] }}% · Mastery {{ $row['avg_mastery'] }}%</p>
+                </div>
+            @endforeach
+        </div>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-space-lg">
+        <div>
+            <h2 class="font-headline text-headline-md mb-3">Missions</h2>
+            @forelse($missions as $m)
+                <div class="pb-card p-3 mb-2 text-sm">
+                    <div class="font-headline text-on-surface">{{ $m['mission']->title }}</div>
+                    <p class="text-on-surface-variant">Enrolled {{ $m['enrollments'] }} · Submitted {{ $m['submissions'] }} · Evaluated {{ $m['evaluations'] }} · Avg {{ $m['average_score'] ?? '—' }}</p>
+                </div>
+            @empty
+                <div class="pb-card p-6 text-center text-on-surface-variant">No mission analytics yet.</div>
+            @endforelse
+        </div>
+        <div>
+            <h2 class="font-headline text-headline-md mb-3">Assessments</h2>
+            @forelse($assessments as $a)
+                <div class="pb-card p-3 mb-2 text-sm">
+                    <div class="font-headline text-on-surface">{{ $a['assessment']->title }}</div>
+                    <p class="text-on-surface-variant">Attempts {{ $a['total_attempts'] }} · Graded {{ $a['graded'] }} · Pending {{ $a['pending_review'] }} · Avg {{ $a['average_score'] ?? '—' }}% · Pass {{ $a['pass_rate'] ?? '—' }}%</p>
+                </div>
+            @empty
+                <div class="pb-card p-6 text-center text-on-surface-variant">No assessment analytics yet.</div>
+            @endforelse
+        </div>
+    </section>
+
+    @if($classroomDetail)
+        <section>
+            <h2 class="font-headline text-headline-md mb-3">Latest classroom attendance trend</h2>
+            <div class="overflow-x-auto">
+                <svg viewBox="0 0 400 100" class="w-full max-w-2xl h-24">
+                    @php
+                        $points = collect($classroomDetail['trend']);
+                        $n = max(1, $points->count() - 1);
+                        $path = $points->values()->map(function ($p, $i) use ($n) {
+                            $x = 20 + ($i / $n) * 360;
+                            $y = 90 - (($p['percentage'] / 100) * 70);
+                            return ($i === 0 ? 'M' : 'L').$x.' '.$y;
+                        })->implode(' ');
+                    @endphp
+                    <path d="{{ $path }}" fill="none" stroke="#7dd3c7" stroke-width="2"/>
+                </svg>
+            </div>
         </section>
     @endif
 </div>

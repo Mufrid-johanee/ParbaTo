@@ -6,6 +6,7 @@ use App\Models\Classroom;
 use App\Models\ClassroomMember;
 use App\Models\Course;
 use App\Models\User;
+use App\Notifications\StudentJoinedClassroomNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -149,6 +150,8 @@ class ClassroomService
                 'joined_at' => now(),
             ])->save();
 
+            $this->notifyTeacherOfJoin($classroom, $student);
+
             return $existing->fresh();
         }
 
@@ -161,7 +164,7 @@ class ClassroomService
 
         $deskIndex = $memberCount + 1;
 
-        return ClassroomMember::query()->create([
+        $member = ClassroomMember::query()->create([
             'classroom_id' => $classroom->id,
             'user_id' => $student->id,
             'desk_row' => (int) ceil($deskIndex / max(1, $classroom->cols)),
@@ -170,6 +173,28 @@ class ClassroomService
             'status' => 'active',
             'joined_at' => now(),
         ]);
+
+        $this->notifyTeacherOfJoin($classroom, $student);
+
+        return $member;
+    }
+
+    protected function notifyTeacherOfJoin(Classroom $classroom, User $student): void
+    {
+        $teacher = $classroom->teacher;
+        if (! $teacher) {
+            return;
+        }
+
+        $already = $teacher->notifications()
+            ->where('type', StudentJoinedClassroomNotification::class)
+            ->where('data->classroom_id', $classroom->id)
+            ->where('data->student_id', $student->id)
+            ->exists();
+
+        if (! $already) {
+            $teacher->notify(new StudentJoinedClassroomNotification($classroom, $student));
+        }
     }
 
     public function uniqueJoinCode(): string

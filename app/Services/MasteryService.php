@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\AssessmentAttempt;
 use App\Models\LearningEvidence;
 use App\Models\MissionEnrollment;
 use App\Models\StudentSkill;
@@ -146,6 +147,52 @@ class MasteryService
                     'mission_id' => $enrollment->mission_id,
                     'mission_title' => $enrollment->mission->title,
                     'feedback' => $enrollment->submission?->feedback,
+                ]
+            );
+        }
+    }
+
+    /**
+     * Apply a graded assessment attempt as learning evidence (per mapped question skill).
+     * Idempotent via updateOrCreate on source_type + source_id + skill + evidence_type.
+     */
+    public function applyAssessmentAttempt(AssessmentAttempt $attempt): void
+    {
+        $attempt->loadMissing(['assessment.questions.skill', 'user', 'answerRecords']);
+        $user = $attempt->user;
+        $overall = (float) ($attempt->accuracy ?? 0);
+
+        $bySkill = $attempt->assessment->questions
+            ->filter(fn ($q) => $q->skill_id)
+            ->groupBy('skill_id');
+
+        if ($bySkill->isEmpty()) {
+            return;
+        }
+
+        foreach ($bySkill as $skillId => $questions) {
+            $max = (float) $questions->sum('points');
+            $earned = 0.0;
+
+            foreach ($questions as $question) {
+                $answer = $attempt->answerRecords->firstWhere('question_id', $question->id);
+                $earned += (float) ($answer?->points_awarded ?? 0);
+            }
+
+            $score = $max > 0 ? round(($earned / $max) * 100, 2) : $overall;
+
+            $this->record(
+                $user,
+                (int) $skillId,
+                AssessmentAttempt::class,
+                $attempt->id,
+                'assessment',
+                $score,
+                80,
+                [
+                    'assessment_id' => $attempt->assessment_id,
+                    'assessment_title' => $attempt->assessment->title,
+                    'overall_accuracy' => $overall,
                 ]
             );
         }

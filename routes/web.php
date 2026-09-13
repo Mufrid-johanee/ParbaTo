@@ -8,7 +8,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlexLearnController;
 use App\Http\Controllers\LearnQuestController;
 use App\Http\Controllers\MissionEvaluationController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\StudentAssessmentController;
 use App\Http\Controllers\TeacherAnalyticsController;
+use App\Http\Controllers\TeacherAssessmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -76,4 +80,49 @@ Route::middleware('auth')->group(function () {
     Route::get('/analytics', TeacherAnalyticsController::class)
         ->middleware('role:teacher,admin')
         ->name('analytics.teacher');
+    Route::get('/analytics/classrooms/{classroom}', [TeacherAnalyticsController::class, 'classroom'])
+        ->middleware('role:teacher,admin')
+        ->name('analytics.classroom');
+
+    // Assessments
+    Route::middleware('role:teacher,admin')->prefix('teacher/assessments')->name('teacher.assessments.')->group(function () {
+        Route::get('/', [TeacherAssessmentController::class, 'index'])->name('index');
+        Route::get('/create', [TeacherAssessmentController::class, 'create'])->name('create');
+        Route::post('/', [TeacherAssessmentController::class, 'store'])->name('store');
+        Route::get('/{assessment}/edit', [TeacherAssessmentController::class, 'edit'])->name('edit');
+        Route::put('/{assessment}', [TeacherAssessmentController::class, 'update'])->name('update');
+        Route::post('/{assessment}/questions', [TeacherAssessmentController::class, 'storeQuestion'])->name('questions.store');
+        Route::delete('/{assessment}/questions/{question}', [TeacherAssessmentController::class, 'destroyQuestion'])->name('questions.destroy');
+        Route::post('/{assessment}/publish', [TeacherAssessmentController::class, 'publish'])->name('publish');
+        Route::post('/{assessment}/unpublish', [TeacherAssessmentController::class, 'unpublish'])->name('unpublish');
+        Route::post('/{assessment}/archive', [TeacherAssessmentController::class, 'archive'])->name('archive');
+        Route::get('/{assessment}/attempts', [TeacherAssessmentController::class, 'attempts'])->name('attempts');
+        Route::get('/{assessment}/attempts/{attempt}', [TeacherAssessmentController::class, 'showAttempt'])->name('attempts.show');
+        Route::post('/{assessment}/attempts/{attempt}/grade', [TeacherAssessmentController::class, 'gradeAttempt'])->name('attempts.grade');
+    });
+
+    Route::prefix('student/assessments')->name('student.assessments.')->group(function () {
+        Route::get('/', [StudentAssessmentController::class, 'index'])->name('index');
+        Route::get('/{assessment}', [StudentAssessmentController::class, 'show'])->name('show');
+        Route::post('/{assessment}/start', [StudentAssessmentController::class, 'start'])->name('start');
+    });
+
+    Route::prefix('student/attempts')->name('student.attempts.')->group(function () {
+        Route::get('/{attempt}', [StudentAssessmentController::class, 'take'])->name('take');
+        Route::post('/{attempt}/autosave', [StudentAssessmentController::class, 'autosave'])->name('autosave');
+        Route::post('/{attempt}/submit', [StudentAssessmentController::class, 'submit'])->name('submit');
+        Route::get('/{attempt}/result', [StudentAssessmentController::class, 'result'])->name('result');
+    });
+
+    // Portfolio
+    Route::get('/student/profile', [PortfolioController::class, 'profile'])->name('student.profile');
+    Route::get('/student/skills', [PortfolioController::class, 'skills'])->name('student.skills');
+    Route::get('/teacher/students/{student}/portfolio', [PortfolioController::class, 'teacherShow'])
+        ->middleware('role:teacher,admin')
+        ->name('teacher.students.portfolio');
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
 });

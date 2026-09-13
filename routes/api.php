@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\AssessmentApiController;
 use App\Http\Controllers\Api\ClassTwinApiController;
 use App\Http\Controllers\Api\FlexLearnApiController;
 use App\Http\Controllers\Api\LearnQuestApiController;
+use App\Http\Controllers\Api\NotificationApiController;
+use App\Http\Controllers\Api\TeacherAnalyticsApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', function () {
@@ -48,4 +51,34 @@ Route::middleware('auth')->group(function () {
     Route::post('/sessions/{session}/heartbeat', [ClassTwinApiController::class, 'heartbeat']);
     Route::post('/sessions/{session}/end', [ClassTwinApiController::class, 'endSession']);
     Route::post('/sessions/{session}/mark-attendance', [ClassTwinApiController::class, 'markAttendance']);
+
+    Route::get('/assessments', [AssessmentApiController::class, 'index']);
+    Route::post('/assessments', [AssessmentApiController::class, 'store']);
+    Route::get('/assessments/{assessment}', [AssessmentApiController::class, 'show']);
+    Route::put('/assessments/{assessment}', [AssessmentApiController::class, 'update']);
+    Route::delete('/assessments/{assessment}', [AssessmentApiController::class, 'destroy']);
+    Route::post('/assessments/{assessment}/questions', [AssessmentApiController::class, 'storeQuestion']);
+    Route::put('/questions/{question}', [AssessmentApiController::class, 'updateQuestion']);
+    Route::delete('/questions/{question}', [AssessmentApiController::class, 'destroyQuestion']);
+    Route::post('/assessments/{assessment}/attempts', [AssessmentApiController::class, 'startAttempt']);
+    Route::get('/attempts/{attempt}', [AssessmentApiController::class, 'showAttempt']);
+    Route::put('/attempts/{attempt}/answers', [AssessmentApiController::class, 'saveAnswers']);
+    Route::post('/attempts/{attempt}/submit', [AssessmentApiController::class, 'submit']);
+    Route::get('/attempts/{attempt}/result', [AssessmentApiController::class, 'result']);
+    Route::post('/attempts/{attempt}/grade', [AssessmentApiController::class, 'grade']);
+
+    Route::get('/notifications', [NotificationApiController::class, 'index']);
+    Route::get('/notifications/unread-count', [NotificationApiController::class, 'unreadCount']);
+    Route::post('/notifications/{notification}/read', [NotificationApiController::class, 'markRead']);
+    Route::post('/notifications/read-all', [NotificationApiController::class, 'markAllRead']);
+
+    Route::middleware('role:teacher,admin')->prefix('analytics')->group(function () {
+        Route::get('/overview', [TeacherAnalyticsApiController::class, 'overview']);
+        Route::get('/classrooms', [TeacherAnalyticsApiController::class, 'classrooms']);
+        Route::get('/classrooms/{classroom}', [TeacherAnalyticsApiController::class, 'classroom']);
+        Route::get('/missions', [TeacherAnalyticsApiController::class, 'missions']);
+        Route::get('/assessments', [TeacherAnalyticsApiController::class, 'assessments']);
+        Route::get('/at-risk', [TeacherAnalyticsApiController::class, 'atRisk']);
+        Route::get('/skills', [TeacherAnalyticsApiController::class, 'skills']);
+    });
 });

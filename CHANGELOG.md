@@ -7,6 +7,18 @@ Format per entry: **Date · Category · Feature/change · Files/modules · Descr
 
 ---
 
+## 2026-09-13 (Phase 2)
+
+### Added — Assessment + Portfolio + Teacher Analytics + Notifications
+
+- **Category:** Backend / Frontend / API / Database / Testing / Documentation  
+- **Feature/change:** Phase 2 complete on top of Phase 1 (no rebuild)  
+- **Files/modules:** `AssessmentService`, `AssessmentScoringService`, `PortfolioService`, `TeacherAnalyticsService`, assessment/portfolio/notification controllers + APIs, policies, `attempt_answers` + `notifications` migration, Blade UIs, Phase2 tests, seeder demo data  
+- **Description:** Teacher-authored assessments (MCQ / T/F / short answer) with publish, attempt autosave/resume, server-side scoring, short-answer grading, LearningEvidence → Mastery → FlexLearn → Portfolio pipeline. Student portfolio + teacher portfolio view. Real DB teacher analytics with at-risk reasons and ownership isolation. In-app Laravel database notifications with deduplication on key events.  
+- **Testing status:** Full suite **42 passed / 191 assertions / 0 failures** (Phase 1 tests remain green)
+
+---
+
 ## 2026-09-13
 
 ### Documentation — Project master triad

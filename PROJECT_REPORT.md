@@ -4,7 +4,7 @@
 > Do not casually alter core concept, vision, mission, or architectural decisions without owner approval.
 
 **Last updated:** 2026-09-13  
-**Status:** Phase 1 documentation complete; implementation starting from greenfield + Stitch design prototypes
+**Status:** Phase 1 + Phase 2 implemented (Foundation, ClassTwin, LearnQuest, FlexLearn, Assessment, Portfolio, Teacher Analytics, Notifications). Phase 3 (gamification / polish / production) not started.
 
 ---
 
@@ -185,7 +185,7 @@ Physical session (presence + live activity) ↔ Digital twin and materials ↔ M
 
 ## Learning workflow
 
-Enroll → Attend ClassTwin session → Engage activities → Launch related LearnQuest mission → Submit evidence → FlexLearn updates path → Teacher reviews analytics → Portfolio grows.
+Enroll → Attend ClassTwin session → Engage activities → Launch related LearnQuest mission → Take assessments → Submit evidence → FlexLearn updates path → Teacher reviews analytics → Portfolio grows → In-app notifications.
 
 ## User journeys
 
@@ -225,6 +225,8 @@ Enroll → Attend ClassTwin session → Engage activities → Launch related Lea
 ## Core features
 
 ClassTwin live classroom, LearnQuest hub + workspace, FlexLearn adaptive path, student dashboard, teacher analytics, auth/RBAC, courses/classrooms/attendance.
+
+**Phase 2 (implemented):** Assessment engine (MCQ / true-false / short answer) with autosave, resume, server-side scoring, short-answer grading, and LearningEvidence → Mastery → FlexLearn integration; student portfolio / skill profile + teacher classroom-scoped portfolio; teacher analytics (overview, attendance, missions, assessments, progress matrix, rule-based at-risk with reasons, skill distribution); in-app database notifications (bell + `/notifications`) with event deduplication.
 
 ## Advanced features
 
@@ -356,15 +358,17 @@ Touch targets, bottom navigation for app shell, no tiny twin grids — use list/
 
 ## Current limitations (as of 2026-09-13)
 
-- Local workspace previously contained **only** Stitch HTML prototypes + `DESIGN.md`  
-- GitHub remote ([Mufrid-johanee/ParbaTo](https://github.com/Mufrid-johanee/ParbaTo)) had README-only presence  
-- No Laravel application code existed before Phase 1  
-- No Firebase credentials supplied (optional integration scaffolding only)  
-- Real-time twin sync not yet implemented (polling/static first)  
+- No WebSockets/Reverb (ClassTwin uses HTTP polling; assessment autosave uses HTTP)
+- No email / SMS / FCM notification channels (database/in-app only)
+- No AI grading or AI analytics
+- Live ClassTwin quizzes/announcements may remain lighter than full assessment engine
+- Attendance is not automatically converted into FlexLearn mastery
+- Firebase credentials not supplied (optional scaffolding only)
+- Phase 3: gamification badges, full Stitch fidelity polish, advanced security/perf, production deploy — not started
 
 ## Future roadmap
 
-Phases 2–13 per master plan: schema → auth → courses/classrooms → ClassTwin → LearnQuest → assessment → FlexLearn → analytics → portfolio → responsive polish → testing/security → production prep.
+Phase 3+ per master plan: gamification/XP badges polish → advanced responsive/UI fidelity → security hardening → performance → production deployment → backup/recovery → accessibility audit → full E2E hardening.
 
 ## AI integration roadmap
 
@@ -408,26 +412,24 @@ ParbaTo/
 
 ---
 
-## Database entities (planned MVP set)
+## Database entities (Phase 1–2)
 
-`users`, `roles` (or role enum + future roles table), `courses`, `course_modules`, `materials`, `course_enrollments`, `classrooms`, `classroom_members`, `class_sessions`, `attendance_records`, `classroom_activities`, `help_requests`, `announcements`, `missions`, `mission_tasks`, `mission_resources`, `mission_submissions`, `mission_task_progress`, `assessments`, `questions`, `assessment_attempts`, `skills`, `student_skills`, `recommendations`, `achievements`, `badges`, `user_achievements`, `notifications`, `portfolio_items`, `audit_logs`
+`users`, `courses`, `course_modules`, `materials`, `course_enrollments`, `classrooms`, `classroom_members`, `class_sessions`, `attendance_records`, `classroom_activities`, `help_requests`, `announcements`, `missions`, `mission_tasks`, `mission_resources`, `mission_submissions`, `mission_task_progress`, `assessments`, `questions`, `assessment_attempts`, `attempt_answers`, `skills`, `student_skills`, `learning_evidences`, `recommendations`, `achievements`, `user_achievements`, `notifications`, `portfolio_items`
 
-Create only what each milestone needs; expand with migrations.
+Phase 3 may expand gamification (`badges`, richer XP) and audit logging.
 
 ---
 
-## Major API endpoints (planned)
+## Major API endpoints (Phase 1–2)
 
 ```
-POST   /api/auth/login|register|logout
-GET    /api/me
-CRUD   /api/courses, /api/classrooms, /api/sessions
-POST   /api/sessions/{id}/attendance/qr
-GET|POST activities, help-requests, announcements
-CRUD   /api/missions, tasks, submissions
-GET    /api/flexlearn/recommendations
-GET    /api/analytics/classroom/{id}
-GET    /api/portfolio/me
+GET    /api/health
+CRUD   /api/classrooms, sessions, attendance, heartbeat
+CRUD   /api/learnquest/missions, tasks, submit, evaluate
+GET    /api/flexlearn, mastery, recommendations (+ start/complete/dismiss)
+CRUD   /api/assessments, questions, attempts, answers, submit, result, grade
+GET    /api/notifications (+ unread-count, read, read-all)
+GET    /api/analytics/overview|classrooms|missions|assessments|at-risk|skills
 ```
 
 Web Blade routes mirror major screens for the primary UI.
@@ -452,3 +454,5 @@ Web Blade routes mirror major screens for the primary UI.
 | 2026-09-13 | Keep `ParbaTo design/` in repo | Visual source of truth per owner prompt |
 | 2026-09-13 | Session auth first; Firebase optional | No credentials supplied; avoid blocking MVP |
 | 2026-09-13 | Rule-based FlexLearn for MVP | Explainability + no AI dependency |
+| 2026-09-13 | Phase 2 Assessment uses server scoring + attempt_answers | Never trust client scores; reuse LearningEvidence/Mastery/FlexLearn |
+| 2026-09-13 | In-app DB notifications only | No Pusher/FCM/email until Phase 3+ need |

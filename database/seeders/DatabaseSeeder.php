@@ -339,11 +339,14 @@ class DatabaseSeeder extends Seeder
 
         $assessment = Assessment::query()->create([
             'course_id' => $course->id,
+            'classroom_id' => $classroom->id,
             'created_by' => $teacher->id,
             'title' => 'Form Validation Pre-check',
+            'description' => 'Quick check on validation concepts.',
             'type' => 'pre_assessment',
             'instructions' => 'Quick check on validation concepts.',
             'pass_score' => 60,
+            'max_attempts' => 2,
             'status' => 'published',
         ]);
 
@@ -357,18 +360,129 @@ class DatabaseSeeder extends Seeder
             'points' => 1,
             'position' => 1,
         ]);
-
-        AssessmentAttempt::query()->create([
+        Question::query()->create([
             'assessment_id' => $assessment->id,
-            'user_id' => $alex->id,
-            'score' => 1,
-            'max_score' => 2,
-            'accuracy' => 50,
-            'status' => 'graded',
-            'answers' => ['required'],
-            'started_at' => now()->subDays(5),
-            'submitted_at' => now()->subDays(5),
+            'skill_id' => $skills[0]->id,
+            'type' => 'true_false',
+            'prompt' => 'Client-side validation alone is enough for security.',
+            'options' => ['true', 'false'],
+            'correct_answer' => ['false'],
+            'points' => 1,
+            'position' => 2,
         ]);
+        Question::query()->create([
+            'assessment_id' => $assessment->id,
+            'skill_id' => $skills[1]->id,
+            'type' => 'mcq',
+            'prompt' => 'Which HTTP method is idempotent for updates?',
+            'options' => ['POST', 'PUT', 'CONNECT', 'TRACE'],
+            'correct_answer' => ['PUT'],
+            'points' => 1,
+            'position' => 3,
+        ]);
+        Question::query()->create([
+            'assessment_id' => $assessment->id,
+            'skill_id' => $skills[1]->id,
+            'type' => 'true_false',
+            'prompt' => 'ARIA labels improve accessibility.',
+            'options' => ['true', 'false'],
+            'correct_answer' => ['true'],
+            'points' => 1,
+            'position' => 4,
+        ]);
+        Question::query()->create([
+            'assessment_id' => $assessment->id,
+            'skill_id' => $skills[0]->id,
+            'type' => 'short_answer',
+            'prompt' => 'Name one Laravel validation rule for emails.',
+            'options' => null,
+            'correct_answer' => null,
+            'points' => 2,
+            'position' => 5,
+        ]);
+
+        $gradedAttempt = app(\App\Services\AssessmentService::class)->startAttempt($alex, $assessment);
+        app(\App\Services\AssessmentService::class)->autosaveAnswers($gradedAttempt, [
+            ['question_id' => $assessment->questions()->where('position', 1)->value('id'), 'selected_option' => 'required'],
+            ['question_id' => $assessment->questions()->where('position', 2)->value('id'), 'selected_option' => 'false'],
+            ['question_id' => $assessment->questions()->where('position', 3)->value('id'), 'selected_option' => 'PUT'],
+            ['question_id' => $assessment->questions()->where('position', 4)->value('id'), 'selected_option' => 'true'],
+            ['question_id' => $assessment->questions()->where('position', 5)->value('id'), 'answer_text' => 'email'],
+        ]);
+        $gradedAttempt = app(\App\Services\AssessmentService::class)->submitAttempt($gradedAttempt->fresh());
+        app(\App\Services\AssessmentService::class)->gradeShortAnswers($gradedAttempt->fresh(), $teacher, [
+            [
+                'question_id' => $assessment->questions()->where('position', 5)->value('id'),
+                'points_awarded' => 2,
+                'teacher_feedback' => 'Correct.',
+            ],
+        ]);
+
+        $assessment2 = Assessment::query()->create([
+            'classroom_id' => $classroom->id,
+            'course_id' => $course->id,
+            'created_by' => $teacher->id,
+            'title' => 'Async UI Checkpoint',
+            'description' => 'Practice quiz with a pending short-answer review.',
+            'type' => 'quiz',
+            'pass_score' => 70,
+            'max_attempts' => 1,
+            'time_limit_minutes' => 30,
+            'status' => 'published',
+        ]);
+
+        foreach ([
+            [1, 'mcq', 'What does fetch() return?', ['Promise', 'String', 'Number', 'Boolean'], ['Promise'], $skills[2]->id, 1],
+            [2, 'true_false', 'async/await can replace .then chains.', ['true', 'false'], ['true'], $skills[2]->id, 1],
+            [3, 'mcq', 'Which status means Not Found?', ['200', '301', '404', '500'], ['404'], $skills[3]->id, 1],
+            [4, 'true_false', 'JSON.stringify parses JSON text.', ['true', 'false'], ['false'], $skills[2]->id, 1],
+            [5, 'short_answer', 'Explain one UX benefit of optimistic UI.', null, null, $skills[3]->id, 3],
+        ] as [$pos, $type, $prompt, $options, $correct, $skillId, $points]) {
+            Question::query()->create([
+                'assessment_id' => $assessment2->id,
+                'skill_id' => $skillId,
+                'type' => $type,
+                'prompt' => $prompt,
+                'options' => $options,
+                'correct_answer' => $correct,
+                'points' => $points,
+                'position' => $pos,
+            ]);
+        }
+
+        $pending = app(\App\Services\AssessmentService::class)->startAttempt($alex, $assessment2);
+        app(\App\Services\AssessmentService::class)->autosaveAnswers($pending, [
+            ['question_id' => $assessment2->questions()->where('position', 1)->value('id'), 'selected_option' => 'Promise'],
+            ['question_id' => $assessment2->questions()->where('position', 2)->value('id'), 'selected_option' => 'true'],
+            ['question_id' => $assessment2->questions()->where('position', 3)->value('id'), 'selected_option' => '404'],
+            ['question_id' => $assessment2->questions()->where('position', 4)->value('id'), 'selected_option' => 'false'],
+            ['question_id' => $assessment2->questions()->where('position', 5)->value('id'), 'answer_text' => 'Feels faster'],
+        ]);
+        app(\App\Services\AssessmentService::class)->submitAttempt($pending->fresh());
+
+        // Seed unread notifications for demo student
+        $alex->notify(new \App\Notifications\AssessmentPublishedNotification($assessment2));
+        $alex->notify(new \App\Notifications\SessionStartedNotification($session->load('classroom')));
+        $alex->notifications()->latest()->limit(5)->get(); // ensure channel writes
+
+        // Extra deterministic unread items
+        foreach (range(1, 3) as $i) {
+            $alex->notify(new \App\Notifications\FlexLearnRecommendationUpdatedNotification(
+                \App\Models\Recommendation::query()->firstOrCreate(
+                    [
+                        'user_id' => $alex->id,
+                        'rule_key' => 'seed-demo-'.$i,
+                    ],
+                    [
+                        'title' => 'Practice path '.$i,
+                        'reason' => 'Seeded FlexLearn recommendation '.$i,
+                        'priority' => 'medium',
+                        'status' => 'active',
+                        'sort_order' => 100 + $i,
+                    ]
+                )
+            ));
+        }
 
         foreach ($students as $student) {
             app(FlexLearnRecommendationService::class)->generateFor($student);
@@ -380,5 +494,6 @@ class DatabaseSeeder extends Seeder
         $this->command?->info('10 demo students seeded (all password: password)');
         $this->command?->info('Classroom join code: JOIN201A');
         $this->command?->info('Live attendance code: PARBATO1');
+        $this->command?->info('Phase 2: 2 assessments, graded + pending attempts, portfolio + notifications seeded');
     }
 }

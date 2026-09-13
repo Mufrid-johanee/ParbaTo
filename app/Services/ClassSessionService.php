@@ -7,6 +7,7 @@ use App\Models\ClassSession;
 use App\Models\Classroom;
 use App\Models\ClassroomMember;
 use App\Models\User;
+use App\Notifications\SessionStartedNotification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -45,8 +46,35 @@ class ClassSessionService
             $plainCode = $session->rotateAttendanceCode((int) ($data['code_ttl_minutes'] ?? 60));
             $this->rememberPlainCode($session, $plainCode);
 
-            return ['session' => $session->fresh(), 'plain_code' => $plainCode];
+            $session = $session->fresh(['classroom']);
+            $this->notifyMembersSessionStarted($session);
+
+            return ['session' => $session, 'plain_code' => $plainCode];
         });
+    }
+
+    protected function notifyMembersSessionStarted(ClassSession $session): void
+    {
+        $members = User::query()
+            ->whereIn(
+                'id',
+                ClassroomMember::query()
+                    ->where('classroom_id', $session->classroom_id)
+                    ->where('status', 'active')
+                    ->pluck('user_id')
+            )
+            ->get();
+
+        foreach ($members as $member) {
+            $already = $member->notifications()
+                ->where('type', SessionStartedNotification::class)
+                ->where('data->session_id', $session->id)
+                ->exists();
+
+            if (! $already) {
+                $member->notify(new SessionStartedNotification($session));
+            }
+        }
     }
 
     /**
