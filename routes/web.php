@@ -6,6 +6,7 @@ use App\Http\Controllers\ClassTwinController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlexLearnController;
 use App\Http\Controllers\LearnQuestController;
+use App\Http\Controllers\MissionEvaluationController;
 use App\Http\Controllers\TeacherAnalyticsController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/learnquest', [LearnQuestController::class, 'index'])->name('learnquest.index');
     Route::get('/learnquest/missions/{mission:slug}', [LearnQuestController::class, 'show'])->name('learnquest.show');
     Route::post('/learnquest/missions/{mission:slug}/start', [LearnQuestController::class, 'start'])->name('learnquest.start');
+    Route::post('/learnquest/missions/{mission:slug}/tasks/{task}/complete', [LearnQuestController::class, 'completeTask'])->name('learnquest.tasks.complete');
+    Route::post('/learnquest/missions/{mission:slug}/submit', [LearnQuestController::class, 'submit'])->name('learnquest.submit');
+
+    Route::middleware('role:teacher,admin')->prefix('learnquest/evaluations')->name('learnquest.evaluations.')->group(function () {
+        Route::get('/', [MissionEvaluationController::class, 'index'])->name('index');
+        Route::get('/{enrollment}', [MissionEvaluationController::class, 'show'])->name('show');
+        Route::post('/{enrollment}', [MissionEvaluationController::class, 'store'])->name('store');
+    });
 
     Route::get('/flexlearn', FlexLearnController::class)->name('flexlearn.index');
 

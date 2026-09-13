@@ -1,8 +1,8 @@
 # ParbaTo — Implementation Progress
 
-**Overall completion:** ~28%  
+**Overall completion:** ~38%  
 **Last updated:** 2026-09-13  
-**Current phase:** Phase 3–6 foundation in place (auth, schema, ClassTwin/LearnQuest/FlexLearn UI + services)
+**Current phase:** LearnQuest Mission Workspace MVP connected (tasks → progress → submit → evaluate)
 
 Honest status only. Unfinished work is never marked complete.
 
@@ -27,11 +27,11 @@ Honest status only. Unfinished work is never marked complete.
 | 3 | Authentication + authorization | [✓] |
 | 4 | Core course/classroom system | [~] |
 | 5 | ClassTwin | [~] |
-| 6 | LearnQuest | [~] |
+| 6 | LearnQuest | [✓] MVP workspace |
 | 7 | Assessment | [~] |
 | 8 | FlexLearn | [~] |
 | 9 | Analytics | [~] |
-| 10 | Portfolio + achievements | [ ] |
+| 10 | Portfolio + achievements | [~] |
 | 11 | Responsive/mobile refinement | [~] |
 | 12 | Testing/security/performance | [~] |
 | 13 | Production preparation | [ ] |
@@ -52,23 +52,31 @@ Honest status only. Unfinished work is never marked complete.
 - [✓] App shell: sidebar + topbar + mobile bottom nav
 - [✓] Student dashboard (live session + missions + recommendations)
 - [✓] ClassTwin live session view + server-validated attendance code check-in + help requests
-- [✓] LearnQuest mission hub + workspace + start mission
+- [✓] LearnQuest mission hub + start mission
+- [✓] LearnQuest Mission Workspace MVP: complete task, auto progress %, phase from tasks, submit, teacher evaluate
+- [✓] `MissionProgressService` (DB source of truth for progress/phase)
+- [✓] `MissionEnrollmentPolicy` + AuthorizesRequests
+- [✓] Campus Navigation Micro-App seeded with full lifecycle tasks + real MDN resources
+- [✓] Registration Form Validator mission expanded with present/evaluate tasks
+- [✓] Teacher evaluations inbox (`/learnquest/evaluations`)
+- [✓] Portfolio item + skill mastery + XP + FlexLearn refresh on evaluation
+- [✓] LearnQuest API endpoints under `/api/learnquest/*`
 - [✓] FlexLearn path UI + explainable rule engine service
-- [✓] Teacher analytics from real aggregates (insights, topic difficulty, support list, mission matrix)
-- [✓] Demo seeder (`student@` / `teacher@` / `admin@parbato.test`)
-- [✓] Feature tests: auth/RBAC + attendance validation
+- [✓] Teacher analytics from real aggregates
+- [✓] Demo seeder with **10 uniquely named students** + teacher + admin
+- [✓] Feature tests: auth/RBAC, attendance, LearnQuest workspace (5)
+- [✓] Browser E2E: campus tasks, complete task, progress persists
 - [✓] `.env.example` with Firebase placeholders (empty)
 
 ---
 
 ## In-progress features
 
-- [~] Course/classroom teacher CRUD UI (schema + seed exist; management screens pending)
-- [~] ClassTwin teacher session controls (QR rotate UI, activity publishing)
-- [~] LearnQuest full lifecycle task completion + submission upload/review
-- [~] Assessment attempt UX (tables + seed quiz exist)
+- [~] Course/classroom teacher CRUD UI
+- [~] ClassTwin teacher session controls
+- [~] Assessment attempt UX
+- [~] Portfolio student-facing UI (items created on mission complete)
 - [~] Responsive polish parity with full Stitch HTML density
-- [~] GitHub remote push (auth may be required)
 
 ---
 
@@ -76,75 +84,75 @@ Honest status only. Unfinished work is never marked complete.
 
 - [ ] Password recovery / email verification flows
 - [ ] Firebase Auth integration (awaiting owner credentials)
-- [ ] Portfolio + achievements awarding UI
+- [ ] Achievements/badges awarding UI
 - [ ] Live websockets / SSE twin sync
-- [ ] Rate limiting polish on attendance endpoints
-- [ ] Full Stitch pixel-parity pass for all 7 screens
-- [ ] Production deployment docs hardening
+- [ ] File upload for mission submissions (optional URL works now)
+- [ ] Production deployment hardening
 
 ---
 
 ## Blocked features
 
-- [!] GitHub CLI push — `gh` was not authenticated at session start (use `gh auth login` or git credentials)
 - [!] Firebase Authentication — credentials not supplied
 
 ---
 
 ## Bugs
 
-_None open after initial smoke tests._
+_None open after Mission Workspace MVP tests._
 
 ---
 
 ## Testing status
 
-- [✓] `AuthAndDashboardTest` (4) passing  
-- [✓] `AttendanceServiceTest` (2) passing  
-- [ ] Broader mission/FlexLearn/analytics feature tests pending  
+- [✓] `AuthAndDashboardTest` passing  
+- [✓] `AttendanceServiceTest` passing  
+- [✓] `LearnQuestMissionWorkspaceTest` (5) passing  
+- [✓] Browser E2E campus task completion passing  
 
 ## Database status
 
-- [✓] Migrated on local MariaDB `parbato`  
-- [✓] Seeded demo dataset  
+- [✓] Migrated + reseeded with full campus/registration mission tasks  
 
 ## API status
 
-- [~] `/api/health` only; REST surface planned in `PROJECT_REPORT.md`
+- [✓] `/api/health`  
+- [✓] `/api/learnquest/missions/{slug}` show/start/enrollment/complete/submit  
+- [✓] `/api/learnquest/enrollments/{id}/evaluate` (teacher)  
 
 ## Frontend integration status
 
-- [✓] Runtime Blade app uses Stitch tokens  
-- [✓] Design folder preserved as reference  
+- [✓] Mission workspace shows tasks, Complete Task, progress, pipeline, submit, feedback  
 - [~] Not every Stitch visual section ported 1:1 yet  
 
 ## Responsive status
 
 - [✓] Mobile bottom nav + collapsible sidebar  
 - [✓] ClassTwin mobile list vs desktop grid  
+- [✓] Mission workspace stacks on mobile; touch-friendly Complete Task buttons  
 - [~] Further tablet drawer / chart polish pending  
 
 ## Security status
 
 - [✓] CSRF on forms; hashed passwords; hashed attendance codes  
-- [✓] Role gates on analytics  
-- [~] Broader policy coverage for IDOR on all resources pending  
+- [✓] Role gates on analytics + evaluations  
+- [✓] Mission enrollment policy (task complete / submit / evaluate)  
+- [~] Broader policy coverage for remaining resources pending  
 
 ## Deployment status
 
 - [ ] Not production-ready  
 - [~] README local setup documented  
-- [ ] Push to https://github.com/Mufrid-johanee/ParbaTo pending auth  
+- [✓] Code pushed to https://github.com/Mufrid-johanee/ParbaTo (earlier foundation commit)  
 
 ---
 
 ## Next recommended task
 
-1. Teacher ClassTwin controls (start/end session, rotate attendance code, activities)  
-2. Mission task progress + submission workflow  
-3. Course management UI for teachers  
-4. Authenticate GitHub (`gh auth login`) and push  
-5. Expand feature tests  
+1. Teacher ClassTwin session controls  
+2. Course management UI  
+3. Student portfolio page consuming `portfolio_items`  
+4. Assessment attempt UI  
 
 ---
 
@@ -157,3 +165,10 @@ _None open after initial smoke tests._
 | Admin | admin@parbato.test | password |
 
 Attendance code for seeded live session: `PARBATO1`
+
+### Try the Mission Workspace flow
+
+1. Login as `nadia@parbato.test` / `password`  
+2. Open **Campus Navigation Micro-App**  
+3. Start mission → Complete Task repeatedly → Submit →  
+4. Login as `teacher@parbato.test` → **Evaluations** → score + feedback  

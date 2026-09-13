@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Mission;
 use App\Models\MissionEnrollment;
+use App\Models\MissionTask;
+use App\Services\MissionProgressService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class LearnQuestController extends Controller
 {
+    public function __construct(
+        protected MissionProgressService $progress
+    ) {}
+
     public function index(Request $request): View
     {
         $query = Mission::query()
@@ -38,7 +43,7 @@ class LearnQuestController extends Controller
 
         $counts = [
             'all' => Mission::query()->where('status', 'published')->count(),
-            'active' => MissionEnrollment::query()->where('user_id', $request->user()->id)->whereIn('status', ['in_progress', 'discovered'])->count(),
+            'active' => MissionEnrollment::query()->where('user_id', $request->user()->id)->whereIn('status', ['in_progress', 'discovered', 'submitted'])->count(),
             'completed' => MissionEnrollment::query()->where('user_id', $request->user()->id)->where('status', 'completed')->count(),
         ];
 
@@ -57,33 +62,70 @@ class LearnQuestController extends Controller
             ->where('user_id', $request->user()->id)
             ->first();
 
-        return view('learnquest.workspace', compact('mission', 'enrollment'));
+        $completedTaskIds = $enrollment
+            ? $enrollment->taskProgress->where('status', 'done')->pluck('mission_task_id')
+            : collect();
+
+        $tasksByPhase = $mission->tasks->groupBy('phase');
+
+        return view('learnquest.workspace', compact(
+            'mission',
+            'enrollment',
+            'completedTaskIds',
+            'tasksByPhase'
+        ));
     }
 
     public function start(Request $request, Mission $mission): RedirectResponse
     {
-        abort_unless($mission->isPublished(), 404);
+        $enrollment = $this->progress->start($mission, $request->user());
 
-        $enrollment = MissionEnrollment::query()->firstOrCreate(
-            [
-                'mission_id' => $mission->id,
-                'user_id' => $request->user()->id,
-            ],
-            [
-                'status' => 'in_progress',
-                'lifecycle_phase' => 'discover',
-                'progress_percent' => 0,
-                'started_at' => now(),
-            ]
-        );
-
-        if ($enrollment->status === 'discovered') {
-            $enrollment->update([
-                'status' => 'in_progress',
-                'started_at' => $enrollment->started_at ?? now(),
-            ]);
+        if ($enrollment->wasRecentlyCreated) {
+            return redirect()
+                ->route('learnquest.show', $mission)
+                ->with('status', 'Mission started. Begin with Discover tasks.');
         }
 
-        return redirect()->route('learnquest.show', $mission);
+        return redirect()
+            ->route('learnquest.show', $mission)
+            ->with('status', 'Continuing your existing mission progress.');
+    }
+
+    public function completeTask(
+        Request $request,
+        Mission $mission,
+        MissionTask $task
+    ): RedirectResponse {
+        abort_unless($task->mission_id === $mission->id, 404);
+
+        $enrollment = MissionEnrollment::query()
+            ->where('mission_id', $mission->id)
+            ->where('user_id', $request->user()->id)
+            ->firstOrFail();
+
+        $this->authorize('completeTask', $enrollment);
+        $this->progress->completeTask($enrollment, $task, $request->user());
+
+        return back()->with('status', 'Task marked complete. Progress updated.');
+    }
+
+    public function submit(Request $request, Mission $mission): RedirectResponse
+    {
+        $enrollment = MissionEnrollment::query()
+            ->where('mission_id', $mission->id)
+            ->where('user_id', $request->user()->id)
+            ->firstOrFail();
+
+        $this->authorize('submit', $enrollment);
+
+        $validated = $request->validate([
+            'summary' => ['required', 'string', 'min:20', 'max:5000'],
+            'repo_url' => ['nullable', 'url', 'max:500'],
+            'demo_url' => ['nullable', 'url', 'max:500'],
+        ]);
+
+        $this->progress->submit($enrollment, $request->user(), $validated);
+
+        return back()->with('status', 'Project submitted. Waiting for teacher evaluation.');
     }
 }

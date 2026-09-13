@@ -50,37 +50,38 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        $alex = User::query()->create([
-            'name' => 'Alex Rahman',
-            'display_name' => 'Alex',
-            'email' => 'student@parbato.test',
-            'password' => 'password',
-            'role' => User::ROLE_STUDENT,
-            'xp' => 3450,
-            'level' => 14,
-            'major' => 'Computer Science',
-            'email_verified_at' => now(),
-        ]);
+        // 10 uniquely named demo students (shared password: password)
+        $demoStudents = [
+            ['Alex Rahman', 'Alex', 'student@parbato.test', 3450, 14, [48, 72, 65, 40]],
+            ['Maya Reyes', 'Maya', 'maya@parbato.test', 1800, 9, [70, 80, 55, 60]],
+            ['Tariq Nasser', 'Tariq', 'tariq@parbato.test', 2200, 11, [82, 75, 88, 70]],
+            ['Sara Ahmed', 'Sara', 'sara@parbato.test', 900, 5, [45, 50, 42, 55]],
+            ['Liam Kelly', 'Liam', 'liam@parbato.test', 650, 4, [38, 60, 48, 35]],
+            ['Nadia Chowdhury', 'Nadia', 'nadia@parbato.test', 1400, 7, [62, 58, 71, 49]],
+            ['Omar Hassan', 'Omar', 'omar@parbato.test', 1100, 6, [55, 67, 44, 72]],
+            ['Priya Sen', 'Priya', 'priya@parbato.test', 1950, 10, [78, 81, 69, 74]],
+            ['Ethan Brooks', 'Ethan', 'ethan@parbato.test', 780, 4, [41, 53, 60, 47]],
+            ['Aisha Karim', 'Aisha', 'aisha@parbato.test', 1600, 8, [66, 59, 73, 51]],
+        ];
 
-        $students = collect([$alex]);
-        foreach ([
-            ['Maya Reyes', 'Maya', 'maya@parbato.test'],
-            ['Tariq Nasser', 'Tariq', 'tariq@parbato.test'],
-            ['Sara Ahmed', 'Sara', 'sara@parbato.test'],
-            ['Liam Kelly', 'Liam', 'liam@parbato.test'],
-        ] as [$name, $display, $email]) {
+        $students = collect();
+        $masteryMap = [];
+        foreach ($demoStudents as [$name, $display, $email, $xp, $level, $mastery]) {
             $students->push(User::query()->create([
                 'name' => $name,
                 'display_name' => $display,
                 'email' => $email,
                 'password' => 'password',
                 'role' => User::ROLE_STUDENT,
-                'xp' => random_int(200, 2000),
-                'level' => random_int(3, 12),
+                'xp' => $xp,
+                'level' => $level,
                 'major' => 'Computer Science',
                 'email_verified_at' => now(),
             ]));
+            $masteryMap[$email] = $mastery;
         }
+
+        $alex = $students->firstWhere('email', 'student@parbato.test');
 
         $course = Course::query()->create([
             'teacher_id' => $teacher->id,
@@ -170,14 +171,6 @@ class DatabaseSeeder extends Seeder
             'domain' => $s[2],
         ]));
 
-        $masteryMap = [
-            'student@parbato.test' => [48, 72, 65, 40],
-            'maya@parbato.test' => [70, 80, 55, 60],
-            'tariq@parbato.test' => [82, 75, 88, 70],
-            'sara@parbato.test' => [45, 50, 42, 55],
-            'liam@parbato.test' => [38, 60, 48, 35],
-        ];
-
         foreach ($students as $student) {
             $values = $masteryMap[$student->email] ?? [60, 60, 60, 60];
             foreach ($skills as $i => $skill) {
@@ -212,18 +205,22 @@ class DatabaseSeeder extends Seeder
         $mission->skills()->attach($skills->take(2)->pluck('id'));
 
         foreach ([
-            ['discover', 'Review current broken form flows'],
-            ['learn', 'Study HTML constraint validation APIs'],
-            ['practice', 'Implement email and password rules'],
-            ['build', 'Assemble the full registration validator'],
-            ['submit', 'Submit demo + reflection'],
-        ] as $i => [$phase, $title]) {
+            ['discover', 'Review current broken form flows', 'Map where registration data fails today.'],
+            ['discover', 'Identify required registration fields', 'List must-have fields and validation rules.'],
+            ['learn', 'Study HTML constraint validation APIs', 'Read constraint validation concepts and attributes.'],
+            ['practice', 'Implement email and password rules', 'Code client-side checks for email and password strength.'],
+            ['build', 'Assemble the full registration validator', 'Combine fields, errors, and submit gating into one form.'],
+            ['submit', 'Submit demo + reflection', 'Prepare a short write-up of what you built.'],
+            ['present', 'Prepare a short demo walkthrough', 'Outline how you will show the validator working.'],
+            ['evaluate', 'Teacher evaluates the project', 'Faculty scores the submission and records feedback.'],
+        ] as $i => [$phase, $title, $description]) {
             MissionTask::query()->create([
                 'mission_id' => $mission->id,
                 'title' => $title,
-                'description' => $title,
+                'description' => $description,
                 'phase' => $phase,
                 'position' => $i + 1,
+                'is_required' => true,
             ]);
         }
 
@@ -235,30 +232,85 @@ class DatabaseSeeder extends Seeder
             'position' => 1,
         ]);
 
-        Mission::query()->create([
+        MissionResource::query()->create([
+            'mission_id' => $mission->id,
+            'title' => 'MDN HTML Forms Guide',
+            'type' => 'article',
+            'url' => 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms',
+            'position' => 2,
+        ]);
+
+        $campus = Mission::query()->create([
             'course_id' => $course->id,
             'created_by' => $teacher->id,
             'title' => 'Campus Navigation Micro-App',
             'slug' => 'campus-navigation-micro-app',
             'description' => 'Prototype a lightweight campus wayfinding experience.',
-            'problem_statement' => 'New students struggle to find labs and lecture halls on day one.',
-            'objective' => 'Deliver a clickable prototype with three routes and clear landmarks.',
+            'problem_statement' => "New students struggle to find labs and lecture halls on day one.\nBuild a simple navigation micro-app that helps them reach three key campus destinations.",
+            'objective' => 'Deliver a clickable prototype with three routes, clear landmarks, and accessible UI cues.',
             'difficulty' => 'beginner',
             'estimated_minutes' => 120,
             'xp_reward' => 150,
             'mode' => 'team',
             'status' => 'published',
             'deadline_at' => now()->addDays(14),
-        ])->skills()->attach($skills->pluck('id')->slice(2, 2));
-
-        MissionEnrollment::query()->create([
-            'mission_id' => $mission->id,
-            'user_id' => $alex->id,
-            'status' => 'in_progress',
-            'lifecycle_phase' => 'practice',
-            'progress_percent' => 45,
-            'started_at' => now()->subDays(3),
+            'assessment_criteria' => ['Us clarity', 'Async API usage', 'Accessibility'],
+            'submission_requirements' => ['Project explanation', 'Optional demo URL'],
         ]);
+        $campus->skills()->attach($skills->pluck('id')->slice(2, 2));
+
+        foreach ([
+            ['discover', 'Understand the campus navigation problem', 'Write the pain points for first-day students.'],
+            ['discover', 'Identify the target users', 'Define who the micro-app helps and their constraints.'],
+            ['discover', 'Define the core navigation requirements', 'List destinations, landmarks, and success criteria.'],
+            ['learn', 'Learn how location/navigation APIs work', 'Study browser geolocation / async location patterns.'],
+            ['learn', 'Learn basic accessibility principles', 'Review accessible labels, contrast, and keyboard use.'],
+            ['practice', 'Create a basic location request', 'Practice requesting location asynchronously and handling errors.'],
+            ['practice', 'Practice displaying a destination', 'Show one destination card with clear landmark text.'],
+            ['build', 'Design the navigation interface', 'Sketch/layout search + destination results for three routes.'],
+            ['build', 'Implement campus location search', 'Let users pick or search among campus destinations.'],
+            ['build', 'Implement navigation/result display', 'Render route steps or landmark guidance for a selection.'],
+            ['submit', 'Submit the project', 'Package your prototype and write a short explanation.'],
+            ['submit', 'Add a short project explanation', 'Explain how Async API and accessibility show up in your work.'],
+            ['present', 'Prepare a short project demonstration', 'Plan a 2–3 minute demo of the three routes.'],
+            ['evaluate', 'Teacher evaluates the project', 'Faculty reviews submission, score, and feedback.'],
+        ] as $i => [$phase, $title, $description]) {
+            MissionTask::query()->create([
+                'mission_id' => $campus->id,
+                'title' => $title,
+                'description' => $description,
+                'phase' => $phase,
+                'position' => $i + 1,
+                'is_required' => true,
+            ]);
+        }
+
+        MissionResource::query()->create([
+            'mission_id' => $campus->id,
+            'title' => 'MDN Geolocation API',
+            'type' => 'link',
+            'url' => 'https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API',
+            'position' => 1,
+        ]);
+
+        MissionResource::query()->create([
+            'mission_id' => $campus->id,
+            'title' => 'MDN Accessibility Basics',
+            'type' => 'article',
+            'url' => 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility',
+            'position' => 2,
+        ]);
+
+        $progressService = app(\App\Services\MissionProgressService::class);
+        $alexEnrollment = $progressService->start($mission, $alex);
+        $discoverLearnPractice = $mission->tasks()
+            ->whereIn('phase', ['discover', 'learn', 'practice'])
+            ->orderBy('position')
+            ->get();
+        foreach ($discoverLearnPractice as $task) {
+            $progressService->completeTask($alexEnrollment, $task, $alex);
+            $alexEnrollment = $alexEnrollment->fresh(['taskProgress', 'mission.tasks']);
+        }
 
         $assessment = Assessment::query()->create([
             'course_id' => $course->id,
@@ -293,14 +345,14 @@ class DatabaseSeeder extends Seeder
             'submitted_at' => now()->subDays(5),
         ]);
 
-        app(FlexLearnRecommendationService::class)->generateFor($alex);
+        foreach ($students as $student) {
+            app(FlexLearnRecommendationService::class)->generateFor($student);
+        }
 
-        unset($admin); // silence unused in some linters; retained for demo login
-
-        $this->command?->info('Demo accounts (password: password):');
-        $this->command?->info('  student@parbato.test');
-        $this->command?->info('  teacher@parbato.test');
-        $this->command?->info('  admin@parbato.test');
+        $this->command?->info('Primary student login: student@parbato.test / password');
+        $this->command?->info('Teacher: teacher@parbato.test / password');
+        $this->command?->info('Admin: admin@parbato.test / password');
+        $this->command?->info('10 demo students seeded (all password: password)');
         $this->command?->info('Live attendance code: PARBATO1');
     }
 }

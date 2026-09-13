@@ -60,9 +60,32 @@ Open `http://127.0.0.1:8000`.
 
 ### Demo accounts
 
+All demo passwords are **`password`**.
+
+**Primary student login (use this):**
+
+| Field | Value |
+|-------|-------|
+| Email | `student@parbato.test` |
+| Password | `password` |
+
+**10 demo students:**
+
+| Name | Email |
+|------|-------|
+| Alex Rahman | `student@parbato.test` |
+| Maya Reyes | `maya@parbato.test` |
+| Tariq Nasser | `tariq@parbato.test` |
+| Sara Ahmed | `sara@parbato.test` |
+| Liam Kelly | `liam@parbato.test` |
+| Nadia Chowdhury | `nadia@parbato.test` |
+| Omar Hassan | `omar@parbato.test` |
+| Priya Sen | `priya@parbato.test` |
+| Ethan Brooks | `ethan@parbato.test` |
+| Aisha Karim | `aisha@parbato.test` |
+
 | Role | Email | Password |
 |------|-------|----------|
-| Student | `student@parbato.test` | `password` |
 | Teacher | `teacher@parbato.test` | `password` |
 | Admin | `admin@parbato.test` | `password` |
 

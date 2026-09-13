@@ -44,6 +44,9 @@
             <a href="{{ route('analytics.teacher') }}" class="pb-nav-link {{ request()->routeIs('analytics.*') ? 'pb-nav-link-active' : '' }}">
                 <span class="material-symbols-outlined text-lg">query_stats</span><span>Analytics</span>
             </a>
+            <a href="{{ route('learnquest.evaluations.index') }}" class="pb-nav-link {{ request()->routeIs('learnquest.evaluations.*') ? 'pb-nav-link-active' : '' }}">
+                <span class="material-symbols-outlined text-lg">grading</span><span>Evaluations</span>
+            </a>
         @endif
     </nav>
 

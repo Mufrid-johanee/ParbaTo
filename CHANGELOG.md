@@ -37,10 +37,12 @@ Format per entry: **Date · Category · Feature/change · Files/modules · Descr
 - **Description:** Implemented session auth; Student/Teacher/Admin roles; courses/ClassTwin/LearnQuest/FlexLearn schema; AttendanceService (hashed codes); FlexLearnRecommendationService (explainable rules); landing, dashboard, live classroom, mission hub/workspace, FlexLearn path, teacher analytics; demo seeder; feature tests. Stitch HTML under `ParbaTo design/` preserved as visual reference. Product chrome branded **ParbaTo**.  
 - **Testing status:** 6 feature tests passing (`AuthAndDashboardTest`, `AttendanceServiceTest`); `npm run build` succeeded; `migrate:fresh --seed` succeeded on local MariaDB  
 
-### Unreleased (planned next)
+### Added — LearnQuest Mission Workspace MVP
 
-- Teacher ClassTwin session controls UI  
-- Mission submission / task completion workflow  
-- Course management screens  
-- GitHub push after auth  
-- Password reset / email verification  
+- **Category:** Backend / Frontend / API / Database / Testing  
+- **Feature/change:** Connected full mission lifecycle: tasks → progress → phase → submit → teacher evaluate → learning evidence  
+- **Files/modules:** `app/Services/MissionProgressService.php`, `app/Policies/MissionEnrollmentPolicy.php`, `app/Http/Controllers/LearnQuestController.php`, `app/Http/Controllers/MissionEvaluationController.php`, `app/Http/Controllers/Api/LearnQuestApiController.php`, `resources/views/learnquest/workspace.blade.php`, `resources/views/learnquest/evaluations/*`, `database/seeders/DatabaseSeeder.php`, `routes/web.php`, `routes/api.php`, `tests/Feature/LearnQuestMissionWorkspaceTest.php`  
+- **Description:** Progress is calculated server-side (`completed/total×100`). Current phase advances only when phase tasks are done. Students cannot complete evaluate tasks or evaluate themselves. Campus Navigation Micro-App now has Discover→Evaluate tasks and real MDN resources. Evaluation awards XP, updates skill mastery, writes portfolio evidence, and regenerates FlexLearn recommendations.  
+- **Testing status:** 5/5 `LearnQuestMissionWorkspaceTest` passing; browser E2E campus complete-task flow passing  
+
+---
