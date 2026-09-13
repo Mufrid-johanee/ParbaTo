@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ClassTwinController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlexLearnController;
@@ -26,9 +27,28 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
+    Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classrooms.index');
+    Route::get('/classrooms/join', [ClassroomController::class, 'joinForm'])->name('classrooms.join');
+    Route::post('/classrooms/join', [ClassroomController::class, 'join'])->name('classrooms.join.store');
+    Route::get('/classrooms/create', [ClassroomController::class, 'create'])->name('classrooms.create');
+    Route::post('/classrooms', [ClassroomController::class, 'store'])->name('classrooms.store');
+    Route::get('/classrooms/{classroom}', [ClassroomController::class, 'show'])->name('classrooms.show');
+    Route::get('/classrooms/{classroom}/edit', [ClassroomController::class, 'edit'])->name('classrooms.edit');
+    Route::put('/classrooms/{classroom}', [ClassroomController::class, 'update'])->name('classrooms.update');
+    Route::post('/classrooms/{classroom}/archive', [ClassroomController::class, 'archive'])->name('classrooms.archive');
+    Route::post('/classrooms/{classroom}/members/{student}/remove', [ClassroomController::class, 'removeMember'])->name('classrooms.members.remove');
+    Route::post('/classrooms/{classroom}/sessions', [ClassroomController::class, 'startSession'])->name('classrooms.sessions.start');
+
     Route::get('/classtwin/sessions/{session}', [ClassTwinController::class, 'show'])->name('classtwin.show');
     Route::post('/classtwin/sessions/{session}/attendance', [ClassTwinController::class, 'checkIn'])->name('classtwin.attendance');
+    Route::post('/classtwin/sessions/{session}/join', [ClassTwinController::class, 'joinSession'])->name('classtwin.join');
+    Route::post('/classtwin/sessions/{session}/heartbeat', [ClassTwinController::class, 'heartbeat'])->name('classtwin.heartbeat');
+    Route::get('/classtwin/sessions/{session}/presence', [ClassTwinController::class, 'presence'])->name('classtwin.presence');
+    Route::post('/classtwin/sessions/{session}/rotate-code', [ClassTwinController::class, 'rotateCode'])->name('classtwin.rotate');
+    Route::post('/classtwin/sessions/{session}/end', [ClassTwinController::class, 'end'])->name('classtwin.end');
+    Route::post('/classtwin/sessions/{session}/mark-attendance', [ClassTwinController::class, 'markAttendance'])->name('classtwin.mark');
     Route::post('/classtwin/sessions/{session}/help', [ClassTwinController::class, 'requestHelp'])->name('classtwin.help');
+    Route::post('/classtwin/sessions/{session}/help/{help}/resolve', [ClassTwinController::class, 'resolveHelp'])->name('classtwin.help.resolve');
 
     Route::get('/learnquest', [LearnQuestController::class, 'index'])->name('learnquest.index');
     Route::get('/learnquest/missions/{mission:slug}', [LearnQuestController::class, 'show'])->name('learnquest.show');

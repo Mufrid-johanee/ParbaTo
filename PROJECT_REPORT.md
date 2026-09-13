@@ -83,6 +83,8 @@ ClassTwin connects the physical classroom with a digital representation (“twin
 
 **Capabilities (target):** classroom creation/scheduling, live sessions, QR + validated attendance, student presence map, live activity status, quizzes, participation tracking, help requests, announcements, session history, classroom analytics.
 
+**Implemented (Phase 1 MVP):** Course (curriculum) remains separate from Classroom (room twin). Teachers create/edit/archive classrooms with unique `join_code`; students join by code into `classroom_members` (removable → inactive). Teachers start/end `class_sessions` (`scheduled|live|ended`). Live attendance uses hashed session codes; plain code + **local SVG QR** (`bacon/bacon-qr-code`, payload `PARBATO-ATTEND:{code}`) shown to teachers via cache/flash. Presence derived from attendance + `last_seen_at` heartbeats (active/idle/absent), refreshed by HTTP polling. Ended sessions store member/present snapshots. Classroom/dashboard UI links into LearnQuest and FlexLearn; attendance is evidence-ready but not auto-scored into mastery.
+
 The UI represents desks/nodes with telemetry states while remaining practical and responsive (tabbed/single-column on mobile).
 
 ---

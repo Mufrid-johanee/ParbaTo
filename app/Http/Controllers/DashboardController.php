@@ -36,9 +36,28 @@ class DashboardController extends Controller
         $liveSession = ClassSession::query()
             ->with(['classroom.course', 'classroom.teacher'])
             ->where('status', 'live')
-            ->whereHas('classroom.members', fn ($q) => $q->where('user_id', $user->id))
+            ->where(function ($q) use ($user) {
+                $q->whereHas('classroom.members', fn ($m) => $m->where('user_id', $user->id)->where('status', 'active'))
+                    ->orWhereHas('classroom', fn ($c) => $c->where('teacher_id', $user->id));
+            })
             ->latest('started_at')
             ->first();
+
+        $classrooms = $user->hasRole('teacher', 'admin')
+            ? \App\Models\Classroom::query()
+                ->where('teacher_id', $user->id)
+                ->where('status', 'active')
+                ->withCount(['members' => fn ($q) => $q->where('status', 'active')])
+                ->latest()
+                ->take(5)
+                ->get()
+            : \App\Models\Classroom::query()
+                ->where('status', 'active')
+                ->whereHas('members', fn ($q) => $q->where('user_id', $user->id)->where('status', 'active'))
+                ->withCount(['members' => fn ($q) => $q->where('status', 'active')])
+                ->latest()
+                ->take(5)
+                ->get();
 
         $missionCount = MissionEnrollment::query()
             ->where('user_id', $user->id)
@@ -57,7 +76,8 @@ class DashboardController extends Controller
             'recommendations',
             'liveSession',
             'missionCount',
-            'availableMissions'
+            'availableMissions',
+            'classrooms'
         ));
     }
 }

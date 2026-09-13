@@ -112,6 +112,26 @@
             </div>
 
             <div class="pb-card p-space-md">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-headline text-headline-sm text-on-surface">Classrooms</h3>
+                    <a href="{{ route('classrooms.index') }}" class="font-label-code text-label-code text-primary hover:underline">All</a>
+                </div>
+                @forelse($classrooms as $classroom)
+                    <a href="{{ route('classrooms.show', $classroom) }}" class="block py-2 border-b border-white/5 last:border-0 hover:text-primary transition-colors">
+                        <div class="font-body-md text-body-md">{{ $classroom->name }}</div>
+                        <div class="font-label-code text-label-code text-on-surface-variant">{{ $classroom->members_count }} students · {{ $classroom->subject ?: $classroom->course?->code }}</div>
+                    </a>
+                @empty
+                    <p class="text-body-sm text-on-surface-variant mb-2">No classrooms yet.</p>
+                    @can('create', App\Models\Classroom::class)
+                        <a href="{{ route('classrooms.create') }}" class="font-label-code text-label-code text-primary">Create classroom →</a>
+                    @else
+                        <a href="{{ route('classrooms.join') }}" class="font-label-code text-label-code text-primary">Join with code →</a>
+                    @endcan
+                @endforelse
+            </div>
+
+            <div class="pb-card p-space-md">
                 <h3 class="font-headline text-headline-sm text-on-surface mb-3">Suggested missions</h3>
                 @foreach($availableMissions as $mission)
                     <a href="{{ route('learnquest.show', $mission) }}" class="block py-2 border-b border-white/5 last:border-0 hover:text-primary transition-colors">

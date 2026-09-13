@@ -13,7 +13,16 @@ class ClassroomMember extends Model
         'desk_row',
         'desk_col',
         'desk_label',
+        'status',
+        'joined_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'joined_at' => 'datetime',
+        ];
+    }
 
     public function classroom(): BelongsTo
     {

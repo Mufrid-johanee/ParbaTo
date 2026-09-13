@@ -32,6 +32,9 @@
         </a>
 
         <span class="px-space-sm pt-space-md pb-1 font-label-meta text-label-meta text-on-surface-variant/70 uppercase tracking-wider">Engines</span>
+        <a href="{{ route('classrooms.index') }}" class="pb-nav-link {{ request()->routeIs('classrooms.*', 'classtwin.*') ? 'pb-nav-link-active' : '' }}">
+            <span class="material-symbols-outlined text-lg">sensors</span><span>ClassTwin</span>
+        </a>
         <a href="{{ route('learnquest.index') }}" class="pb-nav-link {{ request()->routeIs('learnquest.*') ? 'pb-nav-link-active' : '' }}">
             <span class="material-symbols-outlined text-lg">explore</span><span>LearnQuest</span>
         </a>

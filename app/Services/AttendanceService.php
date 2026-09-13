@@ -31,6 +31,7 @@ class AttendanceService
         $isMember = ClassroomMember::query()
             ->where('classroom_id', $session->classroom_id)
             ->where('user_id', $student->id)
+            ->where('status', 'active')
             ->exists();
 
         if (! $isMember) {
@@ -40,7 +41,7 @@ class AttendanceService
         }
 
         return DB::transaction(function () use ($session, $student, $ip) {
-            return AttendanceRecord::query()->firstOrCreate(
+            $record = AttendanceRecord::query()->firstOrCreate(
                 [
                     'class_session_id' => $session->id,
                     'user_id' => $student->id,
@@ -50,8 +51,18 @@ class AttendanceService
                     'status' => 'present',
                     'ip_address' => $ip,
                     'checked_in_at' => now(),
+                    'last_seen_at' => now(),
                 ]
             );
+
+            if (! $record->wasRecentlyCreated) {
+                $record->forceFill([
+                    'last_seen_at' => now(),
+                    'ip_address' => $ip ?? $record->ip_address,
+                ])->save();
+            }
+
+            return $record->fresh();
         });
     }
 
@@ -60,6 +71,32 @@ class AttendanceService
         if (! $teacher->hasRole(User::ROLE_TEACHER, User::ROLE_ADMIN)) {
             throw ValidationException::withMessages([
                 'attendance' => 'Only teachers can mark manual attendance.',
+            ]);
+        }
+
+        $session->loadMissing('classroom');
+
+        if ($teacher->hasRole(User::ROLE_TEACHER)
+            && ! $teacher->hasRole(User::ROLE_ADMIN)
+            && $session->classroom->teacher_id !== $teacher->id) {
+            abort(403, 'You can only mark attendance for your own classrooms.');
+        }
+
+        $isMember = ClassroomMember::query()
+            ->where('classroom_id', $session->classroom_id)
+            ->where('user_id', $student->id)
+            ->where('status', 'active')
+            ->exists();
+
+        if (! $isMember) {
+            throw ValidationException::withMessages([
+                'attendance' => 'That student is not a member of this classroom.',
+            ]);
+        }
+
+        if (! $session->isLive()) {
+            throw ValidationException::withMessages([
+                'attendance' => 'Manual attendance is only available during live sessions.',
             ]);
         }
 
@@ -73,6 +110,7 @@ class AttendanceService
                 'status' => $status,
                 'marked_by' => $teacher->id,
                 'checked_in_at' => now(),
+                'last_seen_at' => now(),
             ]
         );
     }

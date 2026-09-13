@@ -120,10 +120,14 @@ class DatabaseSeeder extends Seeder
             'course_id' => $course->id,
             'teacher_id' => $teacher->id,
             'name' => 'CS-201 Lab Twin',
+            'subject' => 'Web Programming',
+            'description' => 'Digital twin for the CS-201 lab sessions.',
+            'join_code' => 'JOIN201A',
             'room_label' => 'Turing Hall 302',
             'capacity' => 30,
             'rows' => 5,
             'cols' => 6,
+            'status' => 'active',
         ]);
 
         $desk = 1;
@@ -136,9 +140,24 @@ class DatabaseSeeder extends Seeder
                 'desk_row' => $row,
                 'desk_col' => $col,
                 'desk_label' => 'D-'.str_pad((string) $desk, 2, '0', STR_PAD_LEFT),
+                'status' => 'active',
+                'joined_at' => now()->subDays(10),
             ]);
             $desk++;
         }
+
+        // Ended session for history demo
+        ClassSession::query()->create([
+            'classroom_id' => $classroom->id,
+            'started_by' => $teacher->id,
+            'title' => 'Orientation — Lab Safety',
+            'status' => 'ended',
+            'started_at' => now()->subDays(3)->setTime(10, 0),
+            'ended_at' => now()->subDays(3)->setTime(11, 15),
+            'member_count_snapshot' => 10,
+            'present_count_snapshot' => 8,
+            'notes' => 'Demo ended session',
+        ]);
 
         $session = ClassSession::query()->create([
             'classroom_id' => $classroom->id,
@@ -150,6 +169,12 @@ class DatabaseSeeder extends Seeder
             'attendance_code_expires_at' => now()->addHours(4),
             'notes' => 'Demo live ClassTwin session',
         ]);
+
+        \Illuminate\Support\Facades\Cache::put(
+            'classtwin.session.'.$session->id.'.attendance_code',
+            'PARBATO1',
+            now()->addHours(4)
+        );
 
         AttendanceRecord::query()->create([
             'class_session_id' => $session->id,
@@ -353,6 +378,7 @@ class DatabaseSeeder extends Seeder
         $this->command?->info('Teacher: teacher@parbato.test / password');
         $this->command?->info('Admin: admin@parbato.test / password');
         $this->command?->info('10 demo students seeded (all password: password)');
+        $this->command?->info('Classroom join code: JOIN201A');
         $this->command?->info('Live attendance code: PARBATO1');
     }
 }

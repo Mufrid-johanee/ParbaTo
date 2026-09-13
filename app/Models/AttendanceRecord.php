@@ -15,12 +15,14 @@ class AttendanceRecord extends Model
         'marked_by',
         'ip_address',
         'checked_in_at',
+        'last_seen_at',
     ];
 
     protected function casts(): array
     {
         return [
             'checked_in_at' => 'datetime',
+            'last_seen_at' => 'datetime',
         ];
     }
 

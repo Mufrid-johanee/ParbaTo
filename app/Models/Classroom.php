@@ -15,10 +15,14 @@ class Classroom extends Model
         'course_id',
         'teacher_id',
         'name',
+        'subject',
+        'description',
+        'join_code',
         'room_label',
         'capacity',
         'rows',
         'cols',
+        'status',
     ];
 
     public function course(): BelongsTo
@@ -44,5 +48,18 @@ class Classroom extends Model
     public function liveSession(): ?ClassSession
     {
         return $this->sessions()->where('status', 'live')->latest('started_at')->first();
+    }
+
+    public function isOwnedBy(User $user): bool
+    {
+        return (int) $this->teacher_id === (int) $user->id || $user->hasRole(User::ROLE_ADMIN);
+    }
+
+    public function hasMember(User $user): bool
+    {
+        return $this->members()
+            ->where('user_id', $user->id)
+            ->where('status', 'active')
+            ->exists();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ClassTwinApiController;
 use App\Http\Controllers\Api\FlexLearnApiController;
 use App\Http\Controllers\Api\LearnQuestApiController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,22 @@ Route::middleware('auth')->prefix('flexlearn')->group(function () {
     Route::post('/recommendations/{recommendation}/start', [FlexLearnApiController::class, 'start']);
     Route::post('/recommendations/{recommendation}/complete', [FlexLearnApiController::class, 'complete']);
     Route::post('/recommendations/{recommendation}/dismiss', [FlexLearnApiController::class, 'dismiss']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/classrooms', [ClassTwinApiController::class, 'classrooms']);
+    Route::post('/classrooms', [ClassTwinApiController::class, 'storeClassroom']);
+    Route::post('/classrooms/join', [ClassTwinApiController::class, 'joinClassroom']);
+    Route::get('/classrooms/{classroom}', [ClassTwinApiController::class, 'showClassroom']);
+    Route::put('/classrooms/{classroom}', [ClassTwinApiController::class, 'updateClassroom']);
+    Route::post('/classrooms/{classroom}/archive', [ClassTwinApiController::class, 'archiveClassroom']);
+    Route::post('/classrooms/{classroom}/members/{student}/remove', [ClassTwinApiController::class, 'removeMember']);
+    Route::post('/classrooms/{classroom}/sessions', [ClassTwinApiController::class, 'startSession']);
+    Route::get('/classrooms/{classroom}/sessions', [ClassTwinApiController::class, 'classroomSessions']);
+    Route::get('/sessions/{session}', [ClassTwinApiController::class, 'showSession']);
+    Route::post('/sessions/{session}/join', [ClassTwinApiController::class, 'joinSession']);
+    Route::post('/sessions/{session}/attendance', [ClassTwinApiController::class, 'attendance']);
+    Route::post('/sessions/{session}/heartbeat', [ClassTwinApiController::class, 'heartbeat']);
+    Route::post('/sessions/{session}/end', [ClassTwinApiController::class, 'endSession']);
+    Route::post('/sessions/{session}/mark-attendance', [ClassTwinApiController::class, 'markAttendance']);
 });

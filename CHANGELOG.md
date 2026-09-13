@@ -53,4 +53,21 @@ Format per entry: **Date · Category · Feature/change · Files/modules · Descr
 - **Description:** No external AI. Mastery is a weighted average of `learning_evidences` (0–100 bands: Needs Support / Developing / Proficient / Advanced). Teacher evaluation writes evidence per mission skill, recalculates mastery, and refreshes recommendations linked to real published missions when available. Student FlexLearn UI shows path, mastery, strength/support bands, and reasons; teacher can view student mastery at `/flexlearn/students`. Recommendation lifecycle: active → started → completed | dismissed. Empty state for students without evidence.  
 - **Testing status:** 7/7 `FlexLearnMvpTest` passing; full suite 20/20 passing; LearnQuest workspace tests still green  
 
+### Added — ClassTwin MVP + real classroom/session system (Phase 1)
+
+- **Category:** Backend / Frontend / API / Database / Testing / Documentation  
+- **Feature/change:** Classroom create/join, live session lifecycle, hashed attendance, presence heartbeat/polling, session history, ClassTwin APIs  
+- **Files/modules:** `ClassroomService`, `ClassSessionService`, `AttendanceService`, `ClassroomController`, `ClassTwinController`, `Api/ClassTwinApiController`, policies, Form Requests, `2026_09_13_120000_extend_classtwin_classroom_session_system.php`, `resources/views/classrooms/*`, `resources/views/classtwin/live.blade.php`, `tests/Feature/ClassTwinMvpTest.php`, docs  
+- **Description:** Extended existing ClassTwin schema (kept Course ≠ Classroom). Teachers create classrooms with unique join codes; students join by code; teachers start/end live sessions with hashed attendance codes (plain code only in cache/flash); QR-style code panel + manual attendance; presence states (active/idle/absent) from `last_seen_at` + 15s polling (no Reverb yet); ended sessions store attendance snapshots for history. LearnQuest/FlexLearn left intact and linked from classroom UI.  
+- **Testing status:** 11/11 `ClassTwinMvpTest`; full suite **31 passed (96 assertions)**; `migrate:fresh --seed` OK  
+- **Limitations:** No WebSockets/Reverb; attendance not auto-fed into FlexLearn mastery  
+
+### Completed — Phase 1 production-ready ClassTwin (final)
+
+- **Category:** Backend / Frontend / API / Testing / Documentation  
+- **Feature/change:** Closed remaining Phase 1 gaps — edit/archive/remove member, local SVG QR, dashboard classrooms, full E2E chain  
+- **Files/modules:** `QrCodeService` + `bacon/bacon-qr-code`, classroom edit/archive/remove (web+API), `Phase1EndToEndTest`, dashboard classrooms, docs  
+- **Description:** Teachers can edit/archive classrooms and remove members. Attendance QR is generated locally as SVG (`PARBATO-ATTEND:{code}`; no external QR API). Prefix stripped on check-in. E2E test proves Classroom → Session → Attendance → LearnQuest evaluate → FlexLearn mastery/recommendation. Verified `migrate:fresh --seed` and `npm run build`.  
+- **Testing status:** **33 passed (127 assertions)**; 0 failures  
+
 ---

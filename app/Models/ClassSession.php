@@ -20,6 +20,8 @@ class ClassSession extends Model
         'attendance_code',
         'attendance_code_expires_at',
         'notes',
+        'member_count_snapshot',
+        'present_count_snapshot',
     ];
 
     protected function casts(): array
