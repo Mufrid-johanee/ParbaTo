@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"inverse-primary":"#494bd6","on-tertiary-fixed-variant":"#8c0053","on-tertiary":"#640039","surface-container":"#1c1f2a","surface-container-lowest":"#0a0e18","surface":"#0f131d","primary":"#c0c1ff","on-primary-fixed":"#07006c","on-primary-fixed-variant":"#2f2ebe","surface-container-highest":"#313540","outline-variant":"#464554","secondary-container":"#03b5d3","on-primary":"#1000a9","inverse-on-surface":"#2c303b","tertiary":"#ffb0cd","inverse-surface":"#dfe2f1","primary-fixed":"#e1e0ff","on-background":"#dfe2f1","surface-bright":"#353944","secondary-fixed-dim":"#4cd7f6","surface-dim":"#0f131d","tertiary-fixed-dim":"#ffb0cd","surface-tint":"#c0c1ff","on-error":"#690005","surface-container-high":"#262a35","on-tertiary-container":"#570032","on-secondary":"#003640","on-secondary-fixed-variant":"#004e5c","error-container":"#93000a","error":"#ffb4ab","secondary":"#4cd7f6","on-secondary-fixed":"#001f26","tertiary-fixed":"#ffd9e4","on-tertiary-fixed":"#3e0022","surface-variant":"#313540","surface-container-low":"#171b26","on-surface":"#dfe2f1","on-primary-container":"#0d0096","outline":"#908fa0","primary-container":"#8083ff","on-error-container":"#ffdad6","on-secondary-container":"#00424e","primary-fixed-dim":"#c0c1ff","tertiary-container":"#f751a1","background":"#0f131d","secondary-fixed":"#acedff","on-surface-variant":"#c7c4d7"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1.5rem","space-lg":"1.5rem","space-xl":"2.5rem","margin-mobile":"1rem","margin":"2rem","space-xs":"0.25rem","gutter-mobile":"0.75rem","space-md":"1rem","space-sm":"0.5rem"},"fontFamily":{"headline-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Inter"],"label-meta":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"label-code":["JetBrains Mono"],"headline-xl":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"body-sm":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"body-md":["Inter"]},"fontSize":{"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"label-meta":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"800"}],"label-code":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.025em","fontWeight":"700"}],"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-space-md flex items-center justify-between bg-surface-container-lowest"><a class="flex items-center gap-space-sm" data-path="student-dashboard" href="#"><img alt="ClassTwin Brand Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XSXOGB9fx_5IHqkeyPOWNBntBiyg54vCKoIzEzLYLlblr3u3qC68vMojCjMYrk5e8LJecqvNwyHcbXnF9ReVG4va22UE4N3_mnhHhya3zGPgtzllnxR6OUyV2dkWdVYMUmYlaguMvLhkC_eE2RaU4WsaG2z_RrJ9dtzlsVSqJHKLMPu7PYJxmd-tJb_LXinTP2rIlG-oeGnr0CC51g4vn1V8XDHR7lMnYnuWpmU961S_ovNlNNQbAgFanz"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">ClassTwin</span></a><span class="px-space-xs py-0.5 rounded font-label-code text-label-code bg-surface-container text-secondary">TWIN-OS</span></div><div class="px-space-md py-space-sm"><div class="flex items-center justify-between px-space-sm py-space-xs rounded-lg bg-surface-container-low"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-meta text-label-meta text-on-surface-variant uppercase tracking-wider">SYNC STATUS</span></div><span class="font-label-code text-label-code text-secondary">ACTIVE 99.4%</span></div></div><div class="flex-1 overflow-y-auto px-space-sm py-space-xs"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(128,131,255,0.35)]"><span class="px-space-sm pt-space-xs pb-1 font-label-meta text-label-meta text-on-surface-variant/70 uppercase tracking-wider">Overview</span><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="landing-page" href="#"><span class="material-symbols-outlined text-lg">public</span><span>Landing Page</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="student-dashboard" href="#"><span class="material-symbols-outlined text-lg">dashboard</span><span>Student Dashboard</span></a><span class="px-space-sm pt-space-md pb-1 font-label-meta text-label-meta text-on-surface-variant/70 uppercase tracking-wider">Spatial &amp; Quests</span><a class="flex items-center justify-between px-space-sm py-space-xs rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="live-classroom" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-lg text-secondary">sensors</span><span>Live Classroom</span></div><span class="w-2 h-2 rounded-full bg-secondary"></span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="learnquest-missions" href="#"><span class="material-symbols-outlined text-lg">explore</span><span>LearnQuest Missions</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg transition-all bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(128,131,255,0.35)]" data-path="mission-workspace" href="#"><span class="material-symbols-outlined text-lg">terminal</span><span>Mission Workspace</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="flexlearn-paths" href="#"><span class="material-symbols-outlined text-lg">account_tree</span><span>FlexLearn Paths</span></a><span class="px-space-sm pt-space-md pb-1 font-label-meta text-label-meta text-on-surface-variant/70 uppercase tracking-wider">Faculty Command</span><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="teacher-analytics" href="#"><span class="material-symbols-outlined text-lg">query_stats</span><span>Teacher Analytics</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined text-lg">tune</span><span>Settings</span></a></nav></div><div class="p-space-sm bg-surface-container-lowest"><div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface-variant">Cognitive Bandwidth</span><span class="font-label-code text-label-code text-primary">92 XP</span></div><div class="w-full h-1.5 rounded-full bg-surface-container"><div class="h-full rounded-full bg-primary-container w-3/4"></div></div></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md flex-1 max-w-md"><div class="relative w-full flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-lg pointer-events-none">search</span><input class="w-full h-9 pl-9 pr-14 rounded-lg bg-surface-container text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Search curriculum, nodes, quests..." type="text"/><kbd class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-container-high font-label-code text-label-code text-on-surface-variant uppercase shadow-sm">⌘K</kbd></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-low"><span class="material-symbols-outlined text-sm text-primary">calendar_today</span><span class="font-label-code text-label-code text-on-surface-variant">Fall 2025 • Week 7</span></div><div class="flex items-center p-0.5 rounded-full bg-surface-container-high"><button class="px-space-sm py-0.5 rounded-full font-label-meta text-label-meta text-on-primary-container bg-primary-container transition-all" type="button">Student • Alex</button><button class="px-space-sm py-0.5 rounded-full font-label-meta text-label-meta text-on-surface-variant hover:text-on-surface transition-all" type="button">Teacher Mode</button></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary"></span></button><div class="flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9ca5lYliJpSaDMI7BaMQ0y9sPVl-5S6ueWjkoEGZ1AzVEMuP1eemAImjh8ozAd9pCtIGH_Ks8HmFOEKY9dA4sdM9fr6Qlw_cGrffnVllDDMURvOifMSMhH3Bg_ZNRxabCB0_ykmlX4Slx6_9cLLfMtTDpKNCOODS9qNUU_ZaBI-roPOsa9sqIKFnsBMm7GdqfacCP3Do7jiGbUPzQRVo7qGhJOoqFSJReWlv5p6kNXlOzosw9RNLe-w"/></div></div></header><main class="relative pt-16 bg-surface min-h-screen w-full px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<!-- Mission Top Operational Banner -->
+<div class="relative bg-surface-container-low rounded-xl p-space-lg shadow-xl overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="absolute right-96 -bottom-20 w-64 h-64 rounded-full bg-secondary/10 blur-3xl pointer-events-none"></div>
+<div class="relative flex flex-col xl:flex-row xl:items-center xl:justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<!-- Breadcrumb & Telemetry Chips -->
+<div class="flex flex-wrap items-center gap-space-xs text-on-surface-variant font-label-code text-label-code">
+<span class="hover:text-primary transition-colors cursor-pointer">LearnQuest Missions</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Active Sprint</span>
+<span class="text-outline-variant">/</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-secondary">CS201 • WEB ARCHITECTURE</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface">Mission #04</span>
+</div>
+<!-- Mission Title -->
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">
+          Build a University Event Registration System
+        </h1>
+<!-- Status Meta Cluster -->
+<div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-on-surface-variant font-body-sm text-body-sm mt-1">
+<div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-lg">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-on-surface font-label-code text-label-code">Stage: <span class="text-secondary font-semibold">04 BUILD (ACTIVE)</span></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">schedule</span>
+<span>Deadline: <strong class="text-on-surface font-medium">Tomorrow, 11:59 PM</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">military_tech</span>
+<span>Reward: <strong class="text-tertiary font-semibold">+250 XP</strong> &amp; ‘Form Architect’</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-primary">data_object</span>
+<span>Test Suite: <strong class="text-on-surface font-medium">4 / 6 Passing</strong></span>
+</div>
+</div>
+</div>
+<!-- Header Action Controls -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high text-on-surface font-label-code text-label-code hover:bg-surface-bright transition-all shadow-sm" id="btn-save-draft" type="button">
+<span class="material-symbols-outlined text-base text-outline">save</span>
+<span>Save Draft</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high text-secondary font-label-code text-label-code hover:bg-surface-bright transition-all shadow-sm" id="btn-run-linter" type="button">
+<span class="material-symbols-outlined text-base">terminal</span>
+<span>Run Linter</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-high text-on-surface font-label-code text-label-code hover:bg-surface-bright transition-all shadow-sm" id="btn-live-preview" type="button">
+<span class="material-symbols-outlined text-base text-outline">open_in_new</span>
+<span>Popout</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-2 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm hover:opacity-95 shadow-[0_4px_20px_rgba(128,131,255,0.4)] transition-all transform hover:-translate-y-0.5 active:translate-y-0" id="btn-open-submit-modal" type="button">
+<span class="material-symbols-outlined text-lg">rocket_launch</span>
+<span>Submit Project</span>
+</button>
+</div>
+</div>
+<!-- Micro Pipeline Bar -->
+<div class="mt-space-md pt-space-sm bg-surface-container/40 -mx-space-lg -mb-space-lg px-space-lg py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase tracking-widest">Sprint Velocity</span>
+<div class="w-48 h-1.5 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 68%;"></div>
+</div>
+<span class="font-label-code text-label-code text-secondary font-semibold">68% COMPLETE</span>
+</div>
+<div class="hidden md:flex items-center gap-space-lg font-label-code text-label-code text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Auto-Sync: 12s ago</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Node: twin-us-east.class.sys</span>
+</div>
+</div>
+</div>
+<!-- Main Three-Column Workspace Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mt-space-lg items-start">
+<!-- ========================================== -->
+<!-- LEFT COLUMN: Stepper Pipeline & Resources  -->
+<!-- ========================================== -->
+<aside class="xl:col-span-3 flex flex-col gap-space-lg">
+<!-- Stage Stepper -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm bg-surface-container-high/30 -mx-space-md px-space-md -mt-space-md pt-space-md rounded-t-xl">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">alt_route</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Stage Pipeline</h2>
+</div>
+<span class="font-label-meta text-label-meta text-secondary bg-surface-container px-2 py-0.5 rounded uppercase">Sprint 03</span>
+</div>
+<ol class="relative flex flex-col gap-4 pl-3">
+<!-- Item 01 -->
+<li class="relative flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-surface-container-high text-secondary flex items-center justify-center shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface line-through opacity-70">01 Discover</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant/80">Domain model &amp; constraints defined</span>
+</div>
+</li>
+<!-- Item 02 -->
+<li class="relative flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-surface-container-high text-secondary flex items-center justify-center shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface line-through opacity-70">02 Learn</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant/80">Completed 3 micro-modules</span>
+</div>
+</li>
+<!-- Item 03 -->
+<li class="relative flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-surface-container-high text-secondary flex items-center justify-center shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface line-through opacity-70">03 Practice</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant/80">Synthetic regex playground passed</span>
+</div>
+</li>
+<!-- Item 04 (Current Active) -->
+<li class="relative flex items-start gap-space-sm bg-surface-container p-space-sm rounded-lg -ml-2 -mr-1 shadow-[0_0_15px_rgba(76,215,246,0.12)]">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0 font-label-code text-label-code font-bold">
+              04
+            </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-code text-label-code text-secondary font-bold">04 Build Form</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Core challenge implementation</span>
+</div>
+</li>
+<!-- Item 05 -->
+<li class="relative flex items-start gap-space-sm opacity-50">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0 font-label-code text-label-code">
+              05
+            </div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant">05 Peer Review</span>
+<span class="font-body-sm text-body-sm text-outline">Scheduled automated peer sync</span>
+</div>
+</li>
+<!-- Item 06 -->
+<li class="relative flex items-start gap-space-sm opacity-40">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0 font-label-code text-label-code">
+              06
+            </div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant">06 Present &amp; Deploy</span>
+<span class="font-body-sm text-body-sm text-outline">Classroom Twin showcase live demo</span>
+</div>
+</li>
+</ol>
+</div>
+<!-- Knowledge Vault / Guided Resources -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-base">menu_book</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Curated Specs</h3>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant">4 Modules</span>
+</div>
+<div class="flex flex-col gap-2 mt-1">
+<!-- Resource 1 -->
+<a class="group p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-all flex items-start justify-between" href="#">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5">task_alt</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-primary transition-colors">HTML Forms &amp; Inputs</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">12 MIN READ • COMPLETED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-base">arrow_forward</span>
+</a>
+<!-- Resource 2 -->
+<a class="group p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-all flex items-start justify-between" href="#">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5">task_alt</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-primary transition-colors">Regex Pattern Constraint Lab</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">18 MIN LAB • COMPLETED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-base">arrow_forward</span>
+</a>
+<!-- Resource 3 -->
+<a class="group p-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high transition-all flex items-start justify-between" href="#">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5">task_alt</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-primary transition-colors">WCAG 2.2 Accessible Forms</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">10 MIN GUIDE • COMPLETED</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-base">arrow_forward</span>
+</a>
+<!-- Resource 4 -->
+<a class="group p-space-sm rounded-lg bg-surface-container-high hover:bg-surface-bright transition-all flex items-start justify-between" href="#">
+<div class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-lg mt-0.5">pending</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-tertiary transition-colors">CSRF Tokens &amp; Safe Payloads</span>
+<span class="font-label-meta text-label-meta text-tertiary">15 MIN LAB • IN PROGRESS</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-base">play_circle</span>
+</a>
+</div>
+</div>
+<!-- Instructor Twin Live Feed Snippet -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-md flex items-center gap-space-sm">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="Portrait of Dr. Aris Thorne, senior professor in human-computer interaction, wearing smart glasses in a high-tech academic simulation lab with ambient neon indigo backlighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgxhFUv0zrOeKhIhwyQvmprcmkmw4cgeMGvINDEmZN_AelzCoOo093Vkpfrnzeu7VrUtT7IpOLJejlJkkDRGTC1-N988N0imCF8V-bGp85IBr7ysdBFvL5b6w1A8sbpD3zWzb-cS7ivMWnWLubUDCcuAVDX12znl84674OXm6xfzelR67PXnA0gIQeVDq06cf5AiG8DjaSakOm8G2fLsOH2mBzDbe9JCWDYoGl9Flbzm1OqtdSLbRbUA"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-secondary"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-code text-label-code text-on-surface truncate">Dr. Aris Thorne (Twin AI)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">“Ensure role=‘alert’ triggers on invalid domains.”</span>
+</div>
+</div>
+</aside>
+<!-- ========================================== -->
+<!-- CENTER COLUMN: Canvas & Interactive Form  -->
+<!-- ========================================== -->
+<div class="xl:col-span-6 flex flex-col gap-space-lg">
+<!-- Current Challenge Details -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded font-label-code text-label-code bg-secondary-container/20 text-secondary uppercase font-semibold">Stage 04 Challenge</span>
+<span class="font-label-code text-label-code text-on-surface-variant">• Target Sandbox #201</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface flex items-center gap-1 font-label-code text-label-code" type="button">
+<span class="material-symbols-outlined text-sm">code</span>
+<span>Toggle Diff</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">
+          Construct the Responsive Multi-Tier Registration Form
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Create an accessible, semantic registration form collecting attendee name, university email, academic department, and ticket tier preference with instant client-side constraint checks and ARIA status dispatches.
+        </p>
+<!-- Acceptance Task Checklist with Real-time state toggling -->
+<div class="mt-space-xs pt-space-sm bg-surface-container rounded-lg p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase tracking-wider">Mission Deliverables Verification</span>
+<span class="font-label-code text-label-code text-secondary">4 / 6 COMPLETED</span>
+</div>
+<!-- Task item 1 -->
+<label class="flex items-center gap-space-sm p-space-xs rounded hover:bg-surface-container-high transition-colors cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary-container bg-surface-container-highest cursor-not-allowed" disabled="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface line-through opacity-70">
+              Declare semantic &lt;form novalidate&gt; with accessible ARIA live-region structure
+            </span>
+</label>
+<!-- Task item 2 -->
+<label class="flex items-center gap-space-sm p-space-xs rounded hover:bg-surface-container-high transition-colors cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary-container bg-surface-container-highest cursor-not-allowed" disabled="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface line-through opacity-70">
+              Implement full name text input with title case regex pattern (<code class="font-label-code text-label-code text-primary">^[a-zA-Z\s]{3,}$</code>)
+            </span>
+</label>
+<!-- Task item 3 -->
+<label class="flex items-center gap-space-sm p-space-xs rounded hover:bg-surface-container-high transition-colors cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary-container bg-surface-container-highest cursor-not-allowed" disabled="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface line-through opacity-70">
+              Configure university email verification constrained to @university.edu domains
+            </span>
+</label>
+<!-- Task item 4 -->
+<label class="flex items-center gap-space-sm p-space-xs rounded hover:bg-surface-container-high transition-colors cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary-container bg-surface-container-highest cursor-not-allowed" disabled="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface line-through opacity-70">
+              Construct grouped &lt;select&gt; department options categorized by Faculty
+            </span>
+</label>
+<!-- Task item 5 (Active) -->
+<label class="flex items-center gap-space-sm p-space-xs rounded bg-surface-container-high/60 cursor-pointer">
+<input class="w-4 h-4 rounded accent-secondary cursor-pointer" id="chk-task-5" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-secondary font-medium flex items-center gap-1.5">
+<span>Add custom inline error message dispatchers and <code class="font-label-code text-label-code text-primary">aria-live="polite"</code> alerts</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary/15 text-secondary font-label-code text-[10px]">CURRENT FOCUS</span>
+</span>
+</label>
+<!-- Task item 6 (Pending) -->
+<label class="flex items-center gap-space-sm p-space-xs rounded hover:bg-surface-container-high transition-colors cursor-pointer">
+<input class="w-4 h-4 rounded accent-secondary cursor-pointer" id="chk-task-6" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+              Hook submit handler to dispatch payload schema to classroom twin telemetry
+            </span>
+</label>
+</div>
+</div>
+<!-- Live Interactive Sandbox Preview Window -->
+<div class="bg-surface-container-low rounded-xl shadow-xl overflow-hidden flex flex-col">
+<!-- Window Chrome / Subheader -->
+<div class="bg-surface-container-lowest px-space-md py-space-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-error/60"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-container/60"></span>
+<span class="w-3 h-3 rounded-full bg-secondary/60"></span>
+</div>
+<div class="ml-2 px-space-sm py-0.5 rounded bg-surface-container font-label-code text-label-code text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-secondary">lock</span>
+<span>https://sandbox.classtwin.edu/live-preview/mission-04</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-code text-label-code text-secondary bg-surface-container px-2 py-0.5 rounded flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Live DOM Render
+            </span>
+<button class="p-1 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" id="btn-refresh-preview" title="Reload Sandbox" type="button">
+<span class="material-symbols-outlined text-base">refresh</span>
+</button>
+</div>
+</div>
+<!-- Rendered Sandbox Form Canvas -->
+<div class="p-space-lg bg-surface-container/60">
+<div class="max-w-xl mx-auto bg-surface-container-lowest rounded-xl p-space-lg shadow-2xl">
+<!-- Simulated Form Header -->
+<div class="flex items-center justify-between pb-space-md mb-space-md bg-surface-container/30 -mx-space-lg -mt-space-lg px-space-lg pt-space-lg">
+<div>
+<span class="font-label-meta text-label-meta text-secondary uppercase tracking-wider">Annual Symposium 2025</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-0.5">Innovators Conference RSVP</h3>
+</div>
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">event_available</span>
+</div>
+</div>
+<!-- The Working Form -->
+<form class="flex flex-col gap-space-md" id="sandbox-event-form" novalidate="">
+<!-- Full Name Field -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-code text-label-code text-on-surface font-semibold" for="attendee-name">
+                    Legal Full Name <span class="text-tertiary">*</span>
+</label>
+<span class="font-label-code text-[11px] text-on-surface-variant">Min. 3 characters</span>
+</div>
+<div class="relative">
+<input class="w-full h-11 px-space-md rounded-lg bg-surface-container text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-high transition-all" id="attendee-name" placeholder="e.g., Alexandra Vance" required="" type="text" value="Alex Mercer"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-secondary text-lg">check_circle</span>
+</div>
+</div>
+<!-- University Email Field -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-code text-label-code text-on-surface font-semibold" for="attendee-email">
+                    University Email <span class="text-tertiary">*</span>
+</label>
+<span class="font-label-code text-[11px] text-secondary">Verified @university.edu</span>
+</div>
+<div class="relative">
+<input class="w-full h-11 px-space-md rounded-lg bg-surface-container text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-high transition-all" id="attendee-email" placeholder="student.id@university.edu" required="" type="email" value="alex.mercer@cs.university.edu"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-secondary text-lg">verified</span>
+</div>
+<div aria-live="polite" class="font-label-code text-[11px] text-on-surface-variant flex items-center gap-1" id="email-live-alert">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Validated by client domain matcher rule.</span>
+</div>
+</div>
+<!-- Department Select -->
+<div class="flex flex-col gap-1">
+<label class="font-label-code text-label-code text-on-surface font-semibold" for="attendee-dept">
+                  Department &amp; Faculty
+                </label>
+<select class="w-full h-11 px-space-md rounded-lg bg-surface-container text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container-high cursor-pointer" id="attendee-dept">
+<optgroup label="School of Engineering &amp; Computing">
+<option selected="" value="cs">Computer Science &amp; AI Systems</option>
+<option value="ece">Electrical &amp; Computer Engineering</option>
+<option value="bioeng">Biomedical Engineering</option>
+</optgroup>
+<optgroup label="School of Design &amp; Media">
+<option value="hci">Human-Computer Interaction</option>
+<option value="ux">Interactive Media Lab</option>
+</optgroup>
+</select>
+</div>
+<!-- Multi-Tier Radio Cards -->
+<div class="flex flex-col gap-2">
+<label class="font-label-code text-label-code text-on-surface font-semibold">
+                  Select Delegate Access Tier <span class="text-tertiary">*</span>
+</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- Tier 1 Radio Card -->
+<label class="relative flex flex-col p-space-sm rounded-lg bg-surface-container cursor-pointer transition-all hover:bg-surface-container-high">
+<input checked="" class="absolute top-3 right-3 accent-primary" name="tier" type="radio" value="standard"/>
+<span class="font-label-code text-label-code text-on-surface font-bold">Standard Pass</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-1">Free</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Access to all keynotes and student poster sessions.</span>
+</label>
+<!-- Tier 2 Radio Card -->
+<label class="relative flex flex-col p-space-sm rounded-lg bg-surface-container-high cursor-pointer transition-all hover:bg-surface-bright">
+<input class="absolute top-3 right-3 accent-secondary" name="tier" type="radio" value="vip"/>
+<div class="flex items-center gap-1">
+<span class="font-label-code text-label-code text-secondary font-bold">VIP Workshop Pass</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary mt-1">50 XP Unlock</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Includes reserved seating at Twin AI labs &amp; mentorship dinner.</span>
+</label>
+</div>
+</div>
+<!-- Terms & ARIA Alert Confirmation -->
+<div class="flex items-start gap-space-xs mt-1">
+<input checked="" class="mt-1 w-4 h-4 rounded accent-primary cursor-pointer" id="chk-terms" required="" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" for="chk-terms">
+                  I agree to the University Symposium Honor Code and telemetry data logging.
+                </label>
+</div>
+<!-- Simulated Form Submit Trigger -->
+<button class="w-full h-12 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm hover:opacity-90 transition-all flex items-center justify-center gap-space-xs shadow-md mt-2" id="btn-submit-sandbox" type="submit">
+<span class="material-symbols-outlined text-lg">send</span>
+<span>Confirm Registration Event Payload</span>
+</button>
+<!-- Live Toast Simulation Placeholder -->
+<div class="hidden p-space-sm rounded-lg bg-secondary/15 text-secondary font-label-code text-label-code flex items-center gap-2" id="sandbox-status-message">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span>Payload validated! Dispatched to Classroom Twin Telemetry endpoint.</span>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- RIGHT COLUMN: Telemetry & FlexLearn Coach  -->
+<!-- ========================================== -->
+<aside class="xl:col-span-3 flex flex-col gap-space-lg">
+<!-- Progress Ring & Metric Telemetry Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Sprint Telemetry</h3>
+<span class="font-label-code text-label-code text-secondary">LIVE SYNC</span>
+</div>
+<!-- Inline SVG Circular Progress Gauge -->
+<div class="flex items-center justify-center p-space-sm">
+<div class="relative w-36 h-36 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 120 120">
+<!-- Track -->
+<circle class="text-surface-container-highest" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-width="9"></circle>
+<!-- Indicator: 68% -> circumference = 314.15; 314.15 * 0.68 = 213.62 -->
+<circle class="text-secondary transition-all duration-1000" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-dasharray="314.15" stroke-dashoffset="100.5" stroke-linecap="round" stroke-width="9"></circle>
+<circle class="text-primary opacity-60" cx="60" cy="60" fill="transparent" r="38" stroke="currentColor" stroke-dasharray="238.76" stroke-dashoffset="76.4" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center">
+<span class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tighter">68%</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase tracking-wider">Completion</span>
+</div>
+</div>
+</div>
+<!-- Automated Test Fixture Matrix -->
+<div class="flex flex-col gap-2 pt-space-xs">
+<div class="flex items-center justify-between text-on-surface-variant font-label-meta text-label-meta uppercase">
+<span>Automated Spec Fixtures</span>
+<span class="text-on-surface font-label-code text-label-code">4 Passed • 2 Pending</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="p-2 rounded bg-surface-container flex items-center justify-between">
+<span class="font-label-code text-label-code text-on-surface truncate">ARIA Standard</span>
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+</div>
+<div class="p-2 rounded bg-surface-container flex items-center justify-between">
+<span class="font-label-code text-label-code text-on-surface truncate">Email Regex</span>
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+</div>
+<div class="p-2 rounded bg-surface-container flex items-center justify-between">
+<span class="font-label-code text-label-code text-on-surface truncate">Dept Select</span>
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+</div>
+<div class="p-2 rounded bg-surface-container flex items-center justify-between">
+<span class="font-label-code text-label-code text-on-surface truncate">DOM Semantic</span>
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+</div>
+<div class="p-2 rounded bg-surface-container flex items-center justify-between">
+<span class="font-label-code text-label-code text-tertiary truncate">Aria-Live Alert</span>
+<span class="material-symbols-outlined text-tertiary text-sm">pending</span>
+</div>
+<div class="p-2 rounded bg-surface-container flex items-center justify-between">
+<span class="font-label-code text-label-code text-outline truncate">Twin Dispatch</span>
+<span class="material-symbols-outlined text-outline text-sm">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+</div>
+<!-- FlexLearn Adaptive AI Intervention Alert Card -->
+<div class="relative bg-surface-container-low rounded-xl p-space-md shadow-lg overflow-hidden">
+<div class="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-tertiary/10 blur-xl pointer-events-none"></div>
+<div class="flex items-center gap-space-xs text-tertiary pb-1">
+<span class="material-symbols-outlined text-lg animate-bounce">smart_toy</span>
+<span class="font-label-meta text-label-meta uppercase tracking-wider font-semibold">FlexLearn Adaptive Assistant</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-1">
+          Validation Rule Bottleneck Detected
+        </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 leading-relaxed">
+          The classroom telemetry log recorded <strong class="text-on-surface">4 compiler retries</strong> on regex domain matching. FlexLearn has synthesized a targeted practice module for quick mastery.
+        </p>
+<!-- Micro drill card launcher -->
+<div class="mt-space-sm p-space-sm rounded-lg bg-surface-container flex items-center justify-between gap-2">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-xl">psychology</span>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface font-semibold">RegEx Mastery Drill</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">8 MIN • +30 XP</span>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded bg-secondary-container/20 text-secondary font-label-code text-label-code hover:bg-secondary-container/40 transition-colors" id="btn-start-micro-drill" type="button">
+            Start Drill
+          </button>
+</div>
+<button class="mt-space-sm w-full py-2 rounded-lg bg-surface-container-high text-on-surface font-label-code text-label-code hover:bg-surface-bright transition-all text-center" type="button">
+          Dismiss Recommendation
+        </button>
+</div>
+<!-- Final Peer & Submission Trigger Box -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase tracking-wider">Cohort Comparison</span>
+<span class="font-label-code text-label-code text-secondary">Top 15%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          23 classmates have completed Stage 04. Ready to register your schema in the global student twin registry?
+        </p>
+<button class="w-full py-2.5 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm hover:opacity-90 shadow-md transition-all flex items-center justify-center gap-space-xs mt-1" id="btn-telemetry-submit" type="button">
+<span class="material-symbols-outlined text-base">cloud_upload</span>
+<span>Review &amp; Push to Twin</span>
+</button>
+</div>
+<!-- Cohort Activity Stream -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col gap-space-xs">
+<span class="font-label-meta text-label-meta text-on-surface-variant uppercase tracking-wider">Live Twin Peers</span>
+<div class="flex items-center -space-x-2 pt-1">
+<img class="w-8 h-8 rounded-full ring-2 ring-surface-container-low object-cover" data-alt="Student developer avatar, close-up with cyan ambient monitor reflections in a modern university computer lab." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-hZXMZj1ZdIgeBLQdaCjl84ELUKoybEcu0fPtu6xLbZgxISlnUXaMT8ZROOXw56IMNcY7mSV8pRmugMsopeVK-5Zni58707_4rhYhPQcWpBBfhu5Ahh_yummNIon41xtrgcvb_11klPgAjFb97MftPP9Pspbn4YSxLax2q3n_o0ahnw43NCzjMPeS1Jg95R6AEfXoQOg1OhMNp_FgrOILoHbX9LNcYzFTjDI0UoBMP8qw8BY7v5Ap3w"/>
+<img class="w-8 h-8 rounded-full ring-2 ring-surface-container-low object-cover" data-alt="Female student coder avatar with purple headset working at a twin-os workstation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnvOrTdD5faxuRdac-aDS6yNhSBOqanyNRxkGwRdq1Wbcyy2D2iaHLi3f3vWbgIrC15iFpu8OGrTVhlB00PZHEWsqaCQD2DKwWeOky3yv0rHXyLn9ZGQjoDoOeAGlh3mk4TX61FtvkvSJz8D2cXGQXlbw9GxkfEePER8hHaoXDR-QRYHLcE7n2XlIqxve8hV6GHDo5epLIgxqXltHLyzApq2UN69SICxL-RP5LKf6vT4Zo2aVtjoumVg"/>
+<img class="w-8 h-8 rounded-full ring-2 ring-surface-container-low object-cover" data-alt="Young male student smiling in front of multi-screen code editor with ambient warm and violet desk lamp lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWt785jaG64-EfFl5AMdItHkA3jnWMORUwstOJ6pK7rFnKODTWSMtbCz1RI4CRswnl2GdCaXStL0X99J8AuxaS6HlPQVxOBSp3nexRI_h5ELBqlRdMuhQXtmTtmLLS8oJ1bPqzJWeoEUTjvUkOm23JWy3Iw9zAt0x-hmVccxzzJ9t2wzzlcnwla0-2YqV4sx1C694gt_vc6jIXLkqyCdATrxaf4scRHs8aDqxymnZ5ZvwoSZq1X45zcg"/>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center font-label-code text-label-code text-secondary ring-2 ring-surface-container-low">
+            +18
+          </div>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant mt-1">Currently active in Mission #04</span>
+</div>
+</aside>
+</div>
+<!-- ========================================== -->
+<!-- MODAL: Review & Submit to Classroom Twin   -->
+<!-- ========================================== -->
+<div class="fixed inset-0 bg-surface-container-lowest/80 backdrop-blur-md z-50 flex items-center justify-center p-space-md opacity-0 pointer-events-none transition-opacity duration-200" id="submit-modal-backdrop">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-2xl max-w-lg w-full transform scale-95 transition-transform duration-200 flex flex-col gap-space-md" id="submit-modal-dialog">
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-high/40 -mx-space-lg -mt-space-lg px-space-lg pt-space-lg rounded-t-xl">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">task</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Submit Project to Classroom Twin</h3>
+</div>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" id="btn-close-modal" type="button">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        You are about to push your University Event Registration System code to the <strong class="text-on-surface">ClassTwin Automated Grading Oracle</strong>.
+      </p>
+<div class="bg-surface-container rounded-lg p-space-md flex flex-col gap-2 font-label-code text-label-code">
+<div class="flex items-center justify-between text-on-surface">
+<span class="text-on-surface-variant">Test Suite Pass Rate</span>
+<span class="text-secondary font-bold">100% (6/6 Specs)</span>
+</div>
+<div class="flex items-center justify-between text-on-surface">
+<span class="text-on-surface-variant">ARIA Accessibility Index</span>
+<span class="text-secondary font-bold">98 / 100 WCAG AA</span>
+</div>
+<div class="flex items-center justify-between text-on-surface">
+<span class="text-on-surface-variant">XP Bounty Award</span>
+<span class="text-tertiary font-bold">+250 XP</span>
+</div>
+<div class="flex items-center justify-between text-on-surface">
+<span class="text-on-surface-variant">Achievement Badge</span>
+<span class="text-primary font-bold">‘Form Architect’</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-xs mt-2">
+<button class="px-space-md py-2 rounded-lg bg-surface-container text-on-surface font-label-code text-label-code hover:bg-surface-container-high transition-colors" id="btn-cancel-modal" type="button">
+          Cancel &amp; Continue Editing
+        </button>
+<button class="px-space-lg py-2 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm hover:opacity-90 shadow-[0_4px_16px_rgba(128,131,255,0.4)] transition-all flex items-center gap-1.5" id="btn-confirm-submit" type="button">
+<span class="material-symbols-outlined text-base">verified</span>
+<span>Deploy &amp; Finalize</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initMissionWorkspace() {
+    // Modal interactive triggers
+    const modalBackdrop = document.getElementById('submit-modal-backdrop');
+    const modalDialog = document.getElementById('submit-modal-dialog');
+    const openBtn1 = document.getElementById('btn-open-submit-modal');
+    const openBtn2 = document.getElementById('btn-telemetry-submit');
+    const closeBtn = document.getElementById('btn-close-modal');
+    const cancelBtn = document.getElementById('btn-cancel-modal');
+    const confirmBtn = document.getElementById('btn-confirm-submit');
+
+    function openModal() {
+      if (!modalBackdrop || !modalDialog) return;
+      modalBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+      modalBackdrop.classList.add('opacity-100', 'pointer-events-auto');
+      modalDialog.classList.remove('scale-95');
+      modalDialog.classList.add('scale-100');
+    }
+
+    function closeModal() {
+      if (!modalBackdrop || !modalDialog) return;
+      modalBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
+      modalBackdrop.classList.add('opacity-0', 'pointer-events-none');
+      modalDialog.classList.remove('scale-100');
+      modalDialog.classList.add('scale-95');
+    }
+
+    if (openBtn1) openBtn1.addEventListener('click', openModal);
+    if (openBtn2) openBtn2.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) closeModal();
+      });
+    }
+
+    // Sandbox Form Submission Simulation
+    const sandboxForm = document.getElementById('sandbox-event-form');
+    const sandboxMsg = document.getElementById('sandbox-status-message');
+    const chkTask5 = document.getElementById('chk-task-5');
+    const chkTask6 = document.getElementById('chk-task-6');
+
+    if (sandboxForm && sandboxMsg) {
+      sandboxForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        sandboxMsg.classList.remove('hidden');
+        if (chkTask5) chkTask5.checked = true;
+        if (chkTask6) chkTask6.checked = true;
+        
+        setTimeout(() => {
+          openModal();
+        }, 800);
+      });
+    }
+
+    // Linter trigger animation feedback
+    const linterBtn = document.getElementById('btn-run-linter');
+    if (linterBtn) {
+      linterBtn.addEventListener('click', () => {
+        const originalText = linterBtn.innerHTML;
+        linterBtn.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">refresh</span><span>Linting AST...</span>';
+        setTimeout(() => {
+          linterBtn.innerHTML = '<span class="material-symbols-outlined text-base text-secondary">check</span><span>0 Errors</span>';
+          setTimeout(() => {
+            linterBtn.innerHTML = originalText;
+          }, 2000);
+        }, 900);
+      });
+    }
+
+    // Micro Drill launcher feedback
+    const drillBtn = document.getElementById('btn-start-micro-drill');
+    if (drillBtn) {
+      drillBtn.addEventListener('click', () => {
+        drillBtn.textContent = 'Launching...';
+        setTimeout(() => {
+          drillBtn.textContent = 'Active (8m)';
+        }, 600);
+      });
+    }
+
+    // Confirm submission state
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', () => {
+        confirmBtn.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">sync</span><span>Transmitting Twin Payload...</span>';
+        setTimeout(() => {
+          confirmBtn.innerHTML = '<span class="material-symbols-outlined text-base">done_all</span><span>Submission Synced!</span>';
+          setTimeout(() => {
+            closeModal();
+          }, 800);
+        }, 1200);
+      });
+    }
+  })();
+</script></main></div></body></html>

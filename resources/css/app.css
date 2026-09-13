@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* ParbaTo / Stitch design tokens — visual source of truth */
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-headline: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-body-lg: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-body-md: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-body-sm: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-label-meta: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-label-code: 'JetBrains Mono', ui-monospace, monospace;
+    --font-display-hero: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-xl: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-lg: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-md: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-headline-sm: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --text-display-hero: 56px;
+    --text-display-hero--line-height: 64px;
+    --text-display-hero--letter-spacing: -0.03em;
+    --text-display-hero--font-weight: 800;
+    --text-display-hero-mobile: 36px;
+    --text-display-hero-mobile--line-height: 44px;
+    --text-headline-xl: 40px;
+    --text-headline-xl--line-height: 48px;
+    --text-headline-xl--font-weight: 700;
+    --text-headline-lg: 32px;
+    --text-headline-lg--line-height: 40px;
+    --text-headline-md: 22px;
+    --text-headline-md--line-height: 28px;
+    --text-headline-sm: 18px;
+    --text-headline-sm--line-height: 24px;
+    --text-body-lg: 16px;
+    --text-body-lg--line-height: 26px;
+    --text-body-md: 14px;
+    --text-body-md--line-height: 22px;
+    --text-body-sm: 12px;
+    --text-body-sm--line-height: 18px;
+    --text-label-code: 12px;
+    --text-label-code--line-height: 16px;
+    --text-label-meta: 11px;
+    --text-label-meta--line-height: 14px;
+
+    --color-background: #0f131d;
+    --color-on-background: #dfe2f1;
+    --color-surface: #0f131d;
+    --color-surface-dim: #0f131d;
+    --color-surface-bright: #353944;
+    --color-surface-container-lowest: #0a0e18;
+    --color-surface-container-low: #171b26;
+    --color-surface-container: #1c1f2a;
+    --color-surface-container-high: #262a35;
+    --color-surface-container-highest: #313540;
+    --color-surface-variant: #313540;
+    --color-on-surface: #dfe2f1;
+    --color-on-surface-variant: #c7c4d7;
+    --color-outline: #908fa0;
+    --color-outline-variant: #464554;
+    --color-primary: #c0c1ff;
+    --color-on-primary: #1000a9;
+    --color-primary-container: #8083ff;
+    --color-on-primary-container: #0d0096;
+    --color-primary-fixed: #e1e0ff;
+    --color-primary-fixed-dim: #c0c1ff;
+    --color-on-primary-fixed: #07006c;
+    --color-on-primary-fixed-variant: #2f2ebe;
+    --color-inverse-primary: #494bd6;
+    --color-secondary: #4cd7f6;
+    --color-on-secondary: #003640;
+    --color-secondary-container: #03b5d3;
+    --color-on-secondary-container: #00424e;
+    --color-secondary-fixed: #acedff;
+    --color-secondary-fixed-dim: #4cd7f6;
+    --color-tertiary: #ffb0cd;
+    --color-on-tertiary: #640039;
+    --color-tertiary-container: #f751a1;
+    --color-on-tertiary-container: #570032;
+    --color-error: #ffb4ab;
+    --color-on-error: #690005;
+    --color-error-container: #93000a;
+    --color-on-error-container: #ffdad6;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+
+    --spacing-gutter: 1.5rem;
+    --spacing-gutter-mobile: 0.75rem;
+    --spacing-margin: 2rem;
+    --spacing-margin-mobile: 1rem;
+    --spacing-space-xs: 0.25rem;
+    --spacing-space-sm: 0.5rem;
+    --spacing-space-md: 1rem;
+    --spacing-space-lg: 1.5rem;
+    --spacing-space-xl: 2.5rem;
+
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+}
+
+@layer base {
+    html {
+        @apply antialiased;
+    }
+
+    body {
+        @apply bg-background text-on-surface font-body-md overscroll-none;
+    }
+
+    ::selection {
+        @apply bg-primary-container text-on-primary-container;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+}
+
+@layer components {
+    .pb-card {
+        @apply rounded-2xl bg-surface-container border border-white/5 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.5)];
+    }
+
+    .pb-btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 font-headline text-sm font-semibold
+            text-white bg-gradient-to-br from-inverse-primary to-primary-container
+            shadow-[0_0_16px_rgba(99,102,241,0.35)] hover:-translate-y-px
+            hover:shadow-[0_6px_20px_rgba(99,102,241,0.35)] transition-all focus:outline-none
+            focus-visible:ring-2 focus-visible:ring-primary;
+    }
+
+    .pb-btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 font-headline text-sm font-semibold
+            text-secondary border border-secondary/40 bg-transparent hover:bg-secondary/10 transition-all
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary;
+    }
+
+    .pb-input {
+        @apply w-full rounded-lg bg-surface-container-low border border-white/10 text-on-surface
+            placeholder:text-on-surface-variant/60 px-3 py-2.5 font-body-md text-body-md
+            focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/20 transition-colors;
+    }
+
+    .pb-nav-link {
+        @apply flex items-center gap-2 rounded-lg px-3 py-2 font-body-md text-body-md text-on-surface-variant
+            hover:bg-surface-container-high hover:text-on-surface transition-all;
+    }
+
+    .pb-nav-link-active {
+        @apply bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(128,131,255,0.35)];
+    }
+}

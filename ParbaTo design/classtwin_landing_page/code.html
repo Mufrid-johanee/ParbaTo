@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"inverse-primary":"#494bd6","on-tertiary-fixed-variant":"#8c0053","on-tertiary":"#640039","surface-container":"#1c1f2a","surface-container-lowest":"#0a0e18","surface":"#0f131d","primary":"#c0c1ff","on-primary-fixed":"#07006c","on-primary-fixed-variant":"#2f2ebe","surface-container-highest":"#313540","outline-variant":"#464554","secondary-container":"#03b5d3","on-primary":"#1000a9","inverse-on-surface":"#2c303b","tertiary":"#ffb0cd","inverse-surface":"#dfe2f1","primary-fixed":"#e1e0ff","on-background":"#dfe2f1","surface-bright":"#353944","secondary-fixed-dim":"#4cd7f6","surface-dim":"#0f131d","tertiary-fixed-dim":"#ffb0cd","surface-tint":"#c0c1ff","on-error":"#690005","surface-container-high":"#262a35","on-tertiary-container":"#570032","on-secondary":"#003640","on-secondary-fixed-variant":"#004e5c","error-container":"#93000a","error":"#ffb4ab","secondary":"#4cd7f6","on-secondary-fixed":"#001f26","tertiary-fixed":"#ffd9e4","on-tertiary-fixed":"#3e0022","surface-variant":"#313540","surface-container-low":"#171b26","on-surface":"#dfe2f1","on-primary-container":"#0d0096","outline":"#908fa0","primary-container":"#8083ff","on-error-container":"#ffdad6","on-secondary-container":"#00424e","primary-fixed-dim":"#c0c1ff","tertiary-container":"#f751a1","background":"#0f131d","secondary-fixed":"#acedff","on-surface-variant":"#c7c4d7"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1.5rem","space-lg":"1.5rem","space-xl":"2.5rem","margin-mobile":"1rem","margin":"2rem","space-xs":"0.25rem","gutter-mobile":"0.75rem","space-md":"1rem","space-sm":"0.5rem"},"fontFamily":{"headline-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Inter"],"label-meta":["Inter"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"label-code":["JetBrains Mono"],"headline-xl":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"],"body-sm":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"body-md":["Inter"]},"fontSize":{"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"400"}],"label-meta":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-md":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"800"}],"label-code":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.025em","fontWeight":"700"}],"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm" data-path="landing-page" href="#"><img alt="ClassTwin Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XSXOGB9fx_5IHqkeyPOWNBntBiyg54vCKoIzEzLYLlblr3u3qC68vMojCjMYrk5e8LJecqvNwyHcbXnF9ReVG4va22UE4N3_mnhHhya3zGPgtzllnxR6OUyV2dkWdVYMUmYlaguMvLhkC_eE2RaU4WsaG2z_RrJ9dtzlsVSqJHKLMPu7PYJxmd-tJb_LXinTP2rIlG-oeGnr0CC51g4vn1V8XDHR7lMnYnuWpmU961S_ovNlNNQbAgFanz"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">ClassTwin</span></a></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors text-primary font-bold" data-path="landing-page" href="#">Platform</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="live-classroom" href="#">Twin Stage</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="learnquest-missions" href="#">Quest Tree</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="flexlearn-paths" href="#">Adaptive Paths</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center px-space-md py-space-xs rounded-lg font-body-sm text-body-sm font-semibold bg-primary text-on-primary hover:bg-primary-fixed hover:text-on-primary-fixed transition-all shadow-[0_0_16px_rgba(99,102,241,0.35)]" data-path="student-dashboard" href="#">Launch Portal</a><div class="flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9ca5lYliJpSaDMI7BaMQ0y9sPVl-5S6ueWjkoEGZ1AzVEMuP1eemAImjh8ozAd9pCtIGH_Ks8HmFOEKY9dA4sdM9fr6Qlw_cGrffnVllDDMURvOifMSMhH3Bg_ZNRxabCB0_ykmlX4Slx6_9cLLfMtTDpKNCOODS9qNUU_ZaBI-roPOsa9sqIKFnsBMm7GdqfacCP3Do7jiGbUPzQRVo7qGhJOoqFSJReWlv5p6kNXlOzosw9RNLe-w"/></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- HERO SECTION: Translucent bleed, deep dark aesthetic -->
+<section class="relative w-full pt-8 pb-20 overflow-hidden">
+<!-- Atmospheric Ambient Glows -->
+<div class="absolute top-12 left-1/4 w-96 h-96 bg-primary-container/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-40 right-10 w-[30rem] h-[30rem] bg-secondary-container/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="max-w-7xl mx-auto px-margin">
+<!-- Live Classroom Pulse Chip -->
+<div class="inline-flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-high shadow-md mb-space-lg">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<span class="font-label-code text-label-code text-secondary tracking-wide uppercase">Telemetry Node Online</span>
+<span class="text-outline-variant font-label-meta text-label-meta">|</span>
+<span class="font-label-meta text-label-meta text-on-surface-variant">28 Synchronized Student Desks</span>
+</div>
+<!-- Hero Header & Value Proposition -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-7 flex flex-col items-start">
+<div class="inline-flex items-center gap-space-xs mb-space-sm px-space-sm py-space-xs rounded bg-surface-container text-tertiary font-label-code text-label-code uppercase tracking-wider">
+<span class="material-symbols-outlined text-tertiary" style="font-size: 15px;">hub</span>
+            Physical-Digital Twin Architecture
+          </div>
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight max-w-2xl text-balance">
+            One Classroom. Many Paths. <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary-fixed">Real-World Learning.</span>
+</h1>
+<p class="mt-space-md font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+            ClassTwin connects physical classrooms, digital telemetry, and personalized learning paths into one intelligent learning environment.
+          </p>
+<!-- CTAs -->
+<div class="mt-space-xl flex flex-wrap items-center gap-space-md">
+<a class="inline-flex items-center justify-center gap-space-sm px-space-lg py-3 rounded-lg font-headline-sm text-headline-sm text-on-primary bg-gradient-to-r from-inverse-primary via-primary-container to-on-primary-fixed shadow-[0_0_24px_rgba(128,131,255,0.45)] hover:shadow-[0_0_32px_rgba(128,131,255,0.7)] transition-all" href="#demo-preview">
+<span>Explore the Platform</span>
+<span class="material-symbols-outlined" style="font-size: 20px;">arrow_forward</span>
+</a>
+<button class="inline-flex items-center justify-center gap-space-sm px-space-lg py-3 rounded-lg font-headline-sm text-headline-sm text-secondary bg-surface-container-high hover:bg-surface-bright transition-all shadow-sm" onclick="document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'})">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span>See How It Works</span>
+</button>
+</div>
+<!-- Micro Metric Ticker -->
+<div class="mt-space-xl pt-space-lg flex items-center gap-space-xl">
+<div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold">99.4%</div>
+<div class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface-variant">Sync Fidelity</div>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-secondary font-bold">3.2x</div>
+<div class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface-variant">Concept Retention</div>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-tertiary font-bold">140+</div>
+<div class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface-variant">Live Campuses</div>
+</div>
+</div>
+</div>
+<!-- Interactive 3D/Isometric Classroom Twin Graphic -->
+<div class="lg:col-span-5 relative">
+<div class="relative w-full rounded-xl bg-surface-container-low shadow-xl p-space-lg overflow-hidden">
+<!-- Ambient Grid Canvas Texture -->
+<div class="absolute inset-0 opacity-15 bg-[radial-gradient(#c0c1ff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<!-- Live Classroom Top Bar -->
+<div class="relative z-10 flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-code text-label-code text-on-surface">ROOM 402 - CS ADVANCED LAB</span>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-secondary font-label-code text-label-code">
+                TWIN ACTIVE
+              </span>
+</div>
+<!-- Spatial Classroom Representation -->
+<div class="relative z-10 my-space-md p-space-md rounded-lg bg-surface-container-lowest">
+<div class="text-center py-space-xs mb-space-md rounded bg-surface-container-high font-label-code text-label-code text-on-surface-variant flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">podium</span>
+                PHYSICAL INSTRUCTOR PODIUM [PROF. VALDEZ]
+              </div>
+<!-- 28 Desks Grid Layout (4x7 mini isometric clusters) -->
+<div class="grid grid-cols-7 gap-2">
+<!-- Desk nodes with simulated live states -->
+<div class="group relative p-2 rounded bg-surface-container text-center hover:bg-primary-container transition-all cursor-pointer">
+<div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div>
+<span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D01</span>
+</div>
+<div class="group relative p-2 rounded bg-surface-container text-center hover:bg-primary-container transition-all cursor-pointer">
+<div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div>
+<span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D02</span>
+</div>
+<div class="group relative p-2 rounded bg-surface-container text-center hover:bg-primary-container transition-all cursor-pointer">
+<div class="w-2 h-2 mx-auto rounded-full bg-tertiary"></div>
+<span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D03</span>
+</div>
+<div class="group relative p-2 rounded bg-surface-container text-center hover:bg-primary-container transition-all cursor-pointer">
+<div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div>
+<span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D04</span>
+</div>
+<div class="group relative p-2 rounded bg-surface-container text-center hover:bg-primary-container transition-all cursor-pointer">
+<div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div>
+<span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D05</span>
+</div>
+<div class="group relative p-2 rounded bg-surface-container text-center hover:bg-primary-container transition-all cursor-pointer">
+<div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div>
+<span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D06</span>
+</div>
+<div class="group relative p-2 rounded bg-surface-container text-center hover:bg-primary-container transition-all cursor-pointer">
+<div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div>
+<span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D07</span>
+</div>
+<!-- Row 2 -->
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D08</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D09</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D10</span></div>
+<div class="p-2 rounded bg-surface-container-highest text-center shadow-[0_0_10px_rgba(236,72,153,0.4)]"><div class="w-2 h-2 mx-auto rounded-full bg-tertiary animate-pulse"></div><span class="text-[9px] font-label-code text-tertiary mt-1 block">SYNC</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D12</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D13</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D14</span></div>
+<!-- Row 3 -->
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D15</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D16</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D17</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D18</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D19</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D20</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D21</span></div>
+<!-- Row 4 -->
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D22</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D23</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D24</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D25</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D26</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D27</span></div>
+<div class="p-2 rounded bg-surface-container text-center"><div class="w-2 h-2 mx-auto rounded-full bg-secondary"></div><span class="text-[9px] font-label-code text-on-surface-variant mt-1 block">D28</span></div>
+</div>
+</div>
+<!-- Floating Overlay Mission Card (Gamified XP) -->
+<div class="relative z-20 -mt-6 ml-6 p-space-md rounded-xl bg-surface-container-high shadow-2xl backdrop-blur-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1; font-size: 18px;">military_tech</span>
+<span class="font-label-meta text-label-meta uppercase tracking-wider text-tertiary">Active Quest</span>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-tertiary-container/30 text-tertiary font-label-code text-label-code">+250 XP</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1">Build Campus Event Validator</h2>
+<div class="flex items-center gap-space-md mt-space-sm font-label-code text-label-code text-on-surface-variant">
+<span class="text-secondary">Path A: Async API</span>
+<span>•</span>
+<span>Desk 11 &amp; 14 Paired</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TRUST BAR: Leading Engineering & Higher-Ed Partners -->
+<section class="w-full py-space-lg bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-md">
+<span class="font-label-meta text-label-meta uppercase tracking-widest text-on-surface-variant">Deployed Across Pioneering Institutions</span>
+<div class="flex flex-wrap items-center gap-space-xl opacity-70">
+<div class="flex items-center gap-space-xs font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tighter">
+<span class="material-symbols-outlined text-primary">school</span> MIT Media Lab Hub
+          </div>
+<div class="flex items-center gap-space-xs font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tighter">
+<span class="material-symbols-outlined text-secondary">terminal</span> Stanford CS Twin
+          </div>
+<div class="flex items-center gap-space-xs font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tighter">
+<span class="material-symbols-outlined text-tertiary">biotech</span> Oxford Polytech
+          </div>
+<div class="flex items-center gap-space-xs font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tighter">
+<span class="material-symbols-outlined text-primary-fixed">code_blocks</span> ETH Zurich Digital
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- THREE CORE PILLARS SECTION -->
+<section class="w-full py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-margin">
+<!-- Section Overline -->
+<div class="flex flex-col items-start mb-16">
+<span class="px-space-sm py-1 rounded bg-surface-container font-label-code text-label-code text-secondary uppercase tracking-widest mb-space-xs">
+          Engineered for Blended Synchronicity
+        </span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface">Three Foundations. Infinite Cognitive Reach.</h2>
+</div>
+<!-- Grid of 3 Core Pillars -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- PILLAR 1: ClassTwin -->
+<div class="rounded-xl bg-surface-container p-space-lg shadow-lg flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-space-md text-primary">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">view_in_ar</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">ClassTwin</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Turn the physical classroom into a connected digital learning environment. Continuous physical-to-cloud presence mapping.
+            </p>
+<!-- Embedded Visual: Interactive Desk Map Telemetry -->
+<div class="mt-space-lg p-space-md rounded-lg bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-meta text-label-meta uppercase tracking-wider text-secondary">Podium Sensor Matrix</span>
+<span class="font-label-code text-label-code text-on-surface">28/28 Online</span>
+</div>
+<!-- Telemetry Heat Indicator -->
+<div class="grid grid-cols-4 gap-2">
+<div class="p-2 rounded bg-surface-container-high text-center">
+<div class="w-2 h-2 rounded-full bg-secondary mx-auto"></div>
+<span class="text-[10px] font-label-code text-on-surface-variant mt-1 block">Zone A</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high text-center">
+<div class="w-2 h-2 rounded-full bg-secondary mx-auto"></div>
+<span class="text-[10px] font-label-code text-on-surface-variant mt-1 block">Zone B</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high text-center">
+<div class="w-2 h-2 rounded-full bg-tertiary mx-auto"></div>
+<span class="text-[10px] font-label-code text-on-surface-variant mt-1 block">Zone C</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high text-center">
+<div class="w-2 h-2 rounded-full bg-primary mx-auto"></div>
+<span class="text-[10px] font-label-code text-on-surface-variant mt-1 block">Zone D</span>
+</div>
+</div>
+<!-- Mini Telemetry Stat bar -->
+<div class="mt-space-md flex items-center justify-between text-on-surface-variant font-label-code text-label-code">
+<span>Latency: 12ms</span>
+<span class="text-secondary">Spatial Audio: Sync</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md">
+<span class="font-label-meta text-label-meta text-primary flex items-center gap-space-xs font-semibold">
+              Live Spatial Desks &amp; Nodes <span class="material-symbols-outlined text-primary" style="font-size: 16px;">north_east</span>
+</span>
+</div>
+</div>
+<!-- PILLAR 2: LearnQuest -->
+<div class="rounded-xl bg-surface-container p-space-lg shadow-lg flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-space-md text-tertiary">
+<span class="material-symbols-outlined text-tertiary" style="font-size: 28px;">swords</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">LearnQuest</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Transform lessons into real-world missions. Replace dry slides with dynamic software, data, and design challenge quests.
+            </p>
+<!-- Embedded Visual: Rich Quest Mission Card -->
+<div class="mt-space-lg p-space-md rounded-lg bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-code text-label-code">Level 04 Mission</span>
+<span class="font-label-code text-label-code text-secondary">+350 Skill XP</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">DOM Mutation Observer</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Intercept live simulated stock ticker nodes without reflow bottlenecks.</p>
+<!-- Challenge Checklist -->
+<div class="mt-space-sm space-y-1.5">
+<div class="flex items-center gap-space-xs font-label-code text-label-code text-on-surface">
+<span class="material-symbols-outlined text-secondary" style="font-size: 16px;">check_circle</span>
+<span>Attach MutationObserver</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-code text-label-code text-on-surface-variant">
+<span class="material-symbols-outlined text-outline-variant" style="font-size: 16px;">radio_button_unchecked</span>
+<span>Batch debounced payload</span>
+</div>
+</div>
+<!-- Skill XP Chips -->
+<div class="mt-space-md flex flex-wrap gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-code text-label-code text-on-surface-variant">JS Performance</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-label-code text-label-code text-on-surface-variant">Web APIs</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md">
+<span class="font-label-meta text-label-meta text-tertiary flex items-center gap-space-xs font-semibold">
+              Mission Reward Mechanics <span class="material-symbols-outlined text-tertiary" style="font-size: 16px;">north_east</span>
+</span>
+</div>
+</div>
+<!-- PILLAR 3: FlexLearn -->
+<div class="rounded-xl bg-surface-container p-space-lg shadow-lg flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-space-md text-secondary">
+<span class="material-symbols-outlined text-secondary" style="font-size: 28px;">alt_route</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">FlexLearn</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Give every student a learning path that adapts to their needs. Real-time branching paths dynamically calibrate difficulty.
+            </p>
+<!-- Embedded Visual: Branching Skill Tree Diagram -->
+<div class="mt-space-lg p-space-md rounded-lg bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-meta text-label-meta uppercase text-primary">Dynamic Path Engine</span>
+<span class="font-label-code text-label-code text-secondary">87% Path Mastery</span>
+</div>
+<!-- Branching Tree Nodes -->
+<div class="relative py-2 flex flex-col items-center">
+<!-- Root Node -->
+<div class="px-space-md py-1 rounded bg-surface-container-high text-on-surface font-label-code text-label-code text-center shadow-sm">
+                  Root: HTML Forms &amp; Inputs
+                </div>
+<!-- SVG Splines -->
+<svg class="w-full h-10 text-outline-variant" fill="none" viewbox="0 0 200 40">
+<path d="M100 0 V 15 C 100 25, 30 25, 30 40" stroke="currentColor" stroke-width="1.5"></path>
+<path d="M100 0 V 40" stroke="currentColor" stroke-width="1.5"></path>
+<path d="M100 0 V 15 C 100 25, 170 25, 170 40" stroke="currentColor" stroke-width="1.5"></path>
+</svg>
+<!-- Branching Endpoints -->
+<div class="grid grid-cols-3 gap-1.5 w-full text-center">
+<div class="p-1.5 rounded bg-surface-container-high font-label-code text-[10px] text-on-surface-variant">
+<span class="text-primary block font-bold">Foundation</span>
+                    Syntax Refine
+                  </div>
+<div class="p-1.5 rounded bg-surface-container-high font-label-code text-[10px] text-on-surface-variant">
+<span class="text-secondary block font-bold">Practice</span>
+                    Dynamic RegEx
+                  </div>
+<div class="p-1.5 rounded bg-surface-container-high font-label-code text-[10px] text-on-surface-variant">
+<span class="text-tertiary block font-bold">Advanced</span>
+                    Custom Shadow DOM
+                  </div>
+</div>
+</div>
+<div class="mt-space-sm flex items-center justify-between font-label-code text-label-code text-on-surface-variant">
+<span>Target Node: Shadow DOM</span>
+<span class="text-tertiary">Live Divergence</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md">
+<span class="font-label-meta text-label-meta text-secondary flex items-center gap-space-xs font-semibold">
+              Continuous Bayesian Modeling <span class="material-symbols-outlined text-secondary" style="font-size: 16px;">north_east</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- HOW IT WORKS SECTION: Timeline & Pedagogical Loop -->
+<section class="w-full py-24 bg-surface-container-lowest relative overflow-hidden" id="how-it-works">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="px-space-sm py-1 rounded bg-surface-container font-label-code text-label-code text-primary uppercase tracking-widest">
+          The Full Pedagogical Circuit
+        </span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mt-space-sm">
+          Seamless Continuity From Pre-Class to Mastery Proof
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-xs">
+          ClassTwin unifies every stage of learning into an uninterrupted feedback loop with physical and digital telemetry.
+        </p>
+</div>
+<!-- Horizontal Journey Timeline (6 Connected Steps) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-space-md relative">
+<!-- Step 1 -->
+<div class="p-space-md rounded-xl bg-surface-container shadow-md hover:bg-surface-container-high transition-all">
+<div class="font-label-code text-label-code text-secondary font-bold mb-1">STAGE 01</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Before Class</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Micro-previews and targeted diagnostic teasers unlock preliminary node caches on mobile.
+          </p>
+<div class="mt-space-md font-label-code text-label-code text-primary-fixed-dim">
+            &gt; Sync Readiness: 98%
+          </div>
+</div>
+<!-- Step 2 -->
+<div class="p-space-md rounded-xl bg-surface-container shadow-md hover:bg-surface-container-high transition-all">
+<div class="font-label-code text-label-code text-secondary font-bold mb-1">STAGE 02</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">In Class</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Physical desk telemetry aligns with professor stage stream. Paired peer channels engage.
+          </p>
+<div class="mt-space-md font-label-code text-label-code text-secondary">
+            &gt; Realtime Desk Sync
+          </div>
+</div>
+<!-- Step 3 -->
+<div class="p-space-md rounded-xl bg-surface-container shadow-md hover:bg-surface-container-high transition-all">
+<div class="font-label-code text-label-code text-tertiary font-bold mb-1">STAGE 03</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Mission</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Students shift into live collaborative code/design quests with real-world scenarios.
+          </p>
+<div class="mt-space-md font-label-code text-label-code text-tertiary">
+            &gt; Level XP Activated
+          </div>
+</div>
+<!-- Step 4 -->
+<div class="p-space-md rounded-xl bg-surface-container shadow-md hover:bg-surface-container-high transition-all">
+<div class="font-label-code text-label-code text-secondary font-bold mb-1">STAGE 04</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Adaptive Path</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            The FlexLearn engine splits learners into foundation remediation or advanced deep-dives.
+          </p>
+<div class="mt-space-md font-label-code text-label-code text-primary">
+            &gt; Path Calibrated
+          </div>
+</div>
+<!-- Step 5 -->
+<div class="p-space-md rounded-xl bg-surface-container shadow-md hover:bg-surface-container-high transition-all">
+<div class="font-label-code text-label-code text-secondary font-bold mb-1">STAGE 05</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Evidence</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Artifacts, pull requests, and telemetry logs auto-compile into student skill profiles.
+          </p>
+<div class="mt-space-md font-label-code text-label-code text-secondary">
+            &gt; Verified Artifacts
+          </div>
+</div>
+<!-- Step 6 -->
+<div class="p-space-md rounded-xl bg-surface-container shadow-md hover:bg-surface-container-high transition-all">
+<div class="font-label-code text-label-code text-primary font-bold mb-1">STAGE 06</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Progress</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Holistic teacher dashboards reveal blind spots, comprehension peaks, and next sprint steps.
+          </p>
+<div class="mt-space-md font-label-code text-label-code text-tertiary">
+            &gt; Mastery Logged
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- PRODUCT LIVE PREVIEW INTERACTIVE GALLERY -->
+<section class="w-full py-24 bg-surface" id="demo-preview">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl">
+<div>
+<span class="px-space-sm py-1 rounded bg-surface-container font-label-code text-label-code text-secondary uppercase tracking-widest">
+            High-Resolution Workspaces
+          </span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mt-space-xs">
+            Built for Students, Crafted for Educators
+          </h2>
+</div>
+<!-- Interactive Switcher Tabs -->
+<div class="mt-space-md md:mt-0 flex items-center gap-space-xs p-1.5 rounded-lg bg-surface-container-high" id="preview-tabs">
+<button class="px-space-md py-space-xs rounded font-headline-sm text-headline-sm text-on-primary bg-primary-container transition-all" id="tab-student" onclick="switchTab('student')">
+            Student Dashboard
+          </button>
+<button class="px-space-md py-space-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:text-on-surface transition-all" id="tab-stage" onclick="switchTab('stage')">
+            Twin Stage
+          </button>
+<button class="px-space-md py-space-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:text-on-surface transition-all" id="tab-quest" onclick="switchTab('quest')">
+            Mission Hub
+          </button>
+<button class="px-space-md py-space-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:text-on-surface transition-all" id="tab-analytics" onclick="switchTab('analytics')">
+            Teacher Analytics
+          </button>
+</div>
+</div>
+<!-- Mockup Display Frame -->
+<div class="rounded-xl bg-surface-container-lowest shadow-2xl p-space-md">
+<!-- Window Frame Header -->
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-error-container"></span>
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="ml-space-sm font-label-code text-label-code text-on-surface-variant" id="preview-title">classtwin.os // student_workspace.view</span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-code text-label-code">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> 60 FPS Telemetry</span>
+<span>Room 402 - Desk 11</span>
+</div>
+</div>
+<!-- Screen Container with Dynamic Tab Views -->
+<div class="relative min-h-[440px] rounded-lg bg-surface-container overflow-hidden p-space-lg">
+<!-- VIEW 1: STUDENT DASHBOARD -->
+<div class="tab-view block space-y-space-lg" id="view-student">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Active Learning Quest -->
+<div class="lg:col-span-2 p-space-lg rounded-xl bg-surface-container-high shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="text-secondary font-label-code text-label-code uppercase">Current Synchronized Sprint</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container font-label-code text-label-code text-tertiary">Mission 04/08</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Full-Stack Reactive Component Telemetry</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+                  Connect your live React frontend to the classroom MQTT broker. Ingest desk telemetry sensor arrays and compute real-time spatial averages.
+                </p>
+<div class="mt-space-lg flex items-center gap-space-lg">
+<div class="flex-1 bg-surface-container-lowest rounded-full h-3 overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-secondary h-full rounded-full w-3/4"></div>
+</div>
+<span class="font-label-code text-label-code text-on-surface font-semibold">75% Completed</span>
+</div>
+</div>
+<!-- Live Peer Synchrony Panel -->
+<div class="p-space-lg rounded-xl bg-surface-container-high shadow-sm flex flex-col justify-between">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Desk Pod Telemetry</h4>
+<div class="font-label-code text-label-code text-on-surface-variant mb-space-md">POD #4 • DESKS 11, 12, 13</div>
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between p-space-xs rounded bg-surface-container">
+<span class="font-body-sm text-body-sm text-on-surface">You (Elena Rostova)</span>
+<span class="text-secondary font-label-code text-label-code">Code Synced</span>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded bg-surface-container">
+<span class="font-body-sm text-body-sm text-on-surface">Marcus Vance</span>
+<span class="text-tertiary font-label-code text-label-code">Debugging 02</span>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded bg-surface-container">
+<span class="font-body-sm text-body-sm text-on-surface">Priya Patel</span>
+<span class="text-secondary font-label-code text-label-code">Code Synced</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-space-md py-space-xs rounded bg-primary text-on-primary font-headline-sm text-headline-sm">
+                  Ping Teacher Assistance
+                </button>
+</div>
+</div>
+<!-- Bottom Quick Metrics -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md">
+<div class="p-space-md rounded-lg bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta uppercase">Sprint XP</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">1,840 XP</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta uppercase">Current Path</div>
+<div class="font-headline-md text-headline-md text-secondary mt-1">Tier 3 (Adv)</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta uppercase">Attendance</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">100% Verified</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta uppercase">Class Rank</div>
+<div class="font-headline-md text-headline-md text-tertiary mt-1">Top 5%</div>
+</div>
+</div>
+</div>
+<!-- VIEW 2: TWIN STAGE -->
+<div class="tab-view hidden space-y-space-lg" id="view-stage">
+<div class="flex items-center justify-between p-space-md rounded-lg bg-surface-container-high">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary">view_in_ar</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Spatial Twin Topology // Classroom 402</span>
+</div>
+<span class="font-label-code text-label-code text-primary bg-surface-container px-space-sm py-1 rounded">28/28 Transceivers Online</span>
+</div>
+<div class="relative w-full h-80 rounded-xl bg-surface-container-lowest p-space-lg flex flex-col justify-between">
+<div class="flex justify-between items-center">
+<div class="text-on-surface-variant font-label-code text-label-code">
+                  PHYSICAL PODIUM — COORDINATE (0, 0, 1.2)
+                </div>
+<div class="flex gap-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-code text-[11px] text-secondary">Ambient Noise: 42dB</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-code text-[11px] text-tertiary">Focus Metric: 94%</span>
+</div>
+</div>
+<!-- Desk Nodes Spatial Canvas -->
+<div class="grid grid-cols-7 gap-3 my-auto">
+<div class="p-3 rounded-lg bg-surface-container-high text-center shadow-md"><span class="font-label-code text-label-code text-secondary">Desk 01</span></div>
+<div class="p-3 rounded-lg bg-surface-container-high text-center shadow-md"><span class="font-label-code text-label-code text-secondary">Desk 02</span></div>
+<div class="p-3 rounded-lg bg-surface-container-high text-center shadow-md"><span class="font-label-code text-label-code text-secondary">Desk 03</span></div>
+<div class="p-3 rounded-lg bg-primary-container text-on-primary-container text-center shadow-md"><span class="font-label-code text-label-code font-bold">You (11)</span></div>
+<div class="p-3 rounded-lg bg-surface-container-high text-center shadow-md"><span class="font-label-code text-label-code text-secondary">Desk 12</span></div>
+<div class="p-3 rounded-lg bg-surface-container-high text-center shadow-md"><span class="font-label-code text-label-code text-secondary">Desk 13</span></div>
+<div class="p-3 rounded-lg bg-surface-container-high text-center shadow-md"><span class="font-label-code text-label-code text-secondary">Desk 14</span></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-code text-label-code">
+<span>Synchronized Audio Beam: Wide Stereo</span>
+<span class="text-secondary">Spatial Projection: Calibrated</span>
+</div>
+</div>
+</div>
+<!-- VIEW 3: MISSION HUB -->
+<div class="tab-view hidden space-y-space-md" id="view-quest">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="p-space-lg rounded-xl bg-surface-container-high">
+<div class="text-tertiary font-label-code text-label-code mb-1">AVAILABLE NOW</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Secure Webhook Proxy</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Construct an HMAC signature verifier for classroom webhook streams.</p>
+<div class="mt-space-lg flex justify-between items-center">
+<span class="font-label-code text-label-code text-secondary">+400 XP</span>
+<button class="px-space-md py-1 rounded bg-secondary text-on-secondary font-headline-sm text-body-sm">Start Quest</button>
+</div>
+</div>
+<div class="p-space-lg rounded-xl bg-surface-container-high">
+<div class="text-primary font-label-code text-label-code mb-1">IN PROGRESS</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Campus Event Validator</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Build accessible forms with client and server schema verification.</p>
+<div class="mt-space-lg flex justify-between items-center">
+<span class="font-label-code text-label-code text-secondary">+250 XP</span>
+<button class="px-space-md py-1 rounded bg-primary text-on-primary font-headline-sm text-body-sm">Resume</button>
+</div>
+</div>
+<div class="p-space-lg rounded-xl bg-surface-container-high opacity-70">
+<div class="text-on-surface-variant font-label-code text-label-code mb-1">UNLOCKED AT LEVEL 5</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Distributed State Sync</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Resolve race conditions between physical podium broadcasts and desk mirrors.</p>
+<div class="mt-space-lg flex justify-between items-center">
+<span class="font-label-code text-label-code text-outline">+650 XP</span>
+<span class="material-symbols-outlined text-outline">lock</span>
+</div>
+</div>
+</div>
+</div>
+<!-- VIEW 4: TEACHER ANALYTICS -->
+<div class="tab-view hidden space-y-space-md" id="view-analytics">
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta">CLASS COMPREHENSION</div>
+<div class="font-headline-lg text-headline-lg text-secondary mt-1">91.4%</div>
+<span class="font-label-code text-label-code text-on-surface-variant">+6.2% vs last lecture</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta">ACTIVE INTERVENTIONS</div>
+<div class="font-headline-lg text-headline-lg text-tertiary mt-1">3 Desks</div>
+<span class="font-label-code text-label-code text-on-surface-variant">Desks 03, 17, 24 flagged</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta">BRANCH DIVERGENCE</div>
+<div class="font-headline-lg text-headline-lg text-primary mt-1">3 Paths</div>
+<span class="font-label-code text-label-code text-on-surface-variant">Optimal cognitive load</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-high">
+<div class="text-on-surface-variant font-label-meta text-label-meta">AVERAGE VELOCITY</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1">1.8 M/hr</div>
+<span class="font-label-code text-label-code text-on-surface-variant">Missions per seat-hour</span>
+</div>
+</div>
+<!-- Telemetry Graph Mockup -->
+<div class="p-space-lg rounded-xl bg-surface-container-high flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="font-headline-sm text-headline-sm text-on-surface">Real-Time Cognitive Engagement Curve (Session 14)</span>
+<span class="font-label-code text-label-code text-secondary">LIVE BROADCAST</span>
+</div>
+<!-- Inline SVG Sparkline / Graph -->
+<svg class="w-full h-36 text-secondary" fill="none" viewbox="0 0 700 120">
+<path d="M 0,80 Q 70,40 140,60 T 280,20 T 420,50 T 560,30 T 700,10" stroke="currentColor" stroke-width="3"></path>
+<path d="M 0,100 Q 70,75 140,85 T 280,60 T 420,80 T 560,70 T 700,45" stroke="#ffb0cd" stroke-dasharray="4 4" stroke-width="2"></path>
+</svg>
+<div class="flex justify-between items-center text-on-surface-variant font-label-code text-label-code mt-space-sm">
+<span>00:00 (Lecture Kickoff)</span>
+<span>00:25 (Mission Release)</span>
+<span>00:50 (Adaptive Branching)</span>
+<span>Now (Evaluation)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- IMMERSIVE PHOTO / CAMPUS ENGAGEMENT SECTION -->
+<section class="w-full py-20 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<div class="lg:col-span-6 relative">
+<img class="w-full h-96 object-cover rounded-xl shadow-xl" data-alt="A modern architectural higher education lecture amphitheater integrated with glowing digital twin desk screens, students collaborating in ergonomic workstations, slate and indigo ambient lighting, laser-focused technological learning atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArYdNAjPpFNPgwcj6Rgz-ImP_0DNYIJc_juZvfxOojOcnkeYIjyAVN2kPZdm3IxHA4fTU44p8fqq-JKTm0nDETeneYJ8q2UsKPl_Gsiju9KEtyJZ0rp_9y3YspCVxd_yxHE_yKjIXyX0ob8lk7CDHjdBqQbea00Kef20AQu5FqF79oZOZNe4oM7XKcxP8hnnzLTHFFHyojVTSrK6eJrl3orTQHR00Mn3gYycTRouSkHYqCX0-xEi0H5w"/>
+<div class="absolute bottom-4 left-4 p-space-md rounded-lg bg-surface-container-lowest/90 backdrop-blur-md">
+<span class="font-label-code text-label-code text-secondary block">PHYSICAL INSTANCE: LAB HALL E</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Active Synchronized Session</span>
+</div>
+</div>
+<div class="lg:col-span-6 flex flex-col justify-center">
+<span class="px-space-sm py-1 rounded bg-surface-container font-label-code text-label-code text-tertiary uppercase tracking-widest mb-space-xs self-start">
+            Total Convergence
+          </span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface">No Student Left Behind. No Student Held Back.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-md">
+            By turning classroom geometry into real-time computational models, ClassTwin detects engagement dips before they turn into grade drop-offs. Teachers retain human presence while AI and telemetry handle differentiation.
+          </p>
+<div class="mt-space-lg space-y-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary mt-1">verified</span>
+<div>
+<strong class="text-on-surface font-headline-sm text-body-lg">Instant Diagnostic Desks:</strong>
+<span class="text-on-surface-variant font-body-md text-body-md"> Automatic pairing of students needing assistance with peers who have demonstrated concept mastery.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary mt-1">auto_graph</span>
+<div>
+<strong class="text-on-surface font-headline-sm text-body-lg">Zero-Friction Grading:</strong>
+<span class="text-on-surface-variant font-body-md text-body-md"> Continuous telemetry produces automated diagnostic portfolios, cutting administrative grading loads by 65%.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL CALL TO ACTION: High-contrast Command Banner -->
+<section class="w-full py-24 bg-surface relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/10 via-transparent to-secondary-container/10 pointer-events-none"></div>
+<div class="max-w-5xl mx-auto px-margin text-center relative z-10">
+<span class="px-space-sm py-1 rounded bg-surface-container font-label-code text-label-code text-secondary uppercase tracking-widest mb-space-md inline-block">
+        Deploy ClassTwin Today
+      </span>
+<h2 class="font-display-hero text-display-hero text-on-surface tracking-tight">
+        Build Better Learning Experiences.
+      </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mt-space-md">
+        Empower your campus with the world's most advanced blended classroom infrastructure. Launch pilots in under 48 hours with existing hardware.
+      </p>
+<div class="mt-space-xl flex flex-wrap items-center justify-center gap-space-md">
+<a class="px-space-xl py-3 rounded-lg font-headline-sm text-headline-sm text-on-primary bg-gradient-to-r from-inverse-primary via-primary-container to-on-primary-fixed shadow-[0_0_24px_rgba(128,131,255,0.45)] hover:shadow-[0_0_32px_rgba(128,131,255,0.7)] transition-all" href="#">
+          Get Started Free
+        </a>
+<a class="px-space-xl py-3 rounded-lg font-headline-sm text-headline-sm text-secondary bg-surface-container-high hover:bg-surface-bright transition-all shadow-sm" href="#">
+          Request University Demo
+        </a>
+</div>
+<div class="mt-space-xl flex flex-wrap items-center justify-center gap-space-lg text-on-surface-variant font-label-meta text-label-meta uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-secondary" style="font-size: 16px;">check</span> SOC-2 Type II Certified</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-secondary" style="font-size: 16px;">check</span> FERPA &amp; GDPR Compliant</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-secondary" style="font-size: 16px;">check</span> Zero Sensor Hardware Re-wiring</span>
+</div>
+</div>
+</section>
+<!-- SITEMAP / SECONDARY DIRECTORY FOOTER EXTENSION -->
+<section class="w-full py-space-xl bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto px-margin">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-space-lg text-on-surface-variant">
+<div>
+<h4 class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface mb-space-md font-bold">Product</h4>
+<ul class="space-y-space-sm font-body-sm text-body-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Digital Twin Architecture</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Spatial Desk Calibration</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">LearnQuest Studio</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">FlexLearn AI Model</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface mb-space-md font-bold">Features</h4>
+<ul class="space-y-space-sm font-body-sm text-body-sm">
+<li><a class="hover:text-secondary transition-colors" href="#">Physical Telemetry</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Continuous Attendance</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Adaptive Skill Graph</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Automated Portfolios</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface mb-space-md font-bold">For Campuses</h4>
+<ul class="space-y-space-sm font-body-sm text-body-sm">
+<li><a class="hover:text-tertiary transition-colors" href="#">Higher Education</a></li>
+<li><a class="hover:text-tertiary transition-colors" href="#">Coding Bootcamps</a></li>
+<li><a class="hover:text-tertiary transition-colors" href="#">Enterprise Academies</a></li>
+<li><a class="hover:text-tertiary transition-colors" href="#">Security &amp; FERPA</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface mb-space-md font-bold">Resources</h4>
+<ul class="space-y-space-sm font-body-sm text-body-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Documentation</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">ClassTwin API Spec</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pedagogy Whitepaper</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">System Status</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-meta text-label-meta uppercase tracking-wider text-on-surface mb-space-md font-bold">Connect</h4>
+<ul class="space-y-space-sm font-body-sm text-body-sm">
+<li><a class="hover:text-primary transition-colors" href="#">GitHub Repository</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Academic Discord</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Twitter @ClassTwinHQ</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Engineering</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Tab Switcher Vanilla Script -->
+<script>
+    function switchTab(tabId) {
+      // Hide all views
+      document.querySelectorAll('.tab-view').forEach(view => {
+        view.classList.add('hidden');
+        view.classList.remove('block');
+      });
+
+      // Show selected view
+      const target = document.getElementById('view-' + tabId);
+      if (target) {
+        target.classList.remove('hidden');
+        target.classList.add('block');
+      }
+
+      // Reset button styles
+      const tabs = ['student', 'stage', 'quest', 'analytics'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (btn) {
+          if (t === tabId) {
+            btn.className = 'px-space-md py-space-xs rounded font-headline-sm text-headline-sm text-on-primary bg-primary-container transition-all';
+          } else {
+            btn.className = 'px-space-md py-space-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:text-on-surface transition-all';
+          }
+        }
+      });
+
+      // Update mock browser bar
+      const title = document.getElementById('preview-title');
+      if (title) {
+        title.innerText = 'classtwin.os // ' + tabId + '_workspace.view';
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_8px_rgba(0,0,0,0.04)]"><div class="max-w-7xl mx-auto px-margin py-space-xl"><div class="flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><img alt="ClassTwin Brand Logo" class="h-6 w-auto object-contain opacity-80" src="https://lh3.googleusercontent.com/aida/AEtjO1XSXOGB9fx_5IHqkeyPOWNBntBiyg54vCKoIzEzLYLlblr3u3qC68vMojCjMYrk5e8LJecqvNwyHcbXnF9ReVG4va22UE4N3_mnhHhya3zGPgtzllnxR6OUyV2dkWdVYMUmYlaguMvLhkC_eE2RaU4WsaG2z_RrJ9dtzlsVSqJHKLMPu7PYJxmd-tJb_LXinTP2rIlG-oeGnr0CC51g4vn1V8XDHR7lMnYnuWpmU961S_ovNlNNQbAgFanz"/><span class="font-headline-sm text-headline-sm text-on-surface-variant">ClassTwin Blended Architecture</span></div><div class="flex items-center gap-space-md text-on-surface-variant font-label-meta text-label-meta uppercase tracking-wider"><span>Distributed Twin Node v2.4</span><span class="text-secondary">● Live Synchronized</span></div></div><div class="mt-space-lg text-center md:text-left text-on-surface-variant font-body-sm text-body-sm">© 2025 ClassTwin EdTech Systems Inc. Precision blended telemetry. All rights reserved.</div></div></footer></body></html>
