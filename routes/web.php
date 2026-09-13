@@ -42,7 +42,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/{enrollment}', [MissionEvaluationController::class, 'store'])->name('store');
     });
 
-    Route::get('/flexlearn', FlexLearnController::class)->name('flexlearn.index');
+    Route::get('/flexlearn', [FlexLearnController::class, 'index'])->name('flexlearn.index');
+    Route::post('/flexlearn/recommendations/{recommendation}/start', [FlexLearnController::class, 'startRecommendation'])
+        ->name('flexlearn.recommendations.start');
+    Route::post('/flexlearn/recommendations/{recommendation}/dismiss', [FlexLearnController::class, 'dismissRecommendation'])
+        ->name('flexlearn.recommendations.dismiss');
+
+    Route::middleware('role:teacher,admin')->prefix('flexlearn/students')->name('flexlearn.teacher.')->group(function () {
+        Route::get('/', [FlexLearnController::class, 'teacherIndex'])->name('index');
+        Route::get('/{student}', [FlexLearnController::class, 'teacherShow'])->name('show');
+    });
 
     Route::get('/analytics', TeacherAnalyticsController::class)
         ->middleware('role:teacher,admin')

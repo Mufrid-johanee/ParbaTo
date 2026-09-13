@@ -8,7 +8,6 @@ use App\Models\MissionSubmission;
 use App\Models\MissionTask;
 use App\Models\MissionTaskProgress;
 use App\Models\PortfolioItem;
-use App\Models\StudentSkill;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -288,18 +287,8 @@ class MissionProgressService
             'level' => max(1, (int) floor(($user->xp + $xpGain) / 500) + 1),
         ])->save();
 
-        foreach ($mission->skills as $skill) {
-            $studentSkill = StudentSkill::query()->firstOrNew([
-                'user_id' => $user->id,
-                'skill_id' => $skill->id,
-            ]);
-
-            $boost = (int) min(15, max(5, round($score / 10)));
-            $studentSkill->mastery = min(100, (int) $studentSkill->mastery + $boost);
-            $studentSkill->evidence_count = (int) $studentSkill->evidence_count + 1;
-            $studentSkill->last_assessed_at = now();
-            $studentSkill->save();
-        }
+        $mastery = app(MasteryService::class);
+        $mastery->applyMissionEvaluation($enrollment, $score);
 
         PortfolioItem::query()->updateOrCreate(
             [
@@ -322,6 +311,8 @@ class MissionProgressService
             ]
         );
 
-        app(FlexLearnRecommendationService::class)->generateFor($user->fresh());
+        $flex = app(FlexLearnRecommendationService::class);
+        $flex->markCompletedForMission($user, $mission->id);
+        $flex->refreshFor($user->fresh());
     }
 }

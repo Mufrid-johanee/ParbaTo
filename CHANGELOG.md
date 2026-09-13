@@ -45,4 +45,12 @@ Format per entry: **Date · Category · Feature/change · Files/modules · Descr
 - **Description:** Progress is calculated server-side (`completed/total×100`). Current phase advances only when phase tasks are done. Students cannot complete evaluate tasks or evaluate themselves. Campus Navigation Micro-App now has Discover→Evaluate tasks and real MDN resources. Evaluation awards XP, updates skill mastery, writes portfolio evidence, and regenerates FlexLearn recommendations.  
 - **Testing status:** 5/5 `LearnQuestMissionWorkspaceTest` passing; browser E2E campus complete-task flow passing  
 
+### Added — FlexLearn MVP (rule-based personalized learning)
+
+- **Category:** Backend / Frontend / API / Database / Testing / Documentation  
+- **Feature/change:** Learning evidence → deterministic mastery → strengths/weaknesses → explainable recommendations wired to LearnQuest evaluation  
+- **Files/modules:** `app/Services/MasteryService.php`, `app/Services/FlexLearnRecommendationService.php`, `app/Models/LearningEvidence.php`, `app/Models/StudentSkill.php`, `app/Http/Controllers/FlexLearnController.php`, `app/Http/Controllers/Api/FlexLearnApiController.php`, `database/migrations/2026_09_13_100000_create_learning_evidences_and_flexlearn_updates.php`, `resources/views/flexlearn/*`, `routes/web.php`, `routes/api.php`, `tests/Feature/FlexLearnMvpTest.php`, `PROGRESS.md`, `CHANGELOG.md`  
+- **Description:** No external AI. Mastery is a weighted average of `learning_evidences` (0–100 bands: Needs Support / Developing / Proficient / Advanced). Teacher evaluation writes evidence per mission skill, recalculates mastery, and refreshes recommendations linked to real published missions when available. Student FlexLearn UI shows path, mastery, strength/support bands, and reasons; teacher can view student mastery at `/flexlearn/students`. Recommendation lifecycle: active → started → completed | dismissed. Empty state for students without evidence.  
+- **Testing status:** 7/7 `FlexLearnMvpTest` passing; full suite 20/20 passing; LearnQuest workspace tests still green  
+
 ---

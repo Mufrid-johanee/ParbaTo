@@ -1,8 +1,8 @@
 # ParbaTo — Implementation Progress
 
-**Overall completion:** ~38%  
+**Overall completion:** ~48%  
 **Last updated:** 2026-09-13  
-**Current phase:** LearnQuest Mission Workspace MVP connected (tasks → progress → submit → evaluate)
+**Current phase:** FlexLearn MVP (evidence → mastery → explainable recommendations)
 
 Honest status only. Unfinished work is never marked complete.
 
@@ -29,7 +29,7 @@ Honest status only. Unfinished work is never marked complete.
 | 5 | ClassTwin | [~] |
 | 6 | LearnQuest | [✓] MVP workspace |
 | 7 | Assessment | [~] |
-| 8 | FlexLearn | [~] |
+| 8 | FlexLearn | [✓] MVP |
 | 9 | Analytics | [~] |
 | 10 | Portfolio + achievements | [~] |
 | 11 | Responsive/mobile refinement | [~] |
@@ -61,10 +61,14 @@ Honest status only. Unfinished work is never marked complete.
 - [✓] Teacher evaluations inbox (`/learnquest/evaluations`)
 - [✓] Portfolio item + skill mastery + XP + FlexLearn refresh on evaluation
 - [✓] LearnQuest API endpoints under `/api/learnquest/*`
-- [✓] FlexLearn path UI + explainable rule engine service
+- [✓] FlexLearn MVP: learning evidence, deterministic mastery, strengths/weaknesses, rule-based recommendations with reasons
+- [✓] FlexLearn student UI: learning path, mastery overview, recommended next steps (Stitch-aligned)
+- [✓] FlexLearn teacher visibility: student mastery list + detail (`/flexlearn/students`)
+- [✓] FlexLearn API under `/api/flexlearn/*`
+- [✓] LearnQuest → FlexLearn integration on teacher evaluation (evidence → mastery → recs)
 - [✓] Teacher analytics from real aggregates
 - [✓] Demo seeder with **10 uniquely named students** + teacher + admin
-- [✓] Feature tests: auth/RBAC, attendance, LearnQuest workspace (5)
+- [✓] Feature tests: auth/RBAC, attendance, LearnQuest workspace, FlexLearn MVP
 - [✓] Browser E2E: campus tasks, complete task, progress persists
 - [✓] `.env.example` with Firebase placeholders (empty)
 
@@ -74,7 +78,7 @@ Honest status only. Unfinished work is never marked complete.
 
 - [~] Course/classroom teacher CRUD UI
 - [~] ClassTwin teacher session controls
-- [~] Assessment attempt UX
+- [~] Assessment attempt UX (can feed future evidence weights)
 - [~] Portfolio student-facing UI (items created on mission complete)
 - [~] Responsive polish parity with full Stitch HTML density
 
@@ -87,6 +91,7 @@ Honest status only. Unfinished work is never marked complete.
 - [ ] Achievements/badges awarding UI
 - [ ] Live websockets / SSE twin sync
 - [ ] File upload for mission submissions (optional URL works now)
+- [ ] External AI / LLM FlexLearn layer (explicitly out of MVP)
 - [ ] Production deployment hardening
 
 ---
@@ -99,7 +104,7 @@ Honest status only. Unfinished work is never marked complete.
 
 ## Bugs
 
-_None open after Mission Workspace MVP tests._
+_None open after FlexLearn MVP tests._
 
 ---
 
@@ -108,21 +113,26 @@ _None open after Mission Workspace MVP tests._
 - [✓] `AuthAndDashboardTest` passing  
 - [✓] `AttendanceServiceTest` passing  
 - [✓] `LearnQuestMissionWorkspaceTest` (5) passing  
+- [✓] `FlexLearnMvpTest` (7) passing — mastery determinism, evidence on evaluate, auth, empty state, teacher visibility  
+- [✓] Full suite: 20 tests passing  
 - [✓] Browser E2E campus task completion passing  
 
 ## Database status
 
-- [✓] Migrated + reseeded with full campus/registration mission tasks  
+- [✓] Migrated: `learning_evidences`, `recommendations.sort_order`, recommendation status includes `started`  
+- [✓] Demo seed still available via `migrate:fresh --seed`  
 
 ## API status
 
 - [✓] `/api/health`  
 - [✓] `/api/learnquest/missions/{slug}` show/start/enrollment/complete/submit  
 - [✓] `/api/learnquest/enrollments/{id}/evaluate` (teacher)  
+- [✓] `/api/flexlearn` / `mastery` / `recommendations` + start/complete/dismiss  
 
 ## Frontend integration status
 
 - [✓] Mission workspace shows tasks, Complete Task, progress, pipeline, submit, feedback  
+- [✓] FlexLearn page consumes live mastery + explainable recommendations (no hardcoded fake % in UI)  
 - [~] Not every Stitch visual section ported 1:1 yet  
 
 ## Responsive status
@@ -130,13 +140,15 @@ _None open after Mission Workspace MVP tests._
 - [✓] Mobile bottom nav + collapsible sidebar  
 - [✓] ClassTwin mobile list vs desktop grid  
 - [✓] Mission workspace stacks on mobile; touch-friendly Complete Task buttons  
+- [✓] FlexLearn: path/skills/recs stack on mobile; touch-friendly Start/Dismiss  
 - [~] Further tablet drawer / chart polish pending  
 
 ## Security status
 
 - [✓] CSRF on forms; hashed passwords; hashed attendance codes  
-- [✓] Role gates on analytics + evaluations  
+- [✓] Role gates on analytics + evaluations + FlexLearn teacher views  
 - [✓] Mission enrollment policy (task complete / submit / evaluate)  
+- [✓] Recommendations scoped to authenticated student (403 cross-user)  
 - [~] Broader policy coverage for remaining resources pending  
 
 ## Deployment status
@@ -152,7 +164,7 @@ _None open after Mission Workspace MVP tests._
 1. Teacher ClassTwin session controls  
 2. Course management UI  
 3. Student portfolio page consuming `portfolio_items`  
-4. Assessment attempt UI  
+4. Assessment attempt UI (wire into `learning_evidences` when ready)  
 
 ---
 
@@ -166,9 +178,11 @@ _None open after Mission Workspace MVP tests._
 
 Attendance code for seeded live session: `PARBATO1`
 
-### Try the Mission Workspace flow
+### Try LearnQuest → FlexLearn
 
 1. Login as `nadia@parbato.test` / `password`  
-2. Open **Campus Navigation Micro-App**  
-3. Start mission → Complete Task repeatedly → Submit →  
+2. Open **Campus Navigation Micro-App** (or Registration Form Validator)  
+3. Start → Complete tasks → Submit  
 4. Login as `teacher@parbato.test` → **Evaluations** → score + feedback  
+5. Login as student → **FlexLearn** — mastery + explainable next steps  
+6. Teacher → **Student mastery** for cohort visibility  

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\MasteryService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -30,5 +31,15 @@ class StudentSkill extends Model
     public function skill(): BelongsTo
     {
         return $this->belongsTo(Skill::class);
+    }
+
+    public function bandLabel(): string
+    {
+        return MasteryService::bandLabel((int) $this->mastery);
+    }
+
+    public function bandKey(): string
+    {
+        return MasteryService::bandKey((int) $this->mastery);
     }
 }

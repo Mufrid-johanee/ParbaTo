@@ -72,7 +72,7 @@ return new class extends Migration
             $table->string('action_label')->nullable();
             $table->string('action_url')->nullable();
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
-            $table->enum('status', ['active', 'dismissed', 'completed'])->default('active')->index();
+            $table->enum('status', ['active', 'started', 'dismissed', 'completed'])->default('active')->index();
             $table->string('rule_key')->nullable()->index();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
